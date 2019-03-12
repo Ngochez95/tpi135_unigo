@@ -18,7 +18,7 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.TipoMedioContacto;
 public class TipoMedioContactoFacade extends AbstractFacade<TipoMedioContacto> implements TipoMedioContactoFacadeLocal {
 
     @PersistenceContext(unitName = "tpi135.proyecto_uniGo_war_1.0-SNAPSHOTPU")
-    private EntityManager em;
+    protected EntityManager em;
 
     @Override
     protected EntityManager getEntityManager() {
