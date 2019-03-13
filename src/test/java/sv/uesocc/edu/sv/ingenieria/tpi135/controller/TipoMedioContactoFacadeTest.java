@@ -164,9 +164,9 @@ public class TipoMedioContactoFacadeTest {
 //     * Test of count method, of class TipoMedioContactoFacade.
 //     */
 
-    @Test
-    public void testCount() throws Exception {
-        System.out.println("count");
+//    @Test
+//    public void testCount() throws Exception {
+//        System.out.println("count");
 //        EntityManager em = Mockito.mock(EntityManager.class);
 //        javax.persistence.criteria.CriteriaQuery cq = Mockito.mock(javax.persistence.criteria.CriteriaQuery.class);
 //        javax.persistence.criteria.Root rt = Mockito.mock(javax.persistence.criteria.Root.class);
@@ -176,7 +176,7 @@ public class TipoMedioContactoFacadeTest {
 //        Mockito.when(em.getCriteriaBuilder()).thenReturn(cb);
 //        Mockito.when(em.createQuery(cq)).thenReturn(tq);
 //        Mockito.when(em.getCriteriaBuilder().count(rt)).thenReturn(new Long("3"));
-
+//
 //        Query q = Mockito.mock(Query.class);
 //        Mockito.when(em.createQuery("SELECT COUNT(tmc.idTipoMedioContacto) FROM TipoMedioContacto tmc")).thenReturn(q);
 //        Mockito.when(q.getSingleResult()).thenReturn(new Long(0));
@@ -185,5 +185,5 @@ public class TipoMedioContactoFacadeTest {
 //        int resultado= 0;
 //        int esperado= facadeMock.count();
 //        assertEquals( resultado, esperado);
-    }
+//    }
 }

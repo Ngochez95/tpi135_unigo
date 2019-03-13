@@ -5,8 +5,9 @@
  */
 package sv.uesocc.edu.sv.ingenieria.tpi135.controller;
 
-
 import java.util.ArrayList;
+import java.util.List;
+import javax.ejb.embeddable.EJBContainer;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -18,108 +19,108 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.mockito.Mockito;
 import org.mockito.internal.util.reflection.Whitebox;
-import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Semana;
+import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Trayectoria;
 
 /**
  *
  * @author gochez
  */
-public class SemanaFacadeTest {
-    
-    public SemanaFacadeTest() {
+public class TrayectoriaFacadeTest {
+
+    public TrayectoriaFacadeTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
 
     /**
-     * Test of create method, of class SemanaFacade.
+     * Test of create method, of class TrayectoriaFacade.
      */
     @Test
     public void testCreate() throws Exception {
         System.out.println("create");
         EntityManager em = Mockito.mock(EntityManager.class);
-        Semana medio = new Semana();
-        medio.setIdDia(1);
-        SemanaFacade facade = new SemanaFacade();
-        Semana devolver = new Semana(1);
-        Mockito.when(em.find(Semana.class, 1)).thenReturn(devolver);
+        Trayectoria medio = new Trayectoria();
+        medio.setIdTrayectoria(1);
+        TrayectoriaFacade facade = new TrayectoriaFacade();
+        Trayectoria devolver = new Trayectoria(1);
+        Mockito.when(em.find(Trayectoria.class, 1)).thenReturn(devolver);
         Whitebox.setInternalState(facade, "em", em);
         facade.create(medio);
-        Semana encontrado = facade.find(1);
-        int esperado=0;
+        Trayectoria encontrado = facade.find(1);
+        int esperado = 0;
 
-        if (encontrado.getIdDia() == 1) {
-            esperado = encontrado.getIdDia();
+        if (encontrado.getIdTrayectoria() == 1) {
+            esperado = encontrado.getIdTrayectoria();
         }
         facade.create(medio);
         assertEquals(esperado, 1);
     }
 
     /**
-     * Test of edit method, of class SemanaFacade.
+     * Test of edit method, of class TrayectoriaFacade.
      */
 //    @Test
 //    public void testEdit() throws Exception {
 //        System.out.println("edit");
-//        Semana entity = null;
+//        Trayectoria entity = null;
 //        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-//        SemanaFacadeLocal instance = (SemanaFacadeLocal)container.getContext().lookup("java:global/classes/SemanaFacade");
+//        TrayectoriaFacadeLocal instance = (TrayectoriaFacadeLocal)container.getContext().lookup("java:global/classes/TrayectoriaFacade");
 //        instance.edit(entity);
 //        container.close();
 //        // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
 //    }
-
     /**
-     * Test of remove method, of class SemanaFacade.
+     * Test of remove method, of class TrayectoriaFacade.
      */
 //    @Test
 //    public void testRemove() throws Exception {
 //        System.out.println("remove");
-//        Semana entity = null;
+//        Trayectoria entity = null;
 //        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-//        SemanaFacadeLocal instance = (SemanaFacadeLocal)container.getContext().lookup("java:global/classes/SemanaFacade");
+//        TrayectoriaFacadeLocal instance = (TrayectoriaFacadeLocal)container.getContext().lookup("java:global/classes/TrayectoriaFacade");
 //        instance.remove(entity);
 //        container.close();
 //        // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
 //    }
-
     /**
-     * Test of find method, of class SemanaFacade.
+     * Test of find method, of class TrayectoriaFacade.
      */
     @Test
     public void testFind() throws Exception {
-       System.out.println("Método Find");
+
+        System.out.println("Método Find");
         EntityManager em = Mockito.mock(EntityManager.class);
-        SemanaFacade cut = new SemanaFacade();
+        TrayectoriaFacade cut = new TrayectoriaFacade();
         Whitebox.setInternalState(cut, "em", em);
-        Mockito.when(em.find(Semana.class, 1)).thenReturn(new Semana(1));
-        Semana esperado = cut.find(1);
+        Mockito.when(em.find(Trayectoria.class, 1)).thenReturn(new Trayectoria(1));
+        Trayectoria esperado = cut.find(1);
         System.out.println("hola" + esperado.toString());
-        assertEquals(new Semana(1), esperado);
+        assertEquals(new Trayectoria(1), esperado);
+
     }
 
     /**
-     * Test of findAll method, of class SemanaFacade.
+     * Test of findAll method, of class TrayectoriaFacade.
      */
     @Test
     public void testFindAll() throws Exception {
-        System.out.println("findAll");
+ System.out.println("findAll");
         EntityManager em = Mockito.mock(EntityManager.class);
         javax.persistence.criteria.CriteriaQuery cq = Mockito.mock(javax.persistence.criteria.CriteriaQuery.class);
         TypedQuery tq = Mockito.mock(TypedQuery.class);
@@ -128,7 +129,7 @@ public class SemanaFacadeTest {
         Mockito.when(em.createQuery(cq)).thenReturn(tq);
         Mockito.when(em.getCriteriaBuilder().createQuery()).thenReturn(cq);
         Mockito.when(em.createQuery(cq).getResultList()).thenReturn(new ArrayList());
-        SemanaFacade cut = new SemanaFacade();
+        TrayectoriaFacade cut = new TrayectoriaFacade();
         Whitebox.setInternalState(cut, "em", em);
         int expResult = 0;
         int esperado = cut.findAll().size();
@@ -137,30 +138,29 @@ public class SemanaFacadeTest {
     }
 
     /**
-     * Test of findRange method, of class SemanaFacade.
+     * Test of findRange method, of class TrayectoriaFacade.
      */
 //    @Test
 //    public void testFindRange() throws Exception {
 //        System.out.println("findRange");
 //        int[] range = null;
 //        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-//        SemanaFacadeLocal instance = (SemanaFacadeLocal)container.getContext().lookup("java:global/classes/SemanaFacade");
-//        List<Semana> expResult = null;
-//        List<Semana> result = instance.findRange(range);
+//        TrayectoriaFacadeLocal instance = (TrayectoriaFacadeLocal)container.getContext().lookup("java:global/classes/TrayectoriaFacade");
+//        List<Trayectoria> expResult = null;
+//        List<Trayectoria> result = instance.findRange(range);
 //        assertEquals(expResult, result);
 //        container.close();
 //        // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
 //    }
-
     /**
-     * Test of count method, of class SemanaFacade.
+     * Test of count method, of class TrayectoriaFacade.
      */
 //    @Test
 //    public void testCount() throws Exception {
 //        System.out.println("count");
 //        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-//        SemanaFacadeLocal instance = (SemanaFacadeLocal)container.getContext().lookup("java:global/classes/SemanaFacade");
+//        TrayectoriaFacadeLocal instance = (TrayectoriaFacadeLocal)container.getContext().lookup("java:global/classes/TrayectoriaFacade");
 //        int expResult = 0;
 //        int result = instance.count();
 //        assertEquals(expResult, result);
@@ -168,5 +168,4 @@ public class SemanaFacadeTest {
 //        // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
 //    }
-    
 }

@@ -5,8 +5,9 @@
  */
 package sv.uesocc.edu.sv.ingenieria.tpi135.controller;
 
-
 import java.util.ArrayList;
+import java.util.List;
+import javax.ejb.embeddable.EJBContainer;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -18,15 +19,15 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.mockito.Mockito;
 import org.mockito.internal.util.reflection.Whitebox;
-import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Semana;
+import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Usuario;
 
 /**
  *
  * @author gochez
  */
-public class SemanaFacadeTest {
+public class UsuarioFacadeTest {
     
-    public SemanaFacadeTest() {
+    public UsuarioFacadeTest() {
     }
     
     @BeforeClass
@@ -46,38 +47,38 @@ public class SemanaFacadeTest {
     }
 
     /**
-     * Test of create method, of class SemanaFacade.
+     * Test of create method, of class UsuarioFacade.
      */
     @Test
     public void testCreate() throws Exception {
         System.out.println("create");
         EntityManager em = Mockito.mock(EntityManager.class);
-        Semana medio = new Semana();
-        medio.setIdDia(1);
-        SemanaFacade facade = new SemanaFacade();
-        Semana devolver = new Semana(1);
-        Mockito.when(em.find(Semana.class, 1)).thenReturn(devolver);
+        Usuario medio = new Usuario();
+        medio.setIdUsuario(1);
+        UsuarioFacade facade = new UsuarioFacade();
+        Usuario devolver = new Usuario(1);
+        Mockito.when(em.find(Usuario.class, 1)).thenReturn(devolver);
         Whitebox.setInternalState(facade, "em", em);
         facade.create(medio);
-        Semana encontrado = facade.find(1);
+        Usuario encontrado = facade.find(1);
         int esperado=0;
 
-        if (encontrado.getIdDia() == 1) {
-            esperado = encontrado.getIdDia();
+        if (encontrado.getIdUsuario() == 1) {
+            esperado = encontrado.getIdUsuario();
         }
         facade.create(medio);
         assertEquals(esperado, 1);
     }
 
     /**
-     * Test of edit method, of class SemanaFacade.
+     * Test of edit method, of class UsuarioFacade.
      */
 //    @Test
 //    public void testEdit() throws Exception {
 //        System.out.println("edit");
-//        Semana entity = null;
+//        Usuario entity = null;
 //        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-//        SemanaFacadeLocal instance = (SemanaFacadeLocal)container.getContext().lookup("java:global/classes/SemanaFacade");
+//        UsuarioFacadeLocal instance = (UsuarioFacadeLocal)container.getContext().lookup("java:global/classes/UsuarioFacade");
 //        instance.edit(entity);
 //        container.close();
 //        // TODO review the generated test code and remove the default call to fail.
@@ -85,14 +86,14 @@ public class SemanaFacadeTest {
 //    }
 
     /**
-     * Test of remove method, of class SemanaFacade.
+     * Test of remove method, of class UsuarioFacade.
      */
 //    @Test
 //    public void testRemove() throws Exception {
 //        System.out.println("remove");
-//        Semana entity = null;
+//        Usuario entity = null;
 //        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-//        SemanaFacadeLocal instance = (SemanaFacadeLocal)container.getContext().lookup("java:global/classes/SemanaFacade");
+//        UsuarioFacadeLocal instance = (UsuarioFacadeLocal)container.getContext().lookup("java:global/classes/UsuarioFacade");
 //        instance.remove(entity);
 //        container.close();
 //        // TODO review the generated test code and remove the default call to fail.
@@ -100,22 +101,22 @@ public class SemanaFacadeTest {
 //    }
 
     /**
-     * Test of find method, of class SemanaFacade.
+     * Test of find method, of class UsuarioFacade.
      */
     @Test
     public void testFind() throws Exception {
        System.out.println("Método Find");
         EntityManager em = Mockito.mock(EntityManager.class);
-        SemanaFacade cut = new SemanaFacade();
+        UsuarioFacade cut = new UsuarioFacade();
         Whitebox.setInternalState(cut, "em", em);
-        Mockito.when(em.find(Semana.class, 1)).thenReturn(new Semana(1));
-        Semana esperado = cut.find(1);
+        Mockito.when(em.find(Usuario.class, 1)).thenReturn(new Usuario(1));
+        Usuario esperado = cut.find(1);
         System.out.println("hola" + esperado.toString());
-        assertEquals(new Semana(1), esperado);
+        assertEquals(new Usuario(1), esperado);
     }
 
     /**
-     * Test of findAll method, of class SemanaFacade.
+     * Test of findAll method, of class UsuarioFacade.
      */
     @Test
     public void testFindAll() throws Exception {
@@ -128,7 +129,7 @@ public class SemanaFacadeTest {
         Mockito.when(em.createQuery(cq)).thenReturn(tq);
         Mockito.when(em.getCriteriaBuilder().createQuery()).thenReturn(cq);
         Mockito.when(em.createQuery(cq).getResultList()).thenReturn(new ArrayList());
-        SemanaFacade cut = new SemanaFacade();
+        UsuarioFacade cut = new UsuarioFacade();
         Whitebox.setInternalState(cut, "em", em);
         int expResult = 0;
         int esperado = cut.findAll().size();
@@ -137,16 +138,16 @@ public class SemanaFacadeTest {
     }
 
     /**
-     * Test of findRange method, of class SemanaFacade.
+     * Test of findRange method, of class UsuarioFacade.
      */
 //    @Test
 //    public void testFindRange() throws Exception {
 //        System.out.println("findRange");
 //        int[] range = null;
 //        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-//        SemanaFacadeLocal instance = (SemanaFacadeLocal)container.getContext().lookup("java:global/classes/SemanaFacade");
-//        List<Semana> expResult = null;
-//        List<Semana> result = instance.findRange(range);
+//        UsuarioFacadeLocal instance = (UsuarioFacadeLocal)container.getContext().lookup("java:global/classes/UsuarioFacade");
+//        List<Usuario> expResult = null;
+//        List<Usuario> result = instance.findRange(range);
 //        assertEquals(expResult, result);
 //        container.close();
 //        // TODO review the generated test code and remove the default call to fail.
@@ -154,13 +155,13 @@ public class SemanaFacadeTest {
 //    }
 
     /**
-     * Test of count method, of class SemanaFacade.
+     * Test of count method, of class UsuarioFacade.
      */
 //    @Test
 //    public void testCount() throws Exception {
 //        System.out.println("count");
 //        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-//        SemanaFacadeLocal instance = (SemanaFacadeLocal)container.getContext().lookup("java:global/classes/SemanaFacade");
+//        UsuarioFacadeLocal instance = (UsuarioFacadeLocal)container.getContext().lookup("java:global/classes/UsuarioFacade");
 //        int expResult = 0;
 //        int result = instance.count();
 //        assertEquals(expResult, result);
