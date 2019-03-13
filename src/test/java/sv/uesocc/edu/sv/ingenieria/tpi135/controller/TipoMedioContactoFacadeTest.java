@@ -18,6 +18,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.verify;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -56,39 +57,59 @@ public class TipoMedioContactoFacadeTest {
      */
     @Test
     public void testCreate() throws Exception {
-        System.out.println("create");
-        EntityManager em = Mockito.mock(EntityManager.class);
-        TipoMedioContacto medio = new TipoMedioContacto();
-        medio.setIdTipoMedioContacto(1);
-        TipoMedioContactoFacade facade = new TipoMedioContactoFacade();
-        TipoMedioContacto devolver = new TipoMedioContacto(1);
-        Mockito.when(em.find(TipoMedioContacto.class, 1)).thenReturn(devolver);
-        facade.em = em;
-        facade.create(medio);
-        TipoMedioContacto encontrado = facade.find(1);
-        int esperado=0;
-
-        if (encontrado.getIdTipoMedioContacto() == 1) {
-            esperado = encontrado.getIdTipoMedioContacto();
-        }
-        facade.create(medio);
-        assertEquals(esperado, 1);
+//        System.out.println("create");
+//        EntityManager em = Mockito.mock(EntityManager.class);
+//        TipoMedioContacto medio = new TipoMedioContacto();
+//        medio.setIdTipoMedioContacto(1);
+//        TipoMedioContactoFacade facade = new TipoMedioContactoFacade();
+//        TipoMedioContacto devolver = new TipoMedioContacto(1);
+//        Mockito.when(em.find(TipoMedioContacto.class, 1)).thenReturn(devolver);
+//        facade.em = em;
+//        facade.create(medio);
+//        TipoMedioContacto encontrado = facade.find(1);
+//        int esperado = 0;
+//
+//        if (encontrado.getIdTipoMedioContacto() == 1) {
+//            esperado = encontrado.getIdTipoMedioContacto();
+//        }
+//        assertEquals(esperado, 1);
+            EntityManager emMock = Mockito.mock(EntityManager.class);
+            TipoMedioContactoFacade facade = new TipoMedioContactoFacade();
+            Whitebox.setInternalState(facade, "em", emMock);
+            TipoMedioContacto tipomedio = new TipoMedioContacto(1);
+            //Mockito.verify(facade.create(tipomedio)).;;
+            //verify(facade.em).persist(tipomedio);
+            Mockito.verify(facade).create(tipomedio);
+            
     }
 //
 //    /**
 //     * Test of edit method, of class TipoMedioContactoFacade.
 //     */
-//    @Test
-//    public void testEdit() throws Exception {
-//        System.out.println("edit");
-//        TipoMedioContacto entity = null;
-//        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-//        TipoMedioContactoFacadeLocal instance = (TipoMedioContactoFacadeLocal)container.getContext().lookup("java:global/classes/TipoMedioContactoFacade");
-//        instance.edit(entity);
-//        container.close();
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+
+    @Test
+    public void testEdit() throws Exception {
+//        System.out.println("Test edit");
+//        EntityManager em = Mockito.mock(EntityManager.class);
+//        TipoMedioContactoFacade facade = new TipoMedioContactoFacade();
+//        Whitebox.setInternalState(facade, "em", em);
+//        TipoMedioContacto medioContacto = new TipoMedioContacto();
+//        medioContacto.setIdTipoMedioContacto(1);
+//        facade.create(medioContacto);
+//        medioContacto.setTelefono("24423230");
+//        medioContacto.setCorreo("correo");
+//        facade.edit(medioContacto);
+//        
+//                
+//        TipoMedioContacto encontrado = facade.find(2);
+//        boolean resultado= false;
+//        if (encontrado.getTelefono()=="correo") {
+//            resultado= true;
+//            
+//        }
+//        assertTrue(resultado);
+        
+    }
 //
 //    /**
 //     * Test of remove method, of class TipoMedioContactoFacade.
