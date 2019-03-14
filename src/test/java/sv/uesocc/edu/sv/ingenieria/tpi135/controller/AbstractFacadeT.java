@@ -28,20 +28,22 @@ import org.mockito.runners.MockitoJUnitRunner;
  */
 @RunWith(MockitoJUnitRunner.class)
 public abstract class AbstractFacadeT<T> {
-    
+
     private Class<T> entityClass;
+
     protected abstract AbstractFacade<T> getFacade();
+
     protected abstract T getEntity();
 
     @Mock
     private EntityManager emMock;
-    
+
     @Before
     public void setUp() {
         T nuevo = getEntity();
         Mockito.when(this.emMock.find(entityClass, 1)).thenReturn(nuevo);
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -63,27 +65,26 @@ public abstract class AbstractFacadeT<T> {
     /**
      * Test of create method, of class AbstractFacade.
      */
-//    @Test
+    @Test
     public void testCreate() {
-        System.out.println("create");
-        Object entity = null;
-        AbstractFacade instance = null;
+        T entity = getEntity();
+        AbstractFacade<T> instance = getFacade();
+        Whitebox.setInternalState(instance, "em", emMock);
         instance.create(entity);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Mockito.verify(emMock).persist(entity);
+
     }
 
     /**
      * Test of edit method, of class AbstractFacade.
      */
-//    @Test
+    @Test
     public void testEdit() {
-        System.out.println("edit");
-        Object entity = null;
-        AbstractFacade instance = null;
+        T entity = getEntity();
+        AbstractFacade<T> instance = getFacade();
+        Whitebox.setInternalState(instance, "em", emMock);
         instance.edit(entity);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Mockito.verify(emMock).merge(entity);
     }
 
     /**
@@ -91,12 +92,11 @@ public abstract class AbstractFacadeT<T> {
      */
 //    @Test
     public void testRemove() {
-        System.out.println("remove");
-        Object entity = null;
-        AbstractFacade instance = null;
+        T entity = getEntity();
+        AbstractFacade<T> instance = getFacade();
+        Whitebox.setInternalState(instance, "em", emMock);
         instance.remove(entity);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Mockito.verify(emMock).remove(emMock.merge(entity));
     }
 
     /**
@@ -111,7 +111,7 @@ public abstract class AbstractFacadeT<T> {
         Whitebox.setInternalState(instance, "entityClass", entityClass);
         Object expResult = entity;
         Object result = instance.find(1);
-        System.out.println("esperado: "+entity.toString()+"\nResultado: "+result.toString());
+        System.out.println("esperado: " + entity.toString() + "\nResultado: " + result.toString());
         assertEquals(expResult, result);
     }
 
@@ -164,5 +164,5 @@ public abstract class AbstractFacadeT<T> {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-    
+
 }

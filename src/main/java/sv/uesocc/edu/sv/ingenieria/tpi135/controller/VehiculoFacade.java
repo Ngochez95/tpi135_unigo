@@ -15,7 +15,7 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Vehiculo;
  * @author gochez
  */
 @Stateless
-public class VehiculoFacade extends AbstractFacade<Vehiculo> implements VehiculoFacadeLocal {
+public class VehiculoFacade extends AbstractFacade<Vehiculo> implements VehiculoFacadeLocal{
 
     @PersistenceContext(unitName = "tpi135.proyecto_uniGo_war_1.0-SNAPSHOTPU")
     private EntityManager em;

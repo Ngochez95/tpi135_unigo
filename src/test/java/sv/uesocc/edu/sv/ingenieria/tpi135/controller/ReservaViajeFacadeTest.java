@@ -5,35 +5,31 @@
  */
 package sv.uesocc.edu.sv.ingenieria.tpi135.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.embeddable.EJBContainer;
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.mockito.Mockito;
-import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Usuario;
+import sv.uesocc.edu.sv.ingenieria.tpi135.entity.ReservaViaje;
 
 /**
  *
  * @author gochez
  */
-public class UsuarioFacadeTest extends AbstractFacadeT<Usuario> {
+public class ReservaViajeFacadeTest extends AbstractFacadeT<ReservaViaje>{
 
     @Override
-    protected AbstractFacade<Usuario> getFacade() {
-        return new UsuarioFacade();
+    protected AbstractFacade<ReservaViaje> getFacade() {
+        return new ReservaViajeFacade();
     }
 
     @Override
-    protected Usuario getEntity() {
-        return new Usuario(1);
+    protected ReservaViaje getEntity() {
+        return new ReservaViaje(1);
+                
     }
     
     
