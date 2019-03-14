@@ -90,7 +90,7 @@ public abstract class AbstractFacadeT<T> {
     /**
      * Test of remove method, of class AbstractFacade.
      */
-//    @Test
+    @Test
     public void testRemove() {
         T entity = getEntity();
         AbstractFacade<T> instance = getFacade();
