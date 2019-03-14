@@ -13,24 +13,22 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Caractetistica;
+import sv.uesocc.edu.sv.ingenieria.tpi135.entity.MedioContacto;
 
 /**
  *
  * @author Zepeda Abrego, Juan Carlos
  */
-public class CaractetisticaFacadeTest extends AbstractFacadeT<Caractetistica>{
-
+public class MedioContactoFacadeTest extends AbstractFacadeT<MedioContacto>{
+    
     @Override
-    protected AbstractFacade<Caractetistica> getFacade() {
-        return new CaractetisticaFacade();
-    }
-
-    @Override
-    protected Caractetistica getEntity() {
-        return new Caractetistica(1);
+    protected AbstractFacade<MedioContacto> getFacade(){
+        return new MedioContactoFacade();
     }
     
-  
-    
+    @Override
+    protected MedioContacto getEntity() {
+        return  new  MedioContacto(1);
+    }
+
 }

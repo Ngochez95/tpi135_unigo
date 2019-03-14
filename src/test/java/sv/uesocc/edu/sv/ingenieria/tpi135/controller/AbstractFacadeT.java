@@ -139,7 +139,7 @@ public abstract class AbstractFacadeT<T> {
     /**
      * Test of findRange method, of class AbstractFacade.
      */
-//    @Test
+    //@Test
     public void testFindRange() {
         System.out.println("findRange");
         int[] range = null;

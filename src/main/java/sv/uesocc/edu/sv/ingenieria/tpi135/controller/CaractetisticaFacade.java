@@ -12,7 +12,7 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Caractetistica;
 
 /**
  *
- * @author gochez
+ * @author Zepeda Abrego, Juan Carlos
  */
 @Stateless
 public class CaractetisticaFacade extends AbstractFacade<Caractetistica> implements CaractetisticaFacadeLocal {
