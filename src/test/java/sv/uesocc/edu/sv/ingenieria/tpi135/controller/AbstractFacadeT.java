@@ -27,6 +27,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import org.mockito.internal.util.reflection.Whitebox;
 import org.mockito.runners.MockitoJUnitRunner;
+import sun.applet.AppletViewer;
 import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Marca;
 import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Trayectoria;
 
@@ -51,10 +52,7 @@ public abstract class AbstractFacadeT<T> {
     @Before
     public void setUp() {
         T nuevo = getEntity();
-        Mockito.when(this.emMock.find(entityClass, 1)).thenReturn(nuevo);
-        
-        
-       
+        Mockito.when(this.emMock.find(entityClass, 1)).thenReturn(nuevo); 
     }
 
     @After
@@ -170,23 +168,28 @@ public abstract class AbstractFacadeT<T> {
         int resultado = lista.size();
         assertEquals(resultado, esperado);
        
-        
-        
-        
     }
 
     /**
      * Test of count method, of class AbstractFacade.
      */
-//    @Test
+    @Test
     public void testCount() {
-        System.out.println("count");
-        AbstractFacade instance = null;
-        int expResult = 0;
-        int result = instance.count();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("TestCount()");
+        javax.persistence.criteria.CriteriaQuery cq = Mockito.mock(javax.persistence.criteria.CriteriaQuery.class);
+        javax.persistence.criteria.Root<T> rt = Mockito.mock(javax.persistence.criteria.Root.class);
+        TypedQuery tq = Mockito.mock(TypedQuery.class);
+        CriteriaBuilder cb = Mockito.mock(CriteriaBuilder.class);
+        when(cq.from(entityClass)).thenReturn(rt);
+        Mockito.when(emMock.getCriteriaBuilder()).thenReturn(cb);
+        Mockito.when(emMock.createQuery(cq)).thenReturn(tq);
+        Mockito.when(emMock.getCriteriaBuilder().createQuery()).thenReturn(cq);
+        Mockito.when(emMock.createQuery(cq).getSingleResult()).thenReturn(new Long(1));
+        AbstractFacade<T> cut = getFacade();
+        Whitebox.setInternalState(cut, "em", emMock);
+        int resultado = cut.count();
+        assertEquals(1, resultado);
+        
     }
 
 }
