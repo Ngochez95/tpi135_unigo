@@ -10,6 +10,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Selection;
+import javax.swing.text.DefaultEditorKit;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,18 +20,25 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
+import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import org.mockito.internal.util.reflection.Whitebox;
 import org.mockito.runners.MockitoJUnitRunner;
+import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Marca;
+import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Trayectoria;
 
 /**
  *
- * @author gochez
+ * @author gochez, zepeda abrego
  */
 @RunWith(MockitoJUnitRunner.class)
 public abstract class AbstractFacadeT<T> {
-
+    
+    
+    
     private Class<T> entityClass;
 
     protected abstract AbstractFacade<T> getFacade();
@@ -42,6 +52,9 @@ public abstract class AbstractFacadeT<T> {
     public void setUp() {
         T nuevo = getEntity();
         Mockito.when(this.emMock.find(entityClass, 1)).thenReturn(nuevo);
+        
+        
+       
     }
 
     @After
@@ -132,23 +145,34 @@ public abstract class AbstractFacadeT<T> {
         Whitebox.setInternalState(cut, "em", emMock);
         int expResult = 0;
         int esperado = cut.findAll().size();
-
         assertEquals(expResult, esperado);
     }
 
     /**
      * Test of findRange method, of class AbstractFacade.
      */
-    //@Test
-    public void testFindRange() {
-        System.out.println("findRange");
-        int[] range = null;
-        AbstractFacade instance = null;
-        List expResult = null;
-        List result = instance.findRange(range);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    @Test
+    public void testFindRange() throws Exception{
+        System.out.println("TestFindRange()");
+        javax.persistence.criteria.CriteriaQuery cq = Mockito.mock(javax.persistence.criteria.CriteriaQuery.class);
+        TypedQuery tq = Mockito.mock(TypedQuery.class);
+        CriteriaBuilder cb = Mockito.mock(CriteriaBuilder.class);
+        EntityManager em = Mockito.mock(EntityManager.class);
+        Mockito.when(emMock.getCriteriaBuilder()).thenReturn(cb);
+        Mockito.when(emMock.createQuery(cq)).thenReturn(tq);
+        Mockito.when(emMock.getCriteriaBuilder().createQuery()).thenReturn(cq);
+        Mockito.when(emMock.createQuery(cq).getResultList()).thenReturn(new ArrayList());
+        AbstractFacade<T> cut = getFacade();
+        Whitebox.setInternalState(cut, "em", emMock);
+        int esperado = 0;
+        int[] rango = {0, 100};
+        List<T> lista = cut.findRange(rango);
+        int resultado = lista.size();
+        assertEquals(resultado, esperado);
+       
+        
+        
+        
     }
 
     /**
