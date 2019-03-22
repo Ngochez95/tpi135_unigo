@@ -48,11 +48,17 @@ public abstract class AbstractFacadeT<T> {
 
     @Mock
     private EntityManager emMock;
-
+    
+    
+    
     @Before
     public void setUp() {
-        T nuevo = getEntity();
-        Mockito.when(this.emMock.find(entityClass, 1)).thenReturn(nuevo); 
+        T nuevo = getEntity(); 
+        Mockito.when(this.emMock.find(entityClass, 1)).thenReturn(nuevo);
+        //Quitar el 1, declararlo para recibir una primarykey.
+        //la variable nuevo, introducirlo dentro del .when() meter el getEntity con la variable nuevo.
+        T entity;
+        
     }
 
     @After
