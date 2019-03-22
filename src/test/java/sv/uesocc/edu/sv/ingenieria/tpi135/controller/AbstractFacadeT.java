@@ -37,28 +37,41 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Trayectoria;
  */
 @RunWith(MockitoJUnitRunner.class)
 public abstract class AbstractFacadeT<T> {
-    
-    
-    
+
     private Class<T> entityClass;
 
     protected abstract AbstractFacade<T> getFacade();
 
     protected abstract T getEntity();
 
+    private final CriteriaBuilder CB = mock(CriteriaBuilder.class);
+    private final CriteriaQuery CQ = mock(CriteriaQuery.class);
+    private final TypedQuery q = mock(TypedQuery.class);
+    javax.persistence.criteria.Root<T> rt = Mockito.mock(javax.persistence.criteria.Root.class);
+
     @Mock
     private EntityManager emMock;
-    
-    
-    
+
+    AbstractFacade<T> instance = getFacade();
+    T entity;
+
     @Before
     public void setUp() {
-        T nuevo = getEntity(); 
+        entity = getEntity();
+
+        Whitebox.setInternalState(instance, "em", emMock);
+        T nuevo = getEntity();
         Mockito.when(this.emMock.find(entityClass, 1)).thenReturn(nuevo);
+        Mockito.when(emMock.getCriteriaBuilder()).thenReturn(CB);
+        Mockito.when(emMock.createQuery(CQ)).thenReturn(q);
+        Mockito.when(emMock.getCriteriaBuilder().createQuery()).thenReturn(CQ);
+        Mockito.when(emMock.createQuery(CQ).getResultList()).thenReturn(new ArrayList());
+        when(CQ.from(entityClass)).thenReturn(rt);
+        Mockito.when(emMock.createQuery(CQ).getSingleResult()).thenReturn(new Long(1));
+        Whitebox.setInternalState(instance, "entityClass", entityClass);
         //Quitar el 1, declararlo para recibir una primarykey.
         //la variable nuevo, introducirlo dentro del .when() meter el getEntity con la variable nuevo.
-        T entity;
-        
+
     }
 
     @After
@@ -66,30 +79,12 @@ public abstract class AbstractFacadeT<T> {
     }
 
     /**
-     * Test of getEntityManager method, of class AbstractFacade.
-     */
-//    @Test
-    public void testGetEntityManager() {
-        System.out.println("getEntityManager");
-        AbstractFacade instance = null;
-        EntityManager expResult = null;
-        EntityManager result = instance.getEntityManager();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of create method, of class AbstractFacade.
      */
     @Test
     public void testCreate() {
-        T entity = getEntity();
-        AbstractFacade<T> instance = getFacade();
-        Whitebox.setInternalState(instance, "em", emMock);
         instance.create(entity);
         Mockito.verify(emMock).persist(entity);
-
     }
 
     /**
@@ -97,9 +92,7 @@ public abstract class AbstractFacadeT<T> {
      */
     @Test
     public void testEdit() {
-        T entity = getEntity();
-        AbstractFacade<T> instance = getFacade();
-        Whitebox.setInternalState(instance, "em", emMock);
+        System.out.println("testEdit");
         instance.edit(entity);
         Mockito.verify(emMock).merge(entity);
     }
@@ -109,9 +102,7 @@ public abstract class AbstractFacadeT<T> {
      */
     @Test
     public void testRemove() {
-        T entity = getEntity();
-        AbstractFacade<T> instance = getFacade();
-        Whitebox.setInternalState(instance, "em", emMock);
+        System.out.println("testRemove()");
         instance.remove(entity);
         Mockito.verify(emMock).remove(emMock.merge(entity));
     }
@@ -121,14 +112,9 @@ public abstract class AbstractFacadeT<T> {
      */
     @Test
     public void testFind() {
-        System.out.println("find");
-        T entity = getEntity();
-        AbstractFacade<T> instance = getFacade();
-        Whitebox.setInternalState(instance, "em", emMock);
-        Whitebox.setInternalState(instance, "entityClass", entityClass);
+        System.out.println("testFind()");
         Object expResult = entity;
         Object result = instance.find(1);
-        System.out.println("esperado: " + entity.toString() + "\nResultado: " + result.toString());
         assertEquals(expResult, result);
     }
 
@@ -138,17 +124,8 @@ public abstract class AbstractFacadeT<T> {
     @Test
     public void testFindAll() {
         System.out.println("findAll");
-        javax.persistence.criteria.CriteriaQuery cq = Mockito.mock(javax.persistence.criteria.CriteriaQuery.class);
-        TypedQuery tq = Mockito.mock(TypedQuery.class);
-        CriteriaBuilder cbr = Mockito.mock(CriteriaBuilder.class);
-        Mockito.when(emMock.getCriteriaBuilder()).thenReturn(cbr);
-        Mockito.when(emMock.createQuery(cq)).thenReturn(tq);
-        Mockito.when(emMock.getCriteriaBuilder().createQuery()).thenReturn(cq);
-        Mockito.when(emMock.createQuery(cq).getResultList()).thenReturn(new ArrayList());
-        AbstractFacade<T> cut = getFacade();
-        Whitebox.setInternalState(cut, "em", emMock);
         int expResult = 0;
-        int esperado = cut.findAll().size();
+        int esperado = instance.findAll().size();
         assertEquals(expResult, esperado);
     }
 
@@ -156,24 +133,13 @@ public abstract class AbstractFacadeT<T> {
      * Test of findRange method, of class AbstractFacade.
      */
     @Test
-    public void testFindRange() throws Exception{
+    public void testFindRange() throws Exception {
         System.out.println("TestFindRange()");
-        javax.persistence.criteria.CriteriaQuery cq = Mockito.mock(javax.persistence.criteria.CriteriaQuery.class);
-        TypedQuery tq = Mockito.mock(TypedQuery.class);
-        CriteriaBuilder cb = Mockito.mock(CriteriaBuilder.class);
-        EntityManager em = Mockito.mock(EntityManager.class);
-        Mockito.when(emMock.getCriteriaBuilder()).thenReturn(cb);
-        Mockito.when(emMock.createQuery(cq)).thenReturn(tq);
-        Mockito.when(emMock.getCriteriaBuilder().createQuery()).thenReturn(cq);
-        Mockito.when(emMock.createQuery(cq).getResultList()).thenReturn(new ArrayList());
-        AbstractFacade<T> cut = getFacade();
-        Whitebox.setInternalState(cut, "em", emMock);
         int esperado = 0;
         int[] rango = {0, 100};
-        List<T> lista = cut.findRange(rango);
+        List<T> lista = instance.findRange(rango);
         int resultado = lista.size();
         assertEquals(resultado, esperado);
-       
     }
 
     /**
@@ -182,20 +148,10 @@ public abstract class AbstractFacadeT<T> {
     @Test
     public void testCount() {
         System.out.println("TestCount()");
-        javax.persistence.criteria.CriteriaQuery cq = Mockito.mock(javax.persistence.criteria.CriteriaQuery.class);
-        javax.persistence.criteria.Root<T> rt = Mockito.mock(javax.persistence.criteria.Root.class);
         TypedQuery tq = Mockito.mock(TypedQuery.class);
-        CriteriaBuilder cb = Mockito.mock(CriteriaBuilder.class);
-        when(cq.from(entityClass)).thenReturn(rt);
-        Mockito.when(emMock.getCriteriaBuilder()).thenReturn(cb);
-        Mockito.when(emMock.createQuery(cq)).thenReturn(tq);
-        Mockito.when(emMock.getCriteriaBuilder().createQuery()).thenReturn(cq);
-        Mockito.when(emMock.createQuery(cq).getSingleResult()).thenReturn(new Long(1));
-        AbstractFacade<T> cut = getFacade();
-        Whitebox.setInternalState(cut, "em", emMock);
-        int resultado = cut.count();
+        int resultado = instance.count();
         assertEquals(1, resultado);
-        
+
     }
 
 }
