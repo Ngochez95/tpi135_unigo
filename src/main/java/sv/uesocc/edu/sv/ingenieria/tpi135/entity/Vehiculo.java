@@ -41,6 +41,8 @@ public class Vehiculo implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_vehiculo", nullable = false)
     private Integer idVehiculo;
+    @Column(name = "estado_vehiculo")
+    private Boolean estadoVehiculo;
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario", nullable = false)
     @ManyToOne(optional = false)
     private Usuario idUsuario;
@@ -69,6 +71,15 @@ public class Vehiculo implements Serializable {
     public void setIdUsuario(Usuario idUsuario) {
         this.idUsuario = idUsuario;
     }
+
+    public Boolean getEstadoVehiculo() {
+        return estadoVehiculo;
+    }
+
+    public void setEstadoVehiculo(Boolean estadoVehiculo) {
+        this.estadoVehiculo = estadoVehiculo;
+    }
+    
 
     @XmlTransient
     public List<Marca> getMarcaList() {
