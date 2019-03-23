@@ -28,11 +28,11 @@ public abstract class AbstractFacade<T> {
         Logger.getLogger(getClass().getName()).log(Level.WARNING, "EntityManager o Entity son nulos");
         throw new NullPointerException("EntityManager o Entity son nulos");
     }
-    
-    public void loggerSevereEntityNull(Exception e){
+
+    public void loggerSevereEntityNull(Exception e) {
         Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
     }
-    
+
     public void create(T entity) {
         try {
             if (getEntityManager() != null && entity != null) {
@@ -48,7 +48,7 @@ public abstract class AbstractFacade<T> {
     }
 
     public void edit(T entity) {
-       try {
+        try {
             if (getEntityManager() != null && entity != null) {
                 getEntityManager().merge(entity);
             } else {
@@ -58,13 +58,13 @@ public abstract class AbstractFacade<T> {
             loggerSevereEntityNull(e);
             throw e;
         }
-        
+
     }
 
     public void remove(T entity) {
         try {
             if (getEntityManager() != null && entity != null) {
-                 getEntityManager().remove(getEntityManager().merge(entity));
+                getEntityManager().remove(getEntityManager().merge(entity));
             } else {
                 loggerWarningEntityNull();
             }
@@ -72,11 +72,19 @@ public abstract class AbstractFacade<T> {
             loggerSevereEntityNull(e);
             throw e;
         }
-       
+
     }
 
     public T find(Object id) {
-        return getEntityManager().find(entityClass, id);
+        try {
+            if (id != null) {
+                return getEntityManager().find(entityClass, id);
+            }
+        } catch (Exception e) {
+            System.out.println("excepcion: " + e);
+            throw e;
+        }
+        return null;
     }
 
     public List<T> findAll() {
