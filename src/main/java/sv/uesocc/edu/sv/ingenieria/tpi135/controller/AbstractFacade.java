@@ -6,6 +6,8 @@
 package sv.uesocc.edu.sv.ingenieria.tpi135.controller;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 
 /**
@@ -22,16 +24,55 @@ public abstract class AbstractFacade<T> {
 
     protected abstract EntityManager getEntityManager();
 
+    public void loggerWarningEntityNull() {
+        Logger.getLogger(getClass().getName()).log(Level.WARNING, "EntityManager o Entity son nulos");
+        throw new NullPointerException("EntityManager o Entity son nulos");
+    }
+    
+    public void loggerSevereEntityNull(Exception e){
+        Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+    }
+    
     public void create(T entity) {
-        getEntityManager().persist(entity);
+        try {
+            if (getEntityManager() != null && entity != null) {
+                getEntityManager().persist(entity);
+            } else {
+                loggerWarningEntityNull();
+            }
+        } catch (Exception e) {
+            loggerSevereEntityNull(e);
+            throw e;
+        }
+
     }
 
     public void edit(T entity) {
-        getEntityManager().merge(entity);
+       try {
+            if (getEntityManager() != null && entity != null) {
+                getEntityManager().merge(entity);
+            } else {
+                loggerWarningEntityNull();
+            }
+        } catch (Exception e) {
+            loggerSevereEntityNull(e);
+            throw e;
+        }
+        
     }
 
     public void remove(T entity) {
-        getEntityManager().remove(getEntityManager().merge(entity));
+        try {
+            if (getEntityManager() != null && entity != null) {
+                 getEntityManager().remove(getEntityManager().merge(entity));
+            } else {
+                loggerWarningEntityNull();
+            }
+        } catch (Exception e) {
+            loggerSevereEntityNull(e);
+            throw e;
+        }
+       
     }
 
     public T find(Object id) {
@@ -60,5 +101,5 @@ public abstract class AbstractFacade<T> {
         javax.persistence.Query q = getEntityManager().createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
     }
-    
+
 }
