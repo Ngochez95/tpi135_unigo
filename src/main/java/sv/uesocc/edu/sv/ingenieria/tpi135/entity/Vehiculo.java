@@ -32,6 +32,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Vehiculo.findAll", query = "SELECT v FROM Vehiculo v"),
+    @NamedQuery(name = "Vehiculo.findActivo", query = "SELECT v from Vehiculo as v join v.idUsuario as idu JOIN v.marcaList as mcl join idu.trayectoriaList as tyl WHERE (tyl.idTrayectoria=:idReferencia AND tyl.padre=Null)\n" +
+""),
+    @NamedQuery(name = "Vehiculo.findByCaracteristicas", query = "SELECT v FROM Vehiculo as v join v.marcaList as ml join ml.modeloList as mdl join mdl.caractetisticaList as ctl join ctl.tipoCaracteristicaList as tpc WHERE(tpc.anio=:anio AND tpc.capacidad=:capacidad)"),
     @NamedQuery(name = "Vehiculo.findByIdVehiculo", query = "SELECT v FROM Vehiculo v WHERE v.idVehiculo = :idVehiculo")})
 public class Vehiculo implements Serializable {
 

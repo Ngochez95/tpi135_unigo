@@ -5,9 +5,11 @@
  */
 package sv.uesocc.edu.sv.ingenieria.tpi135.controller;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Viaje;
 
 /**
@@ -16,6 +18,8 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Viaje;
  */
 @Stateless
 public class ViajeFacade extends AbstractFacade<Viaje> implements ViajeFacadeLocal {
+
+    private List<Viaje> lista = null;
 
     @PersistenceContext(unitName = "tpi135.proyecto_uniGo_war_1.0-SNAPSHOTPU")
     private EntityManager em;
@@ -28,5 +32,18 @@ public class ViajeFacade extends AbstractFacade<Viaje> implements ViajeFacadeLoc
     public ViajeFacade() {
         super(Viaje.class);
     }
-    
+
+    @Override
+    public List<Viaje> findByConductor(int idUsuario) {
+        try {
+            Query consulta = em.createNamedQuery("Viaje.findByConductor");
+            consulta.setParameter("idUsuario", idUsuario);
+            lista = consulta.getResultList();
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return lista;
+
+    }
+
 }

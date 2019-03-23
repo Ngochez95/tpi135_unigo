@@ -5,6 +5,7 @@
  */
 package sv.uesocc.edu.sv.ingenieria.tpi135.controller;
 
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Vehiculo;
@@ -27,6 +28,11 @@ public interface VehiculoFacadeLocal {
     List<Vehiculo> findAll();
 
     List<Vehiculo> findRange(int[] range);
+    
+    List<Vehiculo> findActivo (int idReferencia);
+    
+    List<Vehiculo> findByCaracteristicas(Date anio, int capacidad);
+            
 
     int count();
     

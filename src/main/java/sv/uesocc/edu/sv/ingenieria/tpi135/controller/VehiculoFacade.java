@@ -5,9 +5,11 @@
  */
 package sv.uesocc.edu.sv.ingenieria.tpi135.controller;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Vehiculo;
 
 /**
@@ -27,6 +29,20 @@ public class VehiculoFacade extends AbstractFacade<Vehiculo> implements Vehiculo
 
     public VehiculoFacade() {
         super(Vehiculo.class);
+    }
+
+    @Override
+    public List<Vehiculo> findActivo(int idReferencia) {
+        List<Vehiculo> lista = null;
+        try {
+            Query consulta = em.createNamedQuery("Vehiculo.findActivo");
+            consulta.setParameter("idReferencia", idReferencia);
+            lista = consulta.getResultList();
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return lista;
+
     }
     
 }

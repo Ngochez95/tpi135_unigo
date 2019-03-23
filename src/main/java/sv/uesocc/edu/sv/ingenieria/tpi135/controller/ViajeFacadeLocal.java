@@ -25,6 +25,8 @@ public interface ViajeFacadeLocal {
     Viaje find(Object id);
 
     List<Viaje> findAll();
+    
+    List<Viaje> findByConductor(int idUsuario);
 
     List<Viaje> findRange(int[] range);
 
