@@ -5,6 +5,7 @@
  */
 package sv.uesocc.edu.sv.ingenieria.tpi135.controller;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,7 +13,7 @@ import javax.persistence.EntityManager;
 
 /**
  *
- * @author gochez
+ * @author gochez & Zepeda Abrego
  */
 public abstract class AbstractFacade<T> {
 
@@ -32,6 +33,10 @@ public abstract class AbstractFacade<T> {
     public void loggerSevereEntityNull(Exception e) {
         Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
     }
+    
+    public void sqlExceptionLogger(SQLException sqle){
+        
+    }
 
     public void create(T entity) {
         try {
@@ -42,7 +47,6 @@ public abstract class AbstractFacade<T> {
             }
         } catch (Exception e) {
             loggerSevereEntityNull(e);
-            throw e;
         }
 
     }
@@ -56,7 +60,6 @@ public abstract class AbstractFacade<T> {
             }
         } catch (Exception e) {
             loggerSevereEntityNull(e);
-            throw e;
         }
 
     }
@@ -70,7 +73,6 @@ public abstract class AbstractFacade<T> {
             }
         } catch (Exception e) {
             loggerSevereEntityNull(e);
-            throw e;
         }
 
     }
@@ -82,7 +84,6 @@ public abstract class AbstractFacade<T> {
             }
         } catch (Exception e) {
             System.out.println("excepcion: " + e);
-            throw e;
         }
         return null;
     }
