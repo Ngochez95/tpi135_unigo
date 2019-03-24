@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="pu-test" transaction-type="RESOURCE_LOCAL">
+    <class>sv.uesocc.edu.sv.ingenieria.tpi135.entity.Caractetistica</class>
+    <class>sv.uesocc.edu.sv.ingenieria.tpi135.entity.Marca</class>
+    <class>sv.uesocc.edu.sv.ingenieria.tpi135.entity.MedioContacto</class>
+    <class>sv.uesocc.edu.sv.ingenieria.tpi135.entity.Modelo</class>
+    <class>sv.uesocc.edu.sv.ingenieria.tpi135.entity.Origen</class>
+    <class>sv.uesocc.edu.sv.ingenieria.tpi135.entity.ReservaViaje</class>
+    <class>sv.uesocc.edu.sv.ingenieria.tpi135.entity.Rol</class>
+    <class>sv.uesocc.edu.sv.ingenieria.tpi135.entity.Semana</class>
+    <class>sv.uesocc.edu.sv.ingenieria.tpi135.entity.TipoCaracteristica</class>
+    <class>sv.uesocc.edu.sv.ingenieria.tpi135.entity.TipoMedioContacto</class>
+    <class>sv.uesocc.edu.sv.ingenieria.tpi135.entity.Trayectoria</class>
+    <class>sv.uesocc.edu.sv.ingenieria.tpi135.entity.Usuario</class>
+    <class>sv.uesocc.edu.sv.ingenieria.tpi135.entity.Vehiculo</class>
+    <class>sv.uesocc.edu.sv.ingenieria.tpi135.entity.Viaje</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+     <properties>
+        <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"/>
+        <property name="javax.persistence.jdbc.url" value="jdbc:derby:memory:testDB;create=true"/>
+        <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+        <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+    </properties>
+  </persistence-unit>
+</persistence>
