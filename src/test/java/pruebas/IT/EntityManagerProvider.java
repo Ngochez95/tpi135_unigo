@@ -1,5 +1,9 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package pruebas.IT;
-
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -10,17 +14,12 @@ import org.junit.runners.model.Statement;
 import org.mockito.internal.util.reflection.Whitebox;
 import sv.uesocc.edu.sv.ingenieria.tpi135.controller.AbstractFacade;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
- * @author gochez
+ * @author zaldivar
  */
-public class EntityManagerProvider implements TestRule{
+public class EntityManagerProvider implements TestRule {
+
     public static EntityManagerProvider emp;
     private final EntityTransaction transaction;
     private final EntityManager em;
@@ -38,11 +37,12 @@ public class EntityManagerProvider implements TestRule{
     }
 
     @Override
-    public Statement apply(Statement arg0, Description arg1) {
+    public Statement apply(final Statement arg0, Description arg1) {
 
         return new Statement() {
             @Override
             public void evaluate() throws Throwable {
+                arg0.evaluate();
                 getEm().clear();
                 getEm().close();
             }
@@ -64,5 +64,5 @@ public class EntityManagerProvider implements TestRule{
     public AbstractFacade getFacade() {
         return facade;
     }
-    
+
 }
