@@ -5,6 +5,7 @@
  */
 package sv.uesocc.edu.sv.ingenieria.tpi135.controller;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,7 +13,7 @@ import javax.persistence.EntityManager;
 
 /**
  *
- * @author gochez
+ * @author gochez & Zepeda Abrego
  */
 public abstract class AbstractFacade<T> {
 
@@ -33,6 +34,14 @@ public abstract class AbstractFacade<T> {
         Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
     }
 
+    public void sqlExceptionLogger(SQLException sqle) {
+
+    }
+
+    public void mostrarExcepcion(Exception e) {
+        System.out.println("excepcion: " + e);
+    }
+
     public void create(T entity) {
         try {
             if (getEntityManager() != null && entity != null) {
@@ -42,7 +51,6 @@ public abstract class AbstractFacade<T> {
             }
         } catch (Exception e) {
             loggerSevereEntityNull(e);
-            throw e;
         }
 
     }
@@ -56,7 +64,6 @@ public abstract class AbstractFacade<T> {
             }
         } catch (Exception e) {
             loggerSevereEntityNull(e);
-            throw e;
         }
 
     }
@@ -70,7 +77,6 @@ public abstract class AbstractFacade<T> {
             }
         } catch (Exception e) {
             loggerSevereEntityNull(e);
-            throw e;
         }
 
     }
@@ -81,37 +87,66 @@ public abstract class AbstractFacade<T> {
                 return getEntityManager().find(entityClass, id);
             }
         } catch (Exception e) {
-            System.out.println("excepcion: " + e);
-            throw e;
+            mostrarExcepcion(e);
         }
         return null;
     }
 
     public List<T> findAll() {
-        javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
-        cq.select(cq.from(entityClass));
-        return getEntityManager().createQuery(cq).getResultList();
+        try {
+            if (getEntityManager() != null) {
+                javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
+                cq.select(cq.from(entityClass));
+                return getEntityManager().createQuery(cq).getResultList();
+            }
+        } catch (Exception e) {
+            mostrarExcepcion(e);
+        }
+        return null;
     }
 
     public List<T> findRange(int[] range) {
-        javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
-        cq.select(cq.from(entityClass));
-        javax.persistence.Query q = getEntityManager().createQuery(cq);
-        q.setMaxResults(range[1] - range[0] + 1);
-        q.setFirstResult(range[0]);
-        return q.getResultList();
+        try {
+            if (range != null && getEntityManager() != null) {
+                javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
+                cq.select(cq.from(entityClass));
+                javax.persistence.Query q = getEntityManager().createQuery(cq);
+                q.setMaxResults(range[1] - range[0] + 1);
+                q.setFirstResult(range[0]);
+                return q.getResultList();
+            }
+        } catch (Exception e) {
+            mostrarExcepcion(e);
+        }
+        return null;
     }
 
     public int count() {
-        javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
-        javax.persistence.criteria.Root<T> rt = cq.from(entityClass);
-        cq.select(getEntityManager().getCriteriaBuilder().count(rt));
-        javax.persistence.Query q = getEntityManager().createQuery(cq);
-        return ((Long) q.getSingleResult()).intValue();
+        try {
+            if (getEntityManager() != null) {
+                javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
+                javax.persistence.criteria.Root<T> rt = cq.from(entityClass);
+                cq.select(getEntityManager().getCriteriaBuilder().count(rt));
+                javax.persistence.Query q = getEntityManager().createQuery(cq);
+                return ((Long) q.getSingleResult()).intValue();
+            }
+        } catch (Exception e) {
+            mostrarExcepcion(e);
+        }
+        return 0;
+
     }
-    
-     public Class<T> getEntityClass() {
-        return entityClass;
+
+    public Class<T> getEntityClass() {
+        try {
+            if (getEntityClass() != null) {
+                return entityClass;
+            }
+        } catch (Exception e) {
+            mostrarExcepcion(e);
+        }
+        return null;
+
     }
 
 }
