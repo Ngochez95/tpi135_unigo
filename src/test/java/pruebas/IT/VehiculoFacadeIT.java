@@ -87,15 +87,15 @@ public class VehiculoFacadeIT {
         assertEquals(vh1, facade().find(1));
     }
 
-    @Test
-    public void testEdit() {
-        System.out.println("Edit");
-        Vehiculo vh1 = new Vehiculo(1);
-        //facade().getEntityManager().getTransaction().begin();
-        facade().edit(vh1);
-
-        Mockito.verify(facade()).edit(vh1);
-    }
+//    @Test
+//    public void testEdit() {
+//        System.out.println("Edit");
+//        Vehiculo vh1 = new Vehiculo(1);
+//        //facade().getEntityManager().getTransaction().begin();
+//        facade().edit(vh1);
+//
+//        Mockito.verify(facade()).edit(vh1);
+//    }
 
     @Test
     public void testFind() {
@@ -104,23 +104,23 @@ public class VehiculoFacadeIT {
         assertTrue(facade().find(1).equals(new Vehiculo(1)));
     }
 
-    @Test
-    public void testFindAll() {
-        System.out.println("Test findAll");
-        Vehiculo vehiculo1 = new Vehiculo();
-        facade().create(vehiculo1);
-        lvh = facade().findAll();
-        assertEquals(1, lvh.size());
-
-    }
-
-    @Test
-    public void testCount() {
-        System.out.println("count-IT");
-        int result;
-        facade().create(new Vehiculo(1));
-        result = facade().count();
-        assertEquals(1, result);
-    }
+//    @Test
+//    public void testFindAll() {
+//        System.out.println("Test findAll");
+//        Vehiculo vehiculo1 = new Vehiculo();
+//        facade().create(vehiculo1);
+//        lvh = facade().findAll();
+//        assertEquals(1, lvh.size());
+//
+//    }
+//
+//    @Test
+//    public void testCount() {
+//        System.out.println("count-IT");
+//        int result;
+//        facade().create(new Vehiculo(1));
+//        result = facade().count();
+//        assertEquals(1, result);
+//    }
 
 }
