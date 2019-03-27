@@ -14,20 +14,8 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Trayectoria;
  * @author gochez
  */
 @Local
-public interface TrayectoriaFacadeLocal {
+public interface TrayectoriaFacadeLocal extends AbstractInterface<Trayectoria>{
 
-    void create(Trayectoria trayectoria);
-
-    void edit(Trayectoria trayectoria);
-
-    void remove(Trayectoria trayectoria);
-
-    Trayectoria find(Object id);
-
-    List<Trayectoria> findAll();
-
-    List<Trayectoria> findRange(int[] range);
-
-    int count();
+    
     
 }

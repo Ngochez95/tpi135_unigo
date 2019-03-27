@@ -14,20 +14,8 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.TipoCaracteristica;
  * @author gochez
  */
 @Local
-public interface TipoCaracteristicaFacadeLocal {
+public interface TipoCaracteristicaFacadeLocal extends AbstractInterface<TipoCaracteristica>{
 
-    void create(TipoCaracteristica tipoCaracteristica);
-
-    void edit(TipoCaracteristica tipoCaracteristica);
-
-    void remove(TipoCaracteristica tipoCaracteristica);
-
-    TipoCaracteristica find(Object id);
-
-    List<TipoCaracteristica> findAll();
-
-    List<TipoCaracteristica> findRange(int[] range);
-
-    int count();
+    
     
 }

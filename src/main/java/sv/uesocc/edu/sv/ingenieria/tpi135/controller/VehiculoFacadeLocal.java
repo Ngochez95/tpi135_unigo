@@ -15,25 +15,9 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Vehiculo;
  * @author gochez
  */
 @Local
-public interface VehiculoFacadeLocal {
+public interface VehiculoFacadeLocal extends AbstractInterface<Vehiculo>{
 
-    void create(Vehiculo vehiculo);
-
-    void edit(Vehiculo vehiculo);
-
-    void remove(Vehiculo vehiculo);
-
-    Vehiculo find(Object id);
-
-    List<Vehiculo> findAll();
-
-    List<Vehiculo> findRange(int[] range);
-    
     List<Vehiculo> findActivo (int idReferencia);
-    
     List<Vehiculo> findByCaracteristicas(Date anio, int capacidad);
-            
-
-    int count();
     
 }

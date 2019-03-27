@@ -5,6 +5,7 @@
  */
 package sv.uesocc.edu.sv.ingenieria.tpi135.controller;
 
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -43,6 +44,16 @@ public class VehiculoFacade extends AbstractFacade<Vehiculo> implements Vehiculo
         }
         return lista;
 
+    }
+
+    @Override
+    public List<Vehiculo> findByCaracteristicas(Date anio, int capacidad) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List findRange(int first, int pageSize) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

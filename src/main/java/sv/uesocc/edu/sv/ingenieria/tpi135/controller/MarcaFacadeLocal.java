@@ -14,9 +14,9 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Marca;
  * @author gochez
  */
 @Local
-public interface MarcaFacadeLocal {
+public interface MarcaFacadeLocal extends AbstractInterface<Marca>{
 
-    void create(Marca marca);
+    /**void create(Marca marca);
 
     void edit(Marca marca);
 
@@ -28,6 +28,6 @@ public interface MarcaFacadeLocal {
 
     List<Marca> findRange(int[] range);
 
-    int count();
+    int count();**/
     
 }

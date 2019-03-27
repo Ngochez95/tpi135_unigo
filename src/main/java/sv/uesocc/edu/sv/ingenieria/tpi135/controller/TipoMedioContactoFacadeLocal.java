@@ -14,20 +14,7 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.TipoMedioContacto;
  * @author gochez
  */
 @Local
-public interface TipoMedioContactoFacadeLocal {
+public interface TipoMedioContactoFacadeLocal extends AbstractInterface<TipoMedioContacto>{
 
-    void create(TipoMedioContacto tipoMedioContacto);
-
-    void edit(TipoMedioContacto tipoMedioContacto);
-
-    void remove(TipoMedioContacto tipoMedioContacto);
-
-    TipoMedioContacto find(Object id);
-
-    List<TipoMedioContacto> findAll();
-
-    List<TipoMedioContacto> findRange(int[] range);
-
-    int count();
     
 }

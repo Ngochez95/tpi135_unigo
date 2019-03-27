@@ -11,23 +11,11 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Caractetistica;
 
 /**
  *
- * @author gochez
+ * @author gochez & zepeda abrego
  */
 @Local
-public interface CaractetisticaFacadeLocal {
+public interface CaractetisticaFacadeLocal extends AbstractInterface<Caractetistica>{
 
-    void create(Caractetistica caractetistica);
 
-    void edit(Caractetistica caractetistica);
-
-    void remove(Caractetistica caractetistica);
-
-    Caractetistica find(Object id);
-
-    List<Caractetistica> findAll();
-
-    List<Caractetistica> findRange(int[] range);
-
-    int count();
     
 }

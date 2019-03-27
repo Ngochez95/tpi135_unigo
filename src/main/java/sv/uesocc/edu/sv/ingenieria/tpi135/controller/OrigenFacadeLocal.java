@@ -14,20 +14,8 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Origen;
  * @author gochez
  */
 @Local
-public interface OrigenFacadeLocal {
+public interface OrigenFacadeLocal extends AbstractInterface<Origen>{
 
-    void create(Origen origen);
-
-    void edit(Origen origen);
-
-    void remove(Origen origen);
-
-    Origen find(Object id);
-
-    List<Origen> findAll();
-
-    List<Origen> findRange(int[] range);
-
-    int count();
+  
     
 }

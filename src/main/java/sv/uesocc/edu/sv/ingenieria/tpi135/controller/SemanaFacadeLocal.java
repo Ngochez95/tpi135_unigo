@@ -14,20 +14,8 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Semana;
  * @author gochez
  */
 @Local
-public interface SemanaFacadeLocal {
+public interface SemanaFacadeLocal extends AbstractInterface<Semana>{
 
-    void create(Semana semana);
-
-    void edit(Semana semana);
-
-    void remove(Semana semana);
-
-    Semana find(Object id);
-
-    List<Semana> findAll();
-
-    List<Semana> findRange(int[] range);
-
-    int count();
+  
     
 }

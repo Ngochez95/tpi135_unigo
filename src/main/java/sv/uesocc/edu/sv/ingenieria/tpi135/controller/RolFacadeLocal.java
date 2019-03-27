@@ -14,20 +14,8 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Rol;
  * @author gochez
  */
 @Local
-public interface RolFacadeLocal {
+public interface RolFacadeLocal extends AbstractInterface<Rol>{
 
-    void create(Rol rol);
-
-    void edit(Rol rol);
-
-    void remove(Rol rol);
-
-    Rol find(Object id);
-
-    List<Rol> findAll();
-
-    List<Rol> findRange(int[] range);
-
-    int count();
+   
     
 }

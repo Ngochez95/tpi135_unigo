@@ -14,20 +14,8 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Usuario;
  * @author gochez
  */
 @Local
-public interface UsuarioFacadeLocal {
+public interface UsuarioFacadeLocal extends AbstractInterface<Usuario>{
 
-    void create(Usuario usuario);
-
-    void edit(Usuario usuario);
-
-    void remove(Usuario usuario);
-
-    Usuario find(Object id);
-
-    List<Usuario> findAll();
-
-    List<Usuario> findRange(int[] range);
-
-    int count();
+ 
     
 }

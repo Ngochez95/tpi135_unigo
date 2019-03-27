@@ -14,20 +14,8 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.ReservaViaje;
  * @author gochez
  */
 @Local
-public interface ReservaViajeFacadeLocal {
+public interface ReservaViajeFacadeLocal extends AbstractInterface<ReservaViaje>{
 
-    void create(ReservaViaje reservaViaje);
-
-    void edit(ReservaViaje reservaViaje);
-
-    void remove(ReservaViaje reservaViaje);
-
-    ReservaViaje find(Object id);
-
-    List<ReservaViaje> findAll();
-
-    List<ReservaViaje> findRange(int[] range);
-
-    int count();
+    
     
 }
