@@ -14,7 +14,12 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Viaje;
  * @author gochez
  */
 @Local
-public interface ViajeFacadeLocal extends AbstractInterface<Viaje>{
+public interface ViajeFacadeLocal extends AbstractInterface<Viaje> {
+
     public List<Viaje> findByConductor(int idUsuario);
+
+    public List<Viaje> findByDia(int dia);
+
+    public List<Viaje> findxCiudadOrigen();
 
 }

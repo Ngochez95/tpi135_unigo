@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import javax.ws.rs.Path;
 import sv.uesocc.edu.sv.ingenieria.tpi135.controller.AbstractInterface;
 import sv.uesocc.edu.sv.ingenieria.tpi135.controller.ViajeFacade;
 import sv.uesocc.edu.sv.ingenieria.tpi135.controller.ViajeFacadeLocal;
@@ -20,6 +21,7 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Viaje;
  */
 @Named(value = "frmViaje")
 @ViewScoped
+@Path("viaje")
 public class frmViaje extends AbstractResource<Viaje> implements Serializable {
 
     /**

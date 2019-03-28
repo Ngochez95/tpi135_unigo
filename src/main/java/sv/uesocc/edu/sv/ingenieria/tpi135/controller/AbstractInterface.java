@@ -27,10 +27,10 @@ public interface AbstractInterface<T> {
 
     public List<T> findAll();
 
-    public List<T> findRange(int[] range);
+    //public List<T> findRange(int[] range);
 
     public int count();
 
-    public List findRange(int first, int pageSize);
+    public List<T> findRange(int first, int pageSize);
     
 }

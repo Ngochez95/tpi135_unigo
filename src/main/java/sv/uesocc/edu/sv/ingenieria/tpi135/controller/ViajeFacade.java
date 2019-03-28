@@ -47,8 +47,28 @@ public class ViajeFacade extends AbstractFacade<Viaje> implements ViajeFacadeLoc
     }
 
     @Override
-    public List findRange(int first, int pageSize) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Viaje> findByDia(int dia) {
+        try {
+            Query consulta = em.createNamedQuery("Viaje.FindByDia");
+            consulta.setParameter("dia", dia);
+            lista = consulta.getResultList();
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return lista;
+
+    }
+
+    @Override
+    public List<Viaje> findxCiudadOrigen() {
+         try {
+            Query consulta = em.createNamedQuery("Viaje.BuscarxCuidadOrigen");
+            lista = consulta.getResultList();
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return lista;  
+
     }
 
 }

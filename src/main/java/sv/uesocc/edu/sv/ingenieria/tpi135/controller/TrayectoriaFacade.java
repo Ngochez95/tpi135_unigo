@@ -30,9 +30,6 @@ public class TrayectoriaFacade extends AbstractFacade<Trayectoria> implements Tr
         super(Trayectoria.class);
     }
 
-    @Override
-    public List findRange(int first, int pageSize) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
     
 }

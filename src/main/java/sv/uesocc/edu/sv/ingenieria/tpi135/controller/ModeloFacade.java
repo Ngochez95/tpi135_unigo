@@ -30,9 +30,6 @@ public class ModeloFacade extends AbstractFacade<Modelo> implements ModeloFacade
         super(Modelo.class);
     }
 
-    @Override
-    public List findRange(int first, int pageSize) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+  
     
 }
