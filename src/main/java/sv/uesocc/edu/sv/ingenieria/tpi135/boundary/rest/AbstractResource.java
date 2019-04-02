@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sv.uesocc.edu.sv.ingenieria.tpi135.boundary;
+package sv.uesocc.edu.sv.ingenieria.tpi135.boundary.rest;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -61,7 +61,7 @@ public abstract class AbstractResource<T> implements Serializable {
     @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
     public List<T> findRange(
             @DefaultValue("0") @QueryParam("first") int first,
-            @DefaultValue("5") @QueryParam("pagesize") int pageSize
+            @DefaultValue("10") @QueryParam("pagesize") int pageSize
     ) {
         if (getFacade() != null && first >= 0 && pageSize >= 0) {
             try {

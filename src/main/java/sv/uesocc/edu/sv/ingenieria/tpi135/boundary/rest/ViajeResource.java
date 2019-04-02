@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sv.uesocc.edu.sv.ingenieria.tpi135.boundary;
+package sv.uesocc.edu.sv.ingenieria.tpi135.boundary.rest;
 
 import java.io.Serializable;
 import javax.ejb.EJB;
@@ -19,18 +19,17 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Viaje;
  *
  * @author zentaury
  */
-@Named(value = "frmViaje")
-@ViewScoped
+
 @Path("viaje")
-public class frmViaje extends AbstractResource<Viaje> implements Serializable {
+public class ViajeResource extends AbstractResource<Viaje> implements Serializable {
 
     /**
-     * Creates a new instance of frmViaje
+     * Creates a new instance of ViajeResource
      */
     @EJB
     private ViajeFacadeLocal viajefd;
 
-    public frmViaje() {
+    public ViajeResource() {
         super(Viaje.class
         );
     }
