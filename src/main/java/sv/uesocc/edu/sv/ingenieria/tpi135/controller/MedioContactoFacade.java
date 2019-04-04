@@ -16,7 +16,7 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.MedioContacto;
  * @author gochez
  */
 @Stateless
-public class MedioContactoFacade extends AbstractFacade<MedioContacto> implements MedioContactoFacadeLocal {
+public class MedioContactoFacade extends AbstractFacade<MedioContacto> {
 
     @PersistenceContext(unitName = "tpi135.proyecto_uniGo_war_1.0-SNAPSHOTPU")
     private EntityManager em;

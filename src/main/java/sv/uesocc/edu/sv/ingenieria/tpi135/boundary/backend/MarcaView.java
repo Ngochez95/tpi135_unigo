@@ -11,9 +11,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
-import sv.uesocc.edu.sv.ingenieria.tpi135.controller.AbstractInterface;
-import sv.uesocc.edu.sv.ingenieria.tpi135.controller.MarcaFacadeLocal;
+import sv.uesocc.edu.sv.ingenieria.tpi135.controller.AbstractFacade;
+import sv.uesocc.edu.sv.ingenieria.tpi135.controller.MarcaFacade;
 import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Marca;
 
 /**
@@ -26,8 +27,8 @@ public class MarcaView extends DefaultGenerator<Marca> implements Serializable {
 
     private String mensaje;
     
-    @EJB
-    private MarcaFacadeLocal marcaFacade;
+    @Inject
+    private MarcaFacade marcaFacade;
 
     @Override
     public Marca crearNuevo() {
@@ -36,7 +37,7 @@ public class MarcaView extends DefaultGenerator<Marca> implements Serializable {
     }
 
     @Override
-    protected AbstractInterface<Marca> getFacade() {
+    protected AbstractFacade<Marca> getFacade() {
         return this.marcaFacade;
     }
 

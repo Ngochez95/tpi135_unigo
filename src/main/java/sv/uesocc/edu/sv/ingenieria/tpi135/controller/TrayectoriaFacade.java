@@ -16,7 +16,7 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Trayectoria;
  * @author gochez
  */
 @Stateless
-public class TrayectoriaFacade extends AbstractFacade<Trayectoria> implements TrayectoriaFacadeLocal {
+public class TrayectoriaFacade extends AbstractFacade<Trayectoria> {
 
     @PersistenceContext(unitName = "tpi135.proyecto_uniGo_war_1.0-SNAPSHOTPU")
     private EntityManager em;

@@ -16,7 +16,7 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Semana;
  * @author gochez
  */
 @Stateless
-public class SemanaFacade extends AbstractFacade<Semana> implements SemanaFacadeLocal {
+public class SemanaFacade extends AbstractFacade<Semana>  {
 
     @PersistenceContext(unitName = "tpi135.proyecto_uniGo_war_1.0-SNAPSHOTPU")
     private EntityManager em;

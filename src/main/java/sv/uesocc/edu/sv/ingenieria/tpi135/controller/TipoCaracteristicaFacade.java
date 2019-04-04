@@ -16,7 +16,7 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.TipoCaracteristica;
  * @author gochez
  */
 @Stateless
-public class TipoCaracteristicaFacade extends AbstractFacade<TipoCaracteristica> implements TipoCaracteristicaFacadeLocal {
+public class TipoCaracteristicaFacade extends AbstractFacade<TipoCaracteristica> {
 
     @PersistenceContext(unitName = "tpi135.proyecto_uniGo_war_1.0-SNAPSHOTPU")
     private EntityManager em;

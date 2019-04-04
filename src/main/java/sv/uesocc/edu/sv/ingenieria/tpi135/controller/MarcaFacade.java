@@ -16,7 +16,7 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Marca;
  * @author gochez
  */
 @Stateless
-public class MarcaFacade extends AbstractFacade<Marca> implements MarcaFacadeLocal {
+public class MarcaFacade extends AbstractFacade<Marca>{
 
     @PersistenceContext(unitName = "tpi135.proyecto_uniGo_war_1.0-SNAPSHOTPU")
     private EntityManager em;

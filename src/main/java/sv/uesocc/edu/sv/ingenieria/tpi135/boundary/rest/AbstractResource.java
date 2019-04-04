@@ -20,14 +20,14 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-import sv.uesocc.edu.sv.ingenieria.tpi135.controller.AbstractInterface;
+import sv.uesocc.edu.sv.ingenieria.tpi135.controller.AbstractFacade;
 /**
  *
  * @author gochez & zepeda abrego
  */
 public abstract class AbstractResource<T> implements Serializable {
 
-    protected abstract AbstractInterface<T> getFacade();
+    protected abstract AbstractFacade<T> getFacade();
     
     protected abstract T crearNuevo();
 

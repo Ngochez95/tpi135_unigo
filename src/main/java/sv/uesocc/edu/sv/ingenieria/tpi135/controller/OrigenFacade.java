@@ -16,7 +16,7 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Origen;
  * @author gochez
  */
 @Stateless
-public class OrigenFacade extends AbstractFacade<Origen> implements OrigenFacadeLocal {
+public class OrigenFacade extends AbstractFacade<Origen>  {
 
     @PersistenceContext(unitName = "tpi135.proyecto_uniGo_war_1.0-SNAPSHOTPU")
     private EntityManager em;

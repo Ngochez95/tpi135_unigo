@@ -16,7 +16,7 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Modelo;
  * @author gochez
  */
 @Stateless
-public class ModeloFacade extends AbstractFacade<Modelo> implements ModeloFacadeLocal {
+public class ModeloFacade extends AbstractFacade<Modelo> {
 
     @PersistenceContext(unitName = "tpi135.proyecto_uniGo_war_1.0-SNAPSHOTPU")
     private EntityManager em;

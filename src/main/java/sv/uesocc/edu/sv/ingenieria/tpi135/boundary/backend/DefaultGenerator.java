@@ -11,7 +11,7 @@ import javax.faces.event.ActionEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
-import sv.uesocc.edu.sv.ingenieria.tpi135.controller.AbstractInterface;
+import sv.uesocc.edu.sv.ingenieria.tpi135.controller.AbstractFacade;
 
 /**
  *
@@ -57,7 +57,7 @@ public abstract class DefaultGenerator<T> implements Serializable {
         return salida;
     }
 
-    protected abstract AbstractInterface<T> getFacade();
+    protected abstract AbstractFacade<T> getFacade();
 
     public abstract T obtenerRowData(String rowKey);
 

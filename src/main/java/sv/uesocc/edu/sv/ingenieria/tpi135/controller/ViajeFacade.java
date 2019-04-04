@@ -17,7 +17,7 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Viaje;
  * @author gochez
  */
 @Stateless
-public class ViajeFacade extends AbstractFacade<Viaje> implements ViajeFacadeLocal {
+public class ViajeFacade extends AbstractFacade<Viaje>  {
 
     private List<Viaje> lista = null;
 
@@ -33,7 +33,6 @@ public class ViajeFacade extends AbstractFacade<Viaje> implements ViajeFacadeLoc
         super(Viaje.class);
     }
 
-    @Override
     public List<Viaje> findByConductor(int idUsuario) {
         try {
             Query consulta = em.createNamedQuery("Viaje.findByConductor");
@@ -46,7 +45,6 @@ public class ViajeFacade extends AbstractFacade<Viaje> implements ViajeFacadeLoc
 
     }
 
-    @Override
     public List<Viaje> findByDia(int dia) {
         try {
             Query consulta = em.createNamedQuery("Viaje.FindByDia");
@@ -59,7 +57,6 @@ public class ViajeFacade extends AbstractFacade<Viaje> implements ViajeFacadeLoc
 
     }
 
-    @Override
     public List<Viaje> findxCiudadOrigen() {
          try {
             Query consulta = em.createNamedQuery("Viaje.BuscarxCuidadOrigen");

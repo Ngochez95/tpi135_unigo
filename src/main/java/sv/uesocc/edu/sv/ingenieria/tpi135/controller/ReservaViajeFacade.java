@@ -16,7 +16,7 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.ReservaViaje;
  * @author gochez
  */
 @Stateless
-public class ReservaViajeFacade extends AbstractFacade<ReservaViaje> implements ReservaViajeFacadeLocal {
+public class ReservaViajeFacade extends AbstractFacade<ReservaViaje> {
 
     @PersistenceContext(unitName = "tpi135.proyecto_uniGo_war_1.0-SNAPSHOTPU")
     private EntityManager em;
