@@ -7,7 +7,10 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.inject.Inject;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
@@ -19,7 +22,10 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.controller.AbstractFacade;
  * @param <T>
  */
 public abstract class DefaultGenerator<T> implements Serializable {
-    
+//
+//    @Inject
+//    SesionDeUsuarioBean sesion;
+
     protected LazyDataModel<T> modelo;
 
     protected int TamanioDePagina = 5;
@@ -27,16 +33,21 @@ public abstract class DefaultGenerator<T> implements Serializable {
     protected T registro;
 
     protected boolean mostrandoDetalle;
-    
+
+    protected ACCION accion;
+
     @PostConstruct
     protected void inicializar() {
         this.inicializarModelo();
         this.mostrandoDetalle = false;
-        //Este es para cuando la interfaz lleva un combobox
-//        this.inicializarListas();
+        this.inicializarListas();
     }
 
     public abstract T crearNuevo();
+
+    protected void inicializarListas() {
+
+    }
 
     public List<T> cargarDatos(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
         List salida = null;
@@ -75,9 +86,10 @@ public abstract class DefaultGenerator<T> implements Serializable {
                 public Object getRowKey(T object) {
                     return obtenerRowKey(object);
                 }
+
                 @Override
-                public List <T> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters){
-                    return cargarDatos(first,pageSize, sortField, sortOrder, filters);
+                public List<T> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
+                    return cargarDatos(first, pageSize, sortField, sortOrder, filters);
                 }
             };
 
@@ -88,12 +100,12 @@ public abstract class DefaultGenerator<T> implements Serializable {
     }
 
     public void cambiarSeleccion(SelectEvent se) {
-        
+
         if (se.getObject() != null) {
             try {
                 this.registro = (T) se.getObject();
                 this.mostrandoDetalle = true;
-//                this.accion = ACCION.EDITAR;
+                this.accion = ACCION.EDITAR;
             } catch (Exception ex) {
                 Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
             }
@@ -104,31 +116,33 @@ public abstract class DefaultGenerator<T> implements Serializable {
     public void btnNuevoHandler(ActionEvent ae) {
         this.crearNuevo();
         this.mostrandoDetalle = true;
-        //this.accion = ACCION.CREAR;
+        this.accion = ACCION.CREAR;
     }
 
     public void btnCancelarHandler(ActionEvent ae) {
         this.registro = null;
-//        this.accion = null;
+        this.accion = null;
         this.mostrandoDetalle = false;
-        
+
     }
-    
-    
 
     public void btnGuardarHandler(ActionEvent ae) {
-        
+
         boolean resultado = false;
-        
+
         try {
+            System.out.println("que esta pasando :'v");
             if (this.registro != null && this.getFacade() != null) {
-                /**resultado = **/this.getFacade().create(this.registro);
-//                generarMensaje(ACCION.CREAR, resultado);
+//               resultado = 
+                System.out.println(""+this.registro.toString());
+
+                this.getFacade().create(this.registro);
+                generarMensaje(ACCION.CREAR, resultado);
                 if (resultado) {
-//                    this.accion = null;
+                    this.accion = null;
                     this.mostrandoDetalle = false;
                 }
-                
+
             }
         } catch (Exception ex) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
@@ -139,12 +153,12 @@ public abstract class DefaultGenerator<T> implements Serializable {
         try {
             if (this.registro != null && this.getFacade() != null) {
                 boolean resultado = this.getFacade().remove(registro);
-//                this.generarMensaje(ACCION.ELIMINAR, resultado);
+                this.generarMensaje(ACCION.ELIMINAR, resultado);
                 this.registro = null;
-//                this.accion = null;
-                
+                this.accion = null;
+
             } else {
-//                this.generarMensaje(ACCION.ELIMINAR, false, "El registro no es valido");
+                this.generarMensaje(ACCION.ELIMINAR, false, "El registro no es valido");
             }
         } catch (Exception ex) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
@@ -161,66 +175,66 @@ public abstract class DefaultGenerator<T> implements Serializable {
 //                    this.registro = pivot;
 //                }
 //                this.generarMensaje(ACCION.EDITAR, resultado);
-//                this.accion = null;
+                this.accion = null;
                 boolean resultado = false;
-/**                if (this.getFacade().edit(registro)) {
-                    resultado = true; 
-                }**/
-//                this.generarMensaje(ACCION.EDITAR, resultado);
+                if (this.getFacade().editar(registro)) {
+                    resultado = true;
+                }
+                this.generarMensaje(ACCION.EDITAR, resultado);
             }
         } catch (Exception ex) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
         }
     }
 
-//    public void generarMensaje(ACCION accion, boolean resultado) {
-//        this.generarMensaje(accion, resultado, null);
-//    }
-//
-//    public void generarMensaje(ACCION accion, boolean resultado, final String mensajeDetalle) {
-//        this.generarMensaje(accion, resultado, mensajeDetalle, false);
-//    }
+    public void generarMensaje(ACCION accion, boolean resultado) {
+        this.generarMensaje(accion, resultado, null);
+    }
 
-//    public void generarMensaje(ACCION accion, boolean resultado, final String mensajeDetalle, boolean mostrarDetalle) {
-//        FacesMessage mensaje = new FacesMessage();
-//        if (mensajeDetalle != null) {
-//            mensaje.setDetail(mensajeDetalle);
-//        }
-//        mensaje.setSeverity(FacesMessage.SEVERITY_INFO);
-//        this.mostrandoDetalle = false;
-//        if (!resultado) {
-//            mensaje.setSeverity(FacesMessage.SEVERITY_ERROR);
-//            this.mostrandoDetalle = true;
-//        }
-//        switch (accion) {
-//            case EDITAR:
-//                mensaje.setSummary(sesion.getMensaje("crud.edit.error"));
-//                if (resultado) {
-//                mensaje.setSummary(sesion.getMensaje("crud.edit.success"));
-//                }
-//                break;
-//            case ELIMINAR:
-//                mensaje.setSummary(sesion.getMensaje("crud.remove.error"));
-//                if (resultado) {
-//                mensaje.setSummary(sesion.getMensaje("crud.remove.success"));
-//                }
-//                break;
-//            case CREAR:
-//                mensaje.setSummary(sesion.getMensaje("crud.create.error"));
-//                if (resultado) {
-//                mensaje.setSummary(sesion.getMensaje("crud.create.success"));
-//                }
-//        }
-//        try {
-//            FacesContext.getCurrentInstance().addMessage(null, mensaje);
-//        } catch (Exception ex) {
-//            Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
-//        }
-//    }
+    public void generarMensaje(ACCION accion, boolean resultado, final String mensajeDetalle) {
+        this.generarMensaje(accion, resultado, mensajeDetalle, false);
+    }
 
-//    public enum ACCION {
-//        CREAR, EDITAR, ELIMINAR;
-//    }
+    public void generarMensaje(ACCION accion, boolean resultado, final String mensajeDetalle, boolean mostrarDetalle) {
+        FacesMessage mensaje = new FacesMessage();
+        if (mensajeDetalle != null) {
+            mensaje.setDetail(mensajeDetalle);
+        }
+        mensaje.setSeverity(FacesMessage.SEVERITY_INFO);
+        this.mostrandoDetalle = false;
+        if (!resultado) {
+            mensaje.setSeverity(FacesMessage.SEVERITY_ERROR);
+            this.mostrandoDetalle = true;
+        }
+        switch (accion) {
+            case EDITAR:
+                mensaje.setSummary("Error al editar");
+                if (resultado) {
+                    mensaje.setSummary("Edición Exitosa");
+                }
+                break;
+            case ELIMINAR:
+                mensaje.setSummary("Error al eliminar");
+                if (resultado) {
+                    mensaje.setSummary("Eliminación Exitosa");
+                }
+                break;
+            case CREAR:
+                mensaje.setSummary("error");
+                if (resultado) {
+                    mensaje.setSummary("Creacion Exitosa");
+                }
+        }
+        try {
+            FacesContext.getCurrentInstance().addMessage(null, mensaje);
+        } catch (Exception ex) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
+        }
+    }
+
+    public enum ACCION {
+        CREAR, EDITAR, ELIMINAR;
+    }
 
     public LazyDataModel<T> getModelo() {
         return modelo;
@@ -254,12 +268,12 @@ public abstract class DefaultGenerator<T> implements Serializable {
         this.mostrandoDetalle = mostrandoDetalle;
     }
 
-//    public boolean isAgregando() {
-//        return this.accion != null && this.accion.equals(ACCION.CREAR);
-//    }
-//
-//    public boolean isEditando() {
-//        return this.accion != null && !this.accion.equals(ACCION.CREAR);
-//    }
+    public boolean isAgregando() {
+        return this.accion != null && this.accion.equals(ACCION.CREAR);
+    }
+
+    public boolean isEditando() {
+        return this.accion != null && !this.accion.equals(ACCION.CREAR);
+    }
 
 }

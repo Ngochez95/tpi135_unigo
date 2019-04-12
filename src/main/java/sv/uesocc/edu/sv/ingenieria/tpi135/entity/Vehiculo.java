@@ -6,9 +6,7 @@
 package sv.uesocc.edu.sv.ingenieria.tpi135.entity;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,10 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -32,23 +28,27 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Vehiculo.findAll", query = "SELECT v FROM Vehiculo v"),
-    @NamedQuery(name = "Vehiculo.findActivo", query = "SELECT v from Vehiculo as v join v.idUsuario as idu JOIN v.marcaList as mcl join idu.trayectoriaList as tyl WHERE (tyl.idTrayectoria=:idReferencia AND tyl.padre=Null)\n" +
-""),
-    @NamedQuery(name = "Vehiculo.findByCaracteristicas", query = "SELECT v FROM Vehiculo as v join v.marcaList as ml join ml.modeloList as mdl join mdl.caractetisticaList as ctl join ctl.tipoCaracteristicaList as tpc WHERE(tpc.anio=:anio AND tpc.capacidad=:capacidad)"),
     @NamedQuery(name = "Vehiculo.findByIdVehiculo", query = "SELECT v FROM Vehiculo v WHERE v.idVehiculo = :idVehiculo")})
 public class Vehiculo implements Serializable {
 
+    //    @NamedQuery(name = "Vehiculo.findActivo", query = "SELECT v from Vehiculo as v join v.idUsuario as idu JOIN v.marcaList as mcl join idu.trayectoriaList as tyl WHERE (tyl.idTrayectoria=:idReferencia AND tyl.padre=Null)\n" +
+//""),
+//    @NamedQuery(name = "Vehiculo.findByCaracteristicas", query = "SELECT v FROM Vehiculo as v join v.marcaList as ml join ml.modeloList as mdl join mdl.caractetisticaList as ctl join ctl.tipoCaracteristicaList as tpc WHERE(tpc.anio=:anio AND tpc.capacidad=:capacidad)"),
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_vehiculo", nullable = false)
+    @Column(name = "id_vehiculo")
     private Integer idVehiculo;
-    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario", nullable = false)
+    @Basic(optional = false)
+    @Column(name = "estado_vehiculo")
+    private boolean estadoVehiculo;
+    @JoinColumn(name = "id_marca", referencedColumnName = "id_marca")
+    @ManyToOne(optional = false)
+    private Marca idMarca;
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
     @ManyToOne(optional = false)
     private Usuario idUsuario;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idVehiculo")
-    private List<Marca> marcaList;
 
     public Vehiculo() {
     }
@@ -73,13 +73,20 @@ public class Vehiculo implements Serializable {
         this.idUsuario = idUsuario;
     }
 
-    @XmlTransient
-    public List<Marca> getMarcaList() {
-        return marcaList;
+    public boolean getEstadoVehiculo() {
+        return estadoVehiculo;
     }
 
-    public void setMarcaList(List<Marca> marcaList) {
-        this.marcaList = marcaList;
+    public void setEstadoVehiculo(boolean estadoVehiculo) {
+        this.estadoVehiculo = estadoVehiculo;
+    }
+
+    public Marca getIdMarca() {
+        return idMarca;
+    }
+
+    public void setIdMarca(Marca idMarca) {
+        this.idMarca = idMarca;
     }
 
     @Override
@@ -106,5 +113,5 @@ public class Vehiculo implements Serializable {
     public String toString() {
         return "sv.uesocc.edu.sv.ingenieria.tpi135.entity.Vehiculo[ idVehiculo=" + idVehiculo + " ]";
     }
-    
+
 }

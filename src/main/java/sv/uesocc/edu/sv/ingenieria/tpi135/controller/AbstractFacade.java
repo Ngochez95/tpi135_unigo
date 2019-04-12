@@ -24,16 +24,18 @@ public abstract class AbstractFacade<T> {
 
     protected abstract EntityManager getEntityManager();
 
-    public void create(T entity) {
-        getEntityManager().persist(entity);
-    }
+//    public void create(T entity) {
+//        getEntityManager().persist(entity);
+//    }
 
-    public T crear(T entity) {
+    
+    //y asi como lo tenes no los has provado con docker? bien el mismo problema me daba subi los cambios pues, voy a ver :v es un gran chingo de cambios que asaber si estan buenos ya vas a ver 
+    public T create(T entity) {
         T salida = null;
         try {
-            EntityManager em = getEntityManager();
-            if (em != null && entity != null) {
-                em.persist(entity);
+            //EntityManager em = getEntityManager();
+            if (getEntityManager() != null && entity != null) {
+                getEntityManager().persist(entity);
                 salida = entity;
             }
         } catch (Exception e) {
@@ -42,11 +44,11 @@ public abstract class AbstractFacade<T> {
         return salida;
     }
 
-    public void edit(T entity) {
-        getEntityManager().merge(entity);
-    }
+//    public void edit(T entity) {
+//        getEntityManager().merge(entity);
+//    }
 
-    public T editar(T entity) {
+    public T edit(T entity) {
         T salida = null;
         try {
             EntityManager em = getEntityManager();
@@ -60,14 +62,31 @@ public abstract class AbstractFacade<T> {
         return salida;
     }
 
+    public boolean crear(T entity) {
+        try {
+            getEntityManager().persist(entity);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean editar(T entity) {
+        try {
+            getEntityManager().merge(entity);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public boolean remove(T entity) {
         try {
             getEntityManager().remove(getEntityManager().merge(entity));
             return true;
         } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+            return false;
         }
-        return false;
     }
 
     public T find(Object id) {

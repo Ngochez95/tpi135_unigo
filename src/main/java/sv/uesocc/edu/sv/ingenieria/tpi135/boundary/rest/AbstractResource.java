@@ -115,7 +115,7 @@ public abstract class AbstractResource<T> implements Serializable {
     public T create(T registro) throws InstantiationException, IllegalAccessException {
         if (getFacade() != null && registro != null) {
             try {
-                T r = getFacade().crear(registro);
+                T r = getFacade().create(registro);
                 if (r != null) {
                     return r;
                 }
@@ -133,7 +133,7 @@ public abstract class AbstractResource<T> implements Serializable {
         if (getFacade() != null) {
             if (registro != null) {
                 try {
-                    T r = getFacade().editar(registro);
+                    T r = getFacade().edit(registro);
                     if (r != null) {
                         return r;
                     }

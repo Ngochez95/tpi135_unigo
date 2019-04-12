@@ -154,7 +154,7 @@
                 </executions>
             </plugin>
               
-            <!--PARA COPIAR EL WAR-->
+            <!--PARA COPIAR EL WAR
             
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -208,7 +208,7 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
         </plugins>
     </build>
     <repositories>
