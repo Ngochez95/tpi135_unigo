@@ -20,13 +20,13 @@ and open the template in the editor.
         <!-- rendered="#{cc.attrs.marcaView.mostrandoDetalle}"--> 
         <!--rendered="#{cc.attrs.marcaView.mostrandoDetalle}"-->
         <p:commandButton value="Crear " actionListener="#{cc.attrs.backBean.btnGuardarHandler}" 
-                       update=":formTabla :formIngreso" />
+                     rendered="#{cc.attrs.backBean.agregando}"  update=":formTabla :formIngreso" />
 
         <p:commandButton value="Remover " id="btnEliminar" actionListener="#{cc.attrs.backBean.btnEliminarHandler}" 
-                          update=":formTabla :formIngreso"/>
+                         rendered="#{cc.attrs.backBean.editando}" update=":formTabla :formIngreso"/>
         <p:tooltip id="toolTipTrack" for="btnEliminar" value="Se eliminara el registro de forma permanente" style="border-color: red "  trackMouse="true" />
         <p:commandButton value="Editar " actionListener="#{cc.attrs.backBean.btnModificarHandler}" 
-                          update=":formTabla :formIngreso"/>
+                         rendered="#{cc.attrs.backBean.editando}" update=":formTabla :formIngreso"/>
 
     </cc:implementation>
 </html>

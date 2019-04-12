@@ -35,7 +35,7 @@
 
             <p:panelGrid id="panelIngreso" columns="2" rendered="#{marcaView.mostrandoDetalle}"  >
                 <p:outputLabel value="ID" />
-                <p:inputText id="txtId" value="#{marcaView.registro.idMarca}" readonly="true" />
+                <p:inputText id="txtId" readonly="true" />
 
 
                 <p:outputLabel value="Nombre" />
@@ -43,13 +43,16 @@
 
             </p:panelGrid>
 
+            <comp:botonesEditar backBean="#{marcaView}" NombreEntidad="Marca"/>
+
+
         </ui:define>
 
 
         <ui:define name="botonesFormulario" rendered="#{marcaView.mostrandoDetalle}">
-           
 
-            <comp:botonesEditar backBean="#{marcaView}" NombreEntidad="Marca"/>
+
+
 
         </ui:define>
 

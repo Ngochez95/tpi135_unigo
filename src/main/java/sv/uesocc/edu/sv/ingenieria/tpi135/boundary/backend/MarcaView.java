@@ -77,7 +77,6 @@ public class MarcaView extends DefaultGenerator<Marca> implements Serializable {
             if (this.registro != null && this.getFacade() != null) {
 //               resultado = 
                 System.out.println("metodo sobreescrito"+this.registro.getMarca());
-
                 this.getFacade().create(this.registro);
                 generarMensaje(ACCION.CREAR, resultado);
                 if (resultado) {
@@ -90,7 +89,7 @@ public class MarcaView extends DefaultGenerator<Marca> implements Serializable {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
         }
     }
-//
+
 //    private String mensaje;
 //    private List<Vehiculo> vhlist;
 //    private List vhlistOne;
