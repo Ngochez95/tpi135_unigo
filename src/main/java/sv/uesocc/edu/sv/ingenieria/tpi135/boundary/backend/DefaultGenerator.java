@@ -133,10 +133,7 @@ public abstract class DefaultGenerator<T> implements Serializable {
         try {
             System.out.println("que esta pasando :'v");
             if (this.registro != null && this.getFacade() != null) {
-//               resultado = 
-                System.out.println(""+this.registro.toString());
-
-                this.getFacade().create(this.registro);
+              resultado =this.getFacade().crear(this.registro);
                 generarMensaje(ACCION.CREAR, resultado);
                 if (resultado) {
                     this.accion = null;

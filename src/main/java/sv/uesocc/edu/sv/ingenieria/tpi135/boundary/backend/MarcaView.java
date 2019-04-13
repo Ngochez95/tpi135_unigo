@@ -6,9 +6,11 @@
 package sv.uesocc.edu.sv.ingenieria.tpi135.boundary.backend;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.faces.event.ActionEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -25,10 +27,10 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Marca;
 @ViewScoped
 public class MarcaView extends DefaultGenerator<Marca> implements Serializable {
 
-   
-    
     @Inject
     private MarcaFacade marcaFacade;
+
+  
 
     @Override
     public Marca crearNuevo() {
@@ -67,16 +69,16 @@ public class MarcaView extends DefaultGenerator<Marca> implements Serializable {
         return null;
 
     }
-    
+
     @Override
     public void btnGuardarHandler(ActionEvent ae) {
-                boolean resultado = false;
+        boolean resultado = false;
 
         try {
-            
+
             if (this.registro != null && this.getFacade() != null) {
 //               resultado = 
-                System.out.println("metodo sobreescrito"+this.registro.getMarca());
+                System.out.println("metodo sobreescrito" + this.registro.getMarca());
                 this.getFacade().create(this.registro);
                 generarMensaje(ACCION.CREAR, resultado);
                 if (resultado) {
@@ -89,6 +91,8 @@ public class MarcaView extends DefaultGenerator<Marca> implements Serializable {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
         }
     }
+
+  
 
 //    private String mensaje;
 //    private List<Vehiculo> vhlist;
@@ -202,5 +206,4 @@ public class MarcaView extends DefaultGenerator<Marca> implements Serializable {
 //    public void setMarca(Marca marca) {
 //        this.marca = marca;
 //    }
-
 }

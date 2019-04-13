@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:comp="http://xmlns.jcp.org/jsf/composite/componentes"
+
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+
+    <ui:composition template="../resources/templates/layout.xhtml">
+        <ui:define name="titulo">Marca</ui:define>
+        <ui:define name="tituloEntidad">Mantenimiento Vehiculo</ui:define>
+
+        <ui:define name="tablaDatos">
+
+            <p:dataTable id="tblMarca" value="#{vehiculoView.modelo}" var="reg"
+                         lazy="true" rows="4" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
+                         {NextPageLink} {LastPageLink}" selectionMode="single" >
+                <p:ajax update=":formIngreso :formTabla" event="rowSelect" listener="#{vehiculoView.cambiarSeleccion}"/>
+                <p:column headerText="ID">
+                    <p:outputLabel value="#{reg.idVehiculo}"/>
+                </p:column>
+                <p:column headerText="Dueño">
+                    <p:outputLabel value="#{reg.idUsuario.nombreUno}"/>
+                </p:column>
+                 <p:column headerText="estado">
+                    <p:outputLabel value="#{reg.estadoVehiculo}"/>
+                </p:column>
+                <p:column headerText="marca">
+                    <p:outputLabel value="#{reg.idMarca.marca}"/>
+                </p:column>
+            </p:dataTable>
+        </ui:define>
+
+
+        <ui:define name="botonesTabla">
+            <comp:botonesTabla marcaView="#{vehiculoView}" NombreEntidad="Vehiculo"/>
+        </ui:define>
+
+        <ui:define name="formulario" >
+
+            <p:panelGrid id="panelIngreso" columns="2" rendered="#{vehiculoView.mostrandoDetalle}"  >
+                <p:outputLabel value="ID" />
+                <p:inputText id="txtId" readonly="true" value="#{vehiculoView.registro.idVehiculo}" />
+
+                <p:outputLabel value="Activo" />
+                <p:selectBooleanCheckbox id="txtCodigo" value="#{vehiculoView.registro.estadoVehiculo}" required="true" />
+                
+                <p:outputLabel value="Marca" />
+                <p:selectOneMenu converter="marcaConverter" value="#{vehiculoView.registro.idMarca}" >
+                    <f:selectItems value="#{vehiculoView.marcasvehiculos}" var="mar" itemLabel="#{mar.marca}" itemValue="#{mar}" />
+                </p:selectOneMenu>
+                
+                
+                <p:outputLabel value="Dueño vehículo" />
+                <p:selectOneMenu converter="usuarioConverter" value="#{vehiculoView.registro.idUsuario}" >
+                    <f:selectItems value="#{vehiculoView.lstUsuarios}" var="usuario" itemLabel="#{usuario.nombreUno} #{usuario.apellidoUno}" itemValue="#{usuario}" />
+                </p:selectOneMenu>
+                
+                
+            </p:panelGrid>
+
+            <comp:botonesEditar backBean="#{vehiculoView}" NombreEntidad="Marca"/>
+
+
+        </ui:define>
+
+
+
+
+
+    </ui:composition>
+</html>
+
