@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Usuario;
 
 /**
@@ -28,6 +29,17 @@ public class UsuarioFacade extends AbstractFacade<Usuario>  {
 
     public UsuarioFacade() {
         super(Usuario.class);
+    }
+    
+    public List<Usuario> findByRol(){
+          List<Usuario> lista = null;
+        try {
+            Query consulta = em.createNamedQuery("Usuario.findByRol");
+            lista = consulta.getResultList();
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return lista;
     }
 
 

@@ -46,7 +46,7 @@ public class VehiculoView extends DefaultGenerator<Vehiculo> implements Serializ
     @Override
     protected void inicializarListas() {
         marcasvehiculos = marcafacade.findAll();
-        lstUsuarios = usuariofacade.findAll();
+        lstUsuarios = usuariofacade.findByRol();
         
     }
 

@@ -24,7 +24,7 @@
                     <p:outputLabel value="#{reg.idVehiculo}"/>
                 </p:column>
                 <p:column headerText="Dueño">
-                    <p:outputLabel value="#{reg.idUsuario.nombreUno}"/>
+                    <p:outputLabel value="#{reg.idUsuario.nombreUno}#{reg.idUsuario.apellidoUno}"/>
                 </p:column>
                  <p:column headerText="estado">
                     <p:outputLabel value="#{reg.estadoVehiculo}"/>
@@ -56,7 +56,7 @@
                 
                 
                 <p:outputLabel value="Dueño vehículo" />
-                <p:selectOneMenu converter="usuarioConverter" value="#{vehiculoView.registro.idUsuario}" >
+                <p:selectOneMenu converter="usuarioConverter" value="#{vehiculoView.registro.idUsuario}" dynamic="true" style="width:125px">
                     <f:selectItems value="#{vehiculoView.lstUsuarios}" var="usuario" itemLabel="#{usuario.nombreUno} #{usuario.apellidoUno}" itemValue="#{usuario}" />
                 </p:selectOneMenu>
                 
