@@ -21,7 +21,7 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Marca;
 
 /**
  *
- * @author rcarlossh
+ * @author gochez
  */
 @Named
 @ViewScoped
@@ -91,6 +91,7 @@ public class MarcaView extends DefaultGenerator<Marca> implements Serializable {
 ////            Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
 ////        }
 ////    }
+
 
   
 
