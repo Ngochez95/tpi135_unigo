@@ -21,7 +21,7 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Marca;
 
 /**
  *
- * @author rcarlossh
+ * @author gochez
  */
 @Named
 @ViewScoped
@@ -77,7 +77,7 @@ public class MarcaView extends DefaultGenerator<Marca> implements Serializable {
         try {
 
             if (this.registro != null && this.getFacade() != null) {
-//               resultado = 
+
                 System.out.println("metodo sobreescrito" + this.registro.getMarca());
                 this.getFacade().create(this.registro);
                 generarMensaje(ACCION.CREAR, resultado);

@@ -41,7 +41,7 @@ public class VehiculoView extends DefaultGenerator<Vehiculo> implements Serializ
     private UsuarioFacade usuariofacade;
 
     List<Marca> marcasvehiculos;
-    List<Usuario> lstUsuarios;
+    List<Usuario> lstUsuarios; 
 
     @Override
     protected void inicializarListas() {
