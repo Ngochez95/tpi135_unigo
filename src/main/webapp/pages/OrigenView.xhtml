@@ -13,26 +13,28 @@
 
         <ui:define name="tablaDatos">
 
-            <p:dataTable id="tblOrigen" value="#{origenView.modelo}" var="reg"
+            <p:dataTable id="tblMedioContacto" value="#{origenView.modelo}" var="reg"
                          lazy="true" rows="4" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
                          {NextPageLink} {LastPageLink}" selectionMode="single" >
                 <p:ajax update=":formIngreso :formTabla" event="rowSelect" listener="#{origenView.cambiarSeleccion}"/>
-                <p:column headerText="ID">
+                <p:column headerText="ID Origen">
                     <p:outputLabel value="#{reg.idOrigen}"/>
                 </p:column>
-                <p:column headerText="Origen">
+                <p:column headerText="Nombre de Origen">
                     <p:outputLabel value="#{reg.origen}"/>
                 </p:column>
-                <p:column headerText="ID PadreOrigen">
-                    <p:outputLabel value="#{reg.idPadreOrigen.idOrigen}"/>
+                 <p:column headerText="ID Padre Origen">
+                    <p:outputLabel value="#{reg.idPadreOrigen.idOrigen} "/>
                 </p:column>
-                <p:column headerText="ID Usuario">
-                    <p:outputLabel value="#{reg.idUsuario.idUsuario}"/>
+                 <p:column headerText="Padre Origen">
+                    <p:outputLabel value="#{reg.idPadreOrigen.origen} "/>
+                </p:column>
+                 <p:column headerText="ID Usuario">
+                    <p:outputLabel value="#{reg.idUsuario.idUsuario} "/>
                 </p:column>
                 <p:column headerText="Usuario">
-                    <p:outputLabel value="#{reg.idUsuario.nombreUno} #{reg.idUsuario.apellidoUno}"/>
+                    <p:outputLabel value="#{reg.idUsuario.nombreUno} #{reg.idUsuario.apellidoUno} "/>
                 </p:column>
-                
             </p:dataTable>
         </ui:define>
 
@@ -44,32 +46,29 @@
         <ui:define name="formulario" >
 
             <p:panelGrid id="panelIngreso" columns="2" rendered="#{origenView.mostrandoDetalle}"  >
-                <p:outputLabel value="ID" />
-                <p:inputText id="txtId" readonly="true" />
-
-
+                <p:outputLabel value="ID Origen" />
+                <p:inputText id="txtId" readonly="true" value="#{origenView.registro.idOrigen}" />
+                
                 <p:outputLabel value="Nombre Origen" />
-                <p:inputText value="#{origenView.registro.origen}" required="True" requiredMessage="Ingrese el nombre del Origen del viaje" />
+                <p:inputText value="#{origenView.registro.origen}" required="True" requiredMessage="Ingrese el nombre del origen" />
                 
-                <p:outputLabel value="Inicio de Recorrido" />
-                <p:selectBooleanCheckbox id="txtCodigo" value="null" required="true" />
-
-                <p:outputLabel value="Origen Padre" />
+                <p:outputLabel value="PadreOrigen" />
                 <p:selectOneMenu converter="omnifaces.SelectItemsConverter" value="#{origenView.registro.idPadreOrigen}" dynamic="true" style="width:125px">
-                    <f:selectItems value="#{origenView.lstOrigenPadre}" var="usuario" itemLabel="#{origenView.registro.idPadreOrigen.idPadreOrigen}" itemValue="#{origen}" />
+                    <f:selectItems value="#{origenView.lstOrigenPadre}" var="origen" itemLabel="#{origen.origen}" itemValue="#{origen}" />
                 </p:selectOneMenu>
                 
-                <p:outputLabel value="Conductor" />
+                <p:outputLabel value="Usuario" />
                 <p:selectOneMenu converter="omnifaces.SelectItemsConverter" value="#{origenView.registro.idUsuario}" dynamic="true" style="width:125px">
-                    <f:selectItems value="#{origenView.lstUsuario}" var="usuario" itemLabel="#{usuario.nombreUno} #{usuario.apellidoUno}" itemValue="#{origen}" />
+                    <f:selectItems value="#{origenView.lstUsuario}" var="usuario" itemLabel="#{usuario.nombreUno} #{usuario.apellidoUno}" itemValue="#{usuario}" />
                 </p:selectOneMenu>
-            </p:panelGrid>
+                
+                
 
-            <comp:botonesEditar backBean="#{origenView}" NombreEntidad="Marca"/>
+            </p:panelGrid>
+            <comp:botonesEditar backBean="#{origenView}" NombreEntidad="MedioContacto"/>
 
 
         </ui:define>
-
 
         <ui:define name="botonesFormulario" rendered="#{origenView.mostrandoDetalle}">
 

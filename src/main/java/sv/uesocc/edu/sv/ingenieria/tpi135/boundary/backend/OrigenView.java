@@ -10,14 +10,12 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import javax.faces.event.ActionEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import sv.uesocc.edu.sv.ingenieria.tpi135.controller.AbstractFacade;
 import sv.uesocc.edu.sv.ingenieria.tpi135.controller.OrigenFacade;
 import sv.uesocc.edu.sv.ingenieria.tpi135.controller.UsuarioFacade;
-import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Marca;
 import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Origen;
 import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Usuario;
 
@@ -38,26 +36,12 @@ public class OrigenView extends DefaultGenerator<Origen> implements Serializable
     List<Origen> lstOrigenPadre;
     List<Usuario> lstUsuario;
     
+
     @Override
-    protected void inicializarListas(){
+    protected void inicializarListas() {
         lstOrigenPadre = origenFacade.findAll();
-        lstUsuario = usuarioFacade.findByRol();
-    }
-    
-    public List<Usuario> getLstUsuario() {
-        return lstUsuario;
-    }
-
-    public void setLstUsuario(List<Usuario> lstUsuario) {
-        this.lstUsuario = lstUsuario;
-    }
-
-    public List<Origen> getLstOrigenPadre() {
-        return lstOrigenPadre;
-    }
-
-    public void setLstOrigenPadre(List<Origen> lstOrigenPadre) {
-        this.lstOrigenPadre = lstOrigenPadre;
+        lstUsuario = usuarioFacade.findAll();
+        
     }
     
     @Override
@@ -118,6 +102,22 @@ public class OrigenView extends DefaultGenerator<Origen> implements Serializable
         } catch (Exception ex) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
         }
+    }
+    
+    public List<Usuario> getLstUsuario() {
+        return lstUsuario;
+    }
+
+    public void setLstUsuario(List<Usuario> lstUsuario) {
+        this.lstUsuario = lstUsuario;
+    }
+
+    public List<Origen> getLstOrigenPadre() {
+        return lstOrigenPadre;
+    }
+
+    public void setLstOrigenPadre(List<Origen> lstOrigenPadre) {
+        this.lstOrigenPadre = lstOrigenPadre;
     }
 
 }

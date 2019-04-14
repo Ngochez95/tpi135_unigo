@@ -9,7 +9,9 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Origen;
+import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Usuario;
 
 /**
  *
@@ -29,6 +31,7 @@ public class OrigenFacade extends AbstractFacade<Origen>  {
     public OrigenFacade() {
         super(Origen.class);
     }
-
+    
+    
     
 }
