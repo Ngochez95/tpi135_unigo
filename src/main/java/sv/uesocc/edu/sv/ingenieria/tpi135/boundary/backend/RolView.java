@@ -63,7 +63,6 @@ public class RolView extends DefaultGenerator<Rol> implements Serializable{
             return Object.getIdRol();
         }
         return null;
-
     }
     
     @Override
@@ -87,7 +86,5 @@ public class RolView extends DefaultGenerator<Rol> implements Serializable{
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
         }
     }
-    
-  
     
 }
