@@ -5,7 +5,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:comp="http://xmlns.jcp.org/jsf/composite/componentes"
-
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 
@@ -26,7 +27,7 @@
                 <p:column headerText="Dueño">
                     <p:outputLabel value="#{reg.idUsuario.nombreUno}#{reg.idUsuario.apellidoUno}"/>
                 </p:column>
-                 <p:column headerText="estado">
+                <p:column headerText="estado">
                     <p:outputLabel value="#{reg.estadoVehiculo}"/>
                 </p:column>
                 <p:column headerText="marca">
@@ -48,19 +49,19 @@
 
                 <p:outputLabel value="Activo" />
                 <p:selectBooleanCheckbox id="txtCodigo" value="#{vehiculoView.registro.estadoVehiculo}" required="true" />
-                
+
                 <p:outputLabel value="Marca" />
-                <p:selectOneMenu converter="marcaConverter" value="#{vehiculoView.registro.idMarca}" >
+                <p:selectOneMenu converter="omnifaces.SelectItemsConverter" value="#{vehiculoView.registro.idMarca}" >
                     <f:selectItems value="#{vehiculoView.marcasvehiculos}" var="mar" itemLabel="#{mar.marca}" itemValue="#{mar}" />
                 </p:selectOneMenu>
-                
-                
+
+
                 <p:outputLabel value="Dueño vehículo" />
-                <p:selectOneMenu converter="usuarioConverter" value="#{vehiculoView.registro.idUsuario}" dynamic="true" style="width:125px">
+                <p:selectOneMenu converter="omnifaces.SelectItemsConverter" value="#{vehiculoView.registro.idUsuario}" dynamic="true" style="width:125px">
                     <f:selectItems value="#{vehiculoView.lstUsuarios}" var="usuario" itemLabel="#{usuario.nombreUno} #{usuario.apellidoUno}" itemValue="#{usuario}" />
                 </p:selectOneMenu>
-                
-                
+
+
             </p:panelGrid>
 
             <comp:botonesEditar backBean="#{vehiculoView}" NombreEntidad="Marca"/>
