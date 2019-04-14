@@ -50,7 +50,9 @@
                 <p:inputText id="txtId" readonly="true" />
                 
                 <p:outputLabel value="ID MedioContacto" />
-                <p:inputText value="#{tipoMedioContactoView.registro.idMedioContacto}" required="True" requiredMessage="Ingrese el telefono" />
+                <p:selectOneMenu converter="omnifaces.SelectItemsConverter" value="#{tipoMedioContactoView.registro.idMedioContacto}" dynamic="true" style="width:125px">
+                    <f:selectItems value="#{tipoMedioContactoView.lstMedioContacto}" var="MedioContacto" itemLabel="#{tipoMedioContactoView.registro.idMedioContacto.idMedioContacto}" itemValue="#{MedioContacto}" />
+                </p:selectOneMenu>
                     
                 <p:outputLabel value="Telefono" />
                 <p:inputText value="#{tipoMedioContactoView.registro.telefono}" required="True" requiredMessage="Ingrese el telefono" />

@@ -14,7 +14,9 @@ import javax.faces.event.ActionEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import sv.uesocc.edu.sv.ingenieria.tpi135.controller.AbstractFacade;
+import sv.uesocc.edu.sv.ingenieria.tpi135.controller.MedioContactoFacade;
 import sv.uesocc.edu.sv.ingenieria.tpi135.controller.TipoMedioContactoFacade;
+import sv.uesocc.edu.sv.ingenieria.tpi135.entity.MedioContacto;
 import sv.uesocc.edu.sv.ingenieria.tpi135.entity.TipoMedioContacto;
 
 /**
@@ -28,6 +30,24 @@ public class TipoMedioContactoView extends DefaultGenerator<TipoMedioContacto> i
     @Inject
     private TipoMedioContactoFacade tipoMedioContactoFacade;
     
+    @Inject
+    private MedioContactoFacade medioContactoFacade;
+    
+    List<MedioContacto> lstMedioContacto;
+    
+    @Override
+    protected void inicializarListas(){
+        lstMedioContacto = medioContactoFacade.findAll();
+    }
+
+    public List<MedioContacto> getLstMedioContacto() {
+        return lstMedioContacto;
+    }
+
+    public void setLstMedioContacto(List<MedioContacto> lstMedioContacto) {
+        this.lstMedioContacto = lstMedioContacto;
+    }
+   
     @Override
     public TipoMedioContacto crearNuevo(){
         this.registro = new TipoMedioContacto();
@@ -86,4 +106,7 @@ public class TipoMedioContactoView extends DefaultGenerator<TipoMedioContacto> i
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
         }
     }
+    
+    
+    
 }
