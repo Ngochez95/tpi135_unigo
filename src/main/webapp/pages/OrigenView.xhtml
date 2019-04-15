@@ -23,13 +23,13 @@
                 <p:column headerText="Nombre de Origen">
                     <p:outputLabel value="#{reg.origen}"/>
                 </p:column>
-                 <p:column headerText="ID Padre Origen">
+                <p:column headerText="ID Padre Origen">
                     <p:outputLabel value="#{reg.idPadreOrigen.idOrigen} "/>
                 </p:column>
-                 <p:column headerText="Padre Origen">
+                <p:column headerText="Padre Origen">
                     <p:outputLabel value="#{reg.idPadreOrigen.origen} "/>
                 </p:column>
-                 <p:column headerText="ID Usuario">
+                <p:column headerText="ID Usuario">
                     <p:outputLabel value="#{reg.idUsuario.idUsuario} "/>
                 </p:column>
                 <p:column headerText="Usuario">
@@ -48,21 +48,22 @@
             <p:panelGrid id="panelIngreso" columns="2" rendered="#{origenView.mostrandoDetalle}"  >
                 <p:outputLabel value="ID Origen" />
                 <p:inputText id="txtId" readonly="true" value="#{origenView.registro.idOrigen}" />
-                
+
                 <p:outputLabel value="Nombre Origen" />
                 <p:inputText value="#{origenView.registro.origen}" required="True" requiredMessage="Ingrese el nombre del origen" />
-                
+
                 <p:outputLabel value="PadreOrigen" />
                 <p:selectOneMenu converter="omnifaces.SelectItemsConverter" value="#{origenView.registro.idPadreOrigen}" dynamic="true" style="width:125px">
+                    <f:selectItem itemLabel="Nuevo Pais" itemValue="" noSelectionOption="true"/>
                     <f:selectItems value="#{origenView.lstOrigenPadre}" var="origen" itemLabel="#{origen.origen}" itemValue="#{origen}" />
                 </p:selectOneMenu>
-                
+
                 <p:outputLabel value="Usuario" />
                 <p:selectOneMenu converter="omnifaces.SelectItemsConverter" value="#{origenView.registro.idUsuario}" dynamic="true" style="width:125px">
                     <f:selectItems value="#{origenView.lstUsuario}" var="usuario" itemLabel="#{usuario.nombreUno} #{usuario.apellidoUno}" itemValue="#{usuario}" />
                 </p:selectOneMenu>
-                
-                
+
+
 
             </p:panelGrid>
             <comp:botonesEditar backBean="#{origenView}" NombreEntidad="MedioContacto"/>
