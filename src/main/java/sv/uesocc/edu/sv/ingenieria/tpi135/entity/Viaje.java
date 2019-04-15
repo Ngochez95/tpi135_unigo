@@ -69,6 +69,9 @@ public class Viaje implements Serializable {
     @JoinColumn(name = "id_trayectoria", referencedColumnName = "id_trayectoria", nullable = false)
     @ManyToOne(optional = false)
     private Trayectoria idTrayectoria;
+    @Basic(optional = false)
+    @Column(name = "estado_viaje")
+    private boolean estadoViaje;
 
     public Viaje() {
     }
@@ -93,6 +96,14 @@ public class Viaje implements Serializable {
 
     public Date getHoraLlegada() {
         return horaLlegada;
+    }
+    
+    public boolean getEstadoViaje(){
+        return estadoViaje;
+    }
+    
+    public void setEstadoViaje(boolean estadoViaje){
+        this.estadoViaje = estadoViaje;
     }
 
     public void setHoraLlegada(Date horaLlegada) {
