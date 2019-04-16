@@ -13,7 +13,37 @@
 
         </h:head>
         <h:body>
+            <h:form>
+                <p:megaMenu  style="margin-top:20px">
+                    <p:submenu label="Mantenimientos">
+                        <p:column>
+                            <p:submenu label="Vehiculo">
+                                <p:menuitem value="Vehiculo" onclick="location.href = 'VehiculoView.jsf'" />
+                                <p:menuitem value="Marca" onclick="location.href = 'MarcaView.jsf'" />
+                                <p:menuitem value="Modelo" onclick="location.href = 'ModeloView.jsf'" />
+                                <p:menuitem value="Caracteristica" onclick="location.href = 'CaracteristicaView.jsf'" />
+                                <p:menuitem value="TipoCaracteristica" onclick="location.href = 'TipoCaracteristicaView.jsf'" />
+                            </p:submenu>
+                        </p:column>
+                        <p:column>
+                            <p:submenu label="Contacto">
+                                <p:menuitem value="MedioContacto" onclick="location.href = 'MedioContactoView.jsf'" />
+                                <p:menuitem value="TipoMedioContacto" onclick="location.href = 'TipoMedioContactoView.jsf'" />
+                                <p:menuitem value="Rol" onclick="location.href = 'RolView.jsf'" />
+                                <p:menuitem value="Origen" onclick="location.href = 'OrigenView.jsf'" />
+                            </p:submenu>
+                        </p:column>
+                        <p:column>
+                            <p:submenu label="Trayectoria">
+                                <p:menuitem value="Trayectoria" onclick="location.href = 'TrayectoriaView.jsf'" />
+                                <p:menuitem value="Viaje" onclick="location.href = 'ViajeView.jsf'" />
+                                <p:menuitem value="Semana" onclick="location.href = 'SemanaView.jsf'" />
+                            </p:submenu>
+                        </p:column>
 
+                    </p:submenu>
+                </p:megaMenu>
+            </h:form>
             <p:panel id="pnlGeneral">
                 <h3 align="center"><ui:insert name="tituloEntidad"> </ui:insert></h3>
 
@@ -40,7 +70,6 @@
                     <ui:insert name="LINK"></ui:insert>
                 </f:facet>
             </p:toolbar>
-
         </h:body>
     </ui:composition>
 </html>
