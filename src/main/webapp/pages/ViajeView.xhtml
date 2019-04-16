@@ -29,11 +29,11 @@
                     
                 </p:column>
                 <p:column headerText="Hora de Llegada">
-                    <p:outputLabel value="#{reg.horaLlegada}"/>
+                    <p:outputLabel value="#{reg.horaLlegada.hours}:#{reg.horaLlegada.minutes}"/>
                        
                 </p:column>
                 <p:column headerText="Hora de Salida">
-                    <p:outputLabel value="#{reg.horaSalida}"/>
+                    <p:outputLabel value="#{reg.horaSalida.hours}:#{reg.horaSalida.minutes}"/>
                 </p:column>
                
                 <p:column headerText="Estado del Viaje">
