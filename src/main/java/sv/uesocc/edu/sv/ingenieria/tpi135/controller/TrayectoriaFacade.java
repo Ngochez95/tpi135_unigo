@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Trayectoria;
 
 /**
@@ -28,6 +29,19 @@ public class TrayectoriaFacade extends AbstractFacade<Trayectoria> {
 
     public TrayectoriaFacade() {
         super(Trayectoria.class);
+    }
+    
+    public List<Trayectoria> findByReferencia(int idReferencia) {
+        List<Trayectoria> lista = null;
+        try {
+            Query consulta = em.createNamedQuery("Trayectoria.findByReferencia");
+            consulta.setParameter("idReferencia", idReferencia);
+            lista = consulta.getResultList();
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return lista;
+
     }
 
 
