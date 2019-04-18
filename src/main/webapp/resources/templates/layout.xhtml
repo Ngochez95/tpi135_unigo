@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition >
+        <h:head>
+            <title> 
+                <ui:insert name="titulo" > Inventario </ui:insert>
+            </title>
+
+        </h:head>
+        <h:body style="background: #b0ebec">
+            <h:form>
+                <p:megaMenu  style="margin-top:20px">
+                    <p:submenu label="Mantenimientos">
+                        <p:column>
+                            <p:submenu label="Vehiculo">
+                                <p:menuitem value="Vehiculo" onclick="location.href = 'VehiculoView.jsf'" />
+                                <p:menuitem value="Marca" onclick="location.href = 'MarcaView.jsf'" />
+                                <p:menuitem value="Modelo" onclick="location.href = 'ModeloView.jsf'" />
+                                <p:menuitem value="Caracteristica" onclick="location.href = 'CaracteristicaView.jsf'" />
+                                <p:menuitem value="TipoCaracteristica" onclick="location.href = 'TipoCaracteristicaView.jsf'" />
+                            </p:submenu>
+                        </p:column>
+                        <p:column>
+                            <p:submenu label="Contacto">
+                                <p:menuitem value="MedioContacto" onclick="location.href = 'MedioContactoView.jsf'" />
+                                <p:menuitem value="TipoMedioContacto" onclick="location.href = 'TipoMedioContactoView.jsf'" />
+                                <p:menuitem value="Rol" onclick="location.href = 'RolView.jsf'" />
+                                <p:menuitem value="Origen" onclick="location.href = 'OrigenView.jsf'" />
+                            </p:submenu>
+                        </p:column>
+                        <p:column>
+                            <p:submenu label="Trayectoria">
+                                <p:menuitem value="Trayectoria" onclick="location.href = 'TrayectoriaView.jsf'" />
+                                <p:menuitem value="Viaje" onclick="location.href = 'ViajeView.jsf'" />
+                                <p:menuitem value="Semana" onclick="location.href = 'SemanaView.jsf'" />
+                            </p:submenu>
+                        </p:column>
+
+                    </p:submenu>
+                </p:megaMenu>
+            </h:form>
+            <p:panel id="pnlGeneral" >
+                <h3 align="center"><ui:insert name="tituloEntidad"> </ui:insert></h3>
+
+                <h:form id="formTabla">
+                    <p:growl id="msgs" autoUpdate="true" />
+                    <ui:insert name="tablaDatos">No content</ui:insert>
+                    <h:panelGroup id="pnlBotonesTabla" >
+                        <ui:insert name="botonesTabla"/>
+                    </h:panelGroup>
+                </h:form>
+
+
+                <h:form id="formIngreso">
+                    <ui:insert name="formulario"></ui:insert>
+
+                    <p:messages autoUpdate="true" />
+                    <ui:insert name="botonesFormulario"></ui:insert>
+
+                </h:form>
+
+            </p:panel>
+            <p:toolbar>
+                <f:facet name="right">
+                    <ui:insert name="LINK"></ui:insert>
+                </f:facet>
+            </p:toolbar>
+        </h:body>
+    </ui:composition>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

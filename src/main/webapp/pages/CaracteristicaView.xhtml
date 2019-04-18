@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:comp="http://xmlns.jcp.org/jsf/composite/componentes"
+      >
+    <ui:composition template="../resources/templates/layout.xhtml">
+        <ui:define name="titulo">Caracteristica</ui:define>
+        <ui:define name="tituloEntidad">Mantenimiento Caracteristica</ui:define>
+
+        <ui:define name="tablaDatos">
+
+            <p:dataTable id="tblMarca" value="#{caracteristicaView.modelo}" var="reg"
+                         lazy="true" rows="4" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
+                         {NextPageLink} {LastPageLink}" selectionMode="single" >
+                <p:ajax update=":formIngreso :formTabla" event="rowSelect" listener="#{caracteristicaView.cambiarSeleccion}"/>
+                <p:column headerText="ID">
+                    <p:outputLabel value="#{reg.idCaracteristica}"/>
+                </p:column>
+                <p:column headerText="Nombre">
+                    <p:outputLabel value="#{reg.idModelo.modelo}"/>
+                </p:column>
+            </p:dataTable>
+        </ui:define>
+
+
+        <ui:define name="botonesTabla">
+            <comp:botonesTabla marcaView="#{caracteristicaView}" NombreEntidad="Caracteristica"/>
+        </ui:define>
+
+        <ui:define name="formulario" >
+
+            <p:panelGrid id="panelIngreso" columns="2" rendered="#{caracteristicaView.mostrandoDetalle}"  >
+                <p:outputLabel value="ID" />
+                <p:inputText id="txtId" readonly="true" value="#{caracteristicaView.registro.idCaracteristica}"/>
+
+
+                <p:outputLabel value="Modelo" />
+                <p:selectOneMenu converter="omnifaces.SelectItemsConverter" value="#{caracteristicaView.registro.idModelo}" dynamic="true" style="width:125px">
+                    <f:selectItems value="#{caracteristicaView.lstmodelo}" var="modelo" itemLabel="#{modelo.modelo} " itemValue="#{modelo}" />
+                </p:selectOneMenu>
+
+
+            </p:panelGrid>
+
+            <comp:botonesEditar backBean="#{caracteristicaView}" NombreEntidad="Caracteristica"/>
+
+
+        </ui:define>
+
+
+        <ui:define name="botonesFormulario" rendered="#{caracteristicaView.mostrandoDetalle}">
+
+
+
+
+        </ui:define>
+
+
+    </ui:composition>
+
+
+
+</html>

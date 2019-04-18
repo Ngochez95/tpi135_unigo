@@ -136,8 +136,8 @@ public abstract class AbstractFacadeT<T> {
     public void testFindRange() throws Exception {
         System.out.println("TestFindRange()");
         int esperado = 0;
-        int[] rango = {0, 100};
-        List<T> lista = instance.findRange(rango);
+        int esperadio2 =2;
+        List<T> lista = instance.findRange(esperado, esperadio2);
         int resultado = lista.size();
         assertEquals(resultado, esperado);
     }

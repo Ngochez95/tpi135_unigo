@@ -1,0 +1,5 @@
+create-jdbc-connection-pool --datasourceclassname org.postgresql.ds.PGSimpleDataSource --restype javax.sql.DataSource --property user=tpi2019:password=tpi2019:DatabaseName=tpi2019:ServerName=db:port=5432 postgres_uniGo_local
+
+ping-connection-pool postgres_uniGo_local
+
+create-jdbc-resource --connectionpoolid postgres_uniGo_local jdbc/unigo

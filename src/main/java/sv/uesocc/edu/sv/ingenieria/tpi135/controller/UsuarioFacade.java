@@ -5,9 +5,11 @@
  */
 package sv.uesocc.edu.sv.ingenieria.tpi135.controller;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Usuario;
 
 /**
@@ -15,7 +17,7 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Usuario;
  * @author gochez
  */
 @Stateless
-public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFacadeLocal {
+public class UsuarioFacade extends AbstractFacade<Usuario>  {
 
     @PersistenceContext(unitName = "tpi135.proyecto_uniGo_war_1.0-SNAPSHOTPU")
     private EntityManager em;
@@ -28,5 +30,18 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
     public UsuarioFacade() {
         super(Usuario.class);
     }
+    
+    public List<Usuario> findByRol(){
+          List<Usuario> lista = null;
+        try {
+            Query consulta = em.createNamedQuery("Usuario.findByRol");
+            lista = consulta.getResultList();
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return lista;
+    }
+
+
     
 }

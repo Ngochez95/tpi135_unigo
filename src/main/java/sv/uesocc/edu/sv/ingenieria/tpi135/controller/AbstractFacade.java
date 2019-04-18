@@ -25,60 +25,69 @@ public abstract class AbstractFacade<T> {
 
     protected abstract EntityManager getEntityManager();
 
-    public void loggerWarningEntityNull() {
-        Logger.getLogger(getClass().getName()).log(Level.WARNING, "EntityManager o Entity son nulos");
-        throw new NullPointerException("EntityManager o Entity son nulos");
-    }
+//    public void create(T entity) {
+//        getEntityManager().persist(entity);
+//    }
 
-    public void loggerSevereEntityNull(Exception e) {
-        Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
-    }
-
-    public void sqlExceptionLogger(SQLException sqle) {
-
-    }
-
-    public void mostrarExcepcion(Exception e) {
-        System.out.println("excepcion: " + e);
-    }
-
-    public void create(T entity) {
+    
+    //y asi como lo tenes no los has provado con docker? bien el mismo problema me daba subi los cambios pues, voy a ver :v es un gran chingo de cambios que asaber si estan buenos ya vas a ver 
+    public T create(T entity) {
+        T salida = null;
         try {
+            //EntityManager em = getEntityManager();
             if (getEntityManager() != null && entity != null) {
                 getEntityManager().persist(entity);
-            } else {
-                loggerWarningEntityNull();
+                salida = entity;
             }
         } catch (Exception e) {
-            loggerSevereEntityNull(e);
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
         }
-
+        return salida;
     }
 
-    public void edit(T entity) {
+//    public void edit(T entity) {
+//        getEntityManager().merge(entity);
+//    }
+
+    public T edit(T entity) {
+        T salida = null;
         try {
-            if (getEntityManager() != null && entity != null) {
-                getEntityManager().merge(entity);
-            } else {
-                loggerWarningEntityNull();
+            EntityManager em = getEntityManager();
+            if (em != null && entity != null) {
+                em.merge(entity);
+                salida = entity;
             }
         } catch (Exception e) {
-            loggerSevereEntityNull(e);
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
         }
-
+        return salida;
     }
 
-    public void remove(T entity) {
+    public boolean crear(T entity) {
         try {
-            if (getEntityManager() != null && entity != null) {
-                getEntityManager().remove(getEntityManager().merge(entity));
-            } else {
-                loggerWarningEntityNull();
-            }
+            getEntityManager().persist(entity);
+            return true;
         } catch (Exception e) {
-            loggerSevereEntityNull(e);
+            return false;
         }
+    }
 
+    public boolean editar(T entity) {
+        try {
+            getEntityManager().merge(entity);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean remove(T entity) {
+        try {
+            getEntityManager().remove(getEntityManager().merge(entity));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public T find(Object id) {
@@ -87,7 +96,6 @@ public abstract class AbstractFacade<T> {
                 return getEntityManager().find(entityClass, id);
             }
         } catch (Exception e) {
-            mostrarExcepcion(e);
         }
         return null;
     }
@@ -100,25 +108,17 @@ public abstract class AbstractFacade<T> {
                 return getEntityManager().createQuery(cq).getResultList();
             }
         } catch (Exception e) {
-            mostrarExcepcion(e);
         }
         return null;
     }
 
-    public List<T> findRange(int[] range) {
-        try {
-            if (range != null && getEntityManager() != null) {
-                javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
-                cq.select(cq.from(entityClass));
-                javax.persistence.Query q = getEntityManager().createQuery(cq);
-                q.setMaxResults(range[1] - range[0] + 1);
-                q.setFirstResult(range[0]);
-                return q.getResultList();
-            }
-        } catch (Exception e) {
-            mostrarExcepcion(e);
-        }
-        return null;
+    public List<T> findRange(int desde, int hasta) {
+        javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
+        cq.select(cq.from(entityClass));
+        javax.persistence.Query q = getEntityManager().createQuery(cq);
+        q.setMaxResults(hasta);
+        q.setFirstResult(desde);
+        return q.getResultList();
     }
 
     public int count() {
@@ -131,21 +131,8 @@ public abstract class AbstractFacade<T> {
                 return ((Long) q.getSingleResult()).intValue();
             }
         } catch (Exception e) {
-            mostrarExcepcion(e);
         }
         return 0;
-
-    }
-
-    public Class<T> getEntityClass() {
-        try {
-            if (getEntityClass() != null) {
-                return entityClass;
-            }
-        } catch (Exception e) {
-            mostrarExcepcion(e);
-        }
-        return null;
 
     }
 

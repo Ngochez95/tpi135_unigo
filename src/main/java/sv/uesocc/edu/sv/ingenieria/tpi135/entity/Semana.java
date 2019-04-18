@@ -77,7 +77,6 @@ public class Semana implements Serializable {
     public void setDia(String dia) {
         this.dia = dia;
     }
-
     @XmlTransient
     public List<Viaje> getViajeList() {
         return viajeList;

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:cc="http://java.sun.com/jsf/composite">
+
+    <cc:interface>
+        <cc:attribute name="marcaView" required="true" type="sv.uesocc.edu.sv.ingenieria.tpi135.boundary.backend.DefaultGenerator" />
+        <cc:attribute name="NombreEntidad" default="" required="false"  type="java.lang.String"/>
+    </cc:interface>
+
+    <cc:implementation>
+        <p:commandButton value="Nuevo #{cc.attrs.NombreEntidad}" actionListener="#{cc.attrs.marcaView.btnNuevoHandler}" 
+                         validateClient="true" update=":formIngreso :formTabla"/>
+        <p:commandButton value="Cancelar" actionListener="#{cc.attrs.marcaView.btnCancelarHandler}" 
+                         rendered="#{cc.attrs.marcaView.mostrandoDetalle}" update=":formIngreso :formTabla" />
+        
+    </cc:implementation>
+
+</html>

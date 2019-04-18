@@ -42,18 +42,15 @@ public class Marca implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_marca", nullable = false)
+    @Column(name = "id_marca")
     private Integer idMarca;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "marca", nullable = false, length = 50)
+    @Column(name = "marca")
     private String marca;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMarca")
+    private List<Vehiculo> vehiculoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMarca")
     private List<Modelo> modeloList;
-    @JoinColumn(name = "id_vehiculo", referencedColumnName = "id_vehiculo", nullable = false)
-    @ManyToOne(optional = false)
-    private Vehiculo idVehiculo;
 
     public Marca() {
     }
@@ -84,20 +81,21 @@ public class Marca implements Serializable {
     }
 
     @XmlTransient
+    public List<Vehiculo> getVehiculoList() {
+        return vehiculoList;
+    }
+
+    public void setVehiculoList(List<Vehiculo> vehiculoList) {
+        this.vehiculoList = vehiculoList;
+    }
+
+    @XmlTransient
     public List<Modelo> getModeloList() {
         return modeloList;
     }
 
     public void setModeloList(List<Modelo> modeloList) {
         this.modeloList = modeloList;
-    }
-
-    public Vehiculo getIdVehiculo() {
-        return idVehiculo;
-    }
-
-    public void setIdVehiculo(Vehiculo idVehiculo) {
-        this.idVehiculo = idVehiculo;
     }
 
     @Override

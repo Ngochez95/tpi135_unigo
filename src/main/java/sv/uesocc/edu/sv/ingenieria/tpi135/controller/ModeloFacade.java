@@ -5,6 +5,7 @@
  */
 package sv.uesocc.edu.sv.ingenieria.tpi135.controller;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +16,7 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Modelo;
  * @author gochez
  */
 @Stateless
-public class ModeloFacade extends AbstractFacade<Modelo> implements ModeloFacadeLocal {
+public class ModeloFacade extends AbstractFacade<Modelo> {
 
     @PersistenceContext(unitName = "tpi135.proyecto_uniGo_war_1.0-SNAPSHOTPU")
     private EntityManager em;
@@ -28,5 +29,7 @@ public class ModeloFacade extends AbstractFacade<Modelo> implements ModeloFacade
     public ModeloFacade() {
         super(Modelo.class);
     }
+
+  
     
 }

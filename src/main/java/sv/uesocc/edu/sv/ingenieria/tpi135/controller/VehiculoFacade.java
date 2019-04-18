@@ -5,9 +5,12 @@
  */
 package sv.uesocc.edu.sv.ingenieria.tpi135.controller;
 
+import java.util.Date;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Vehiculo;
 
 /**
@@ -15,7 +18,7 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Vehiculo;
  * @author gochez
  */
 @Stateless
-public class VehiculoFacade extends AbstractFacade<Vehiculo> implements VehiculoFacadeLocal{
+public class VehiculoFacade extends AbstractFacade<Vehiculo> {
 
     @PersistenceContext(unitName = "tpi135.proyecto_uniGo_war_1.0-SNAPSHOTPU")
     private EntityManager em;
@@ -28,5 +31,24 @@ public class VehiculoFacade extends AbstractFacade<Vehiculo> implements Vehiculo
     public VehiculoFacade() {
         super(Vehiculo.class);
     }
+
+    public List<Vehiculo> findActivo(int idReferencia) {
+        List<Vehiculo> lista = null;
+        try {
+            Query consulta = em.createNamedQuery("Vehiculo.findActivo");
+            consulta.setParameter("idReferencia", idReferencia);
+            lista = consulta.getResultList();
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return lista;
+
+    }
+
+//    public List<Vehiculo> findByCaracteristicas(Date anio, int capacidad) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+
+
     
 }
