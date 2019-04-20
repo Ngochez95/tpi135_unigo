@@ -1,13 +1,13 @@
 ----------------------------------------------------------------
-Fri Apr 19 16:33:36 CST 2019:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.1.0 - (1808820): instance a816c00e-016a-37bb-cfea-00000c2acb00 
-on database directory memory:/home/zentaury/Documentos/ues/tpi/unigo/tpi135_unigo/testDB with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
-Loaded from file:/home/zentaury/.m2/repository/org/apache/derby/derby/10.14.1.0/derby-10.14.1.0.jar
+Sat Apr 20 00:04:54 CST 2019:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.1.0 - (1808820): instance a816c00e-016a-3958-fc50-000008cc4fd0 
+on database directory memory:/home/gochez/tpi/tpi135_unigo/testDB with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
+Loaded from file:/home/gochez/.m2/repository/org/apache/derby/derby/10.14.1.0/derby-10.14.1.0.jar
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_201-b09
-user.dir=/home/zentaury/Documentos/ues/tpi/unigo/tpi135_unigo
+java.runtime.version=1.8.0_101-b13
+user.dir=/home/gochez/tpi/tpi135_unigo
 os.name=Linux
 os.arch=amd64
-os.version=4.15.0-47-generic
+os.version=4.10.0-38-generic
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
