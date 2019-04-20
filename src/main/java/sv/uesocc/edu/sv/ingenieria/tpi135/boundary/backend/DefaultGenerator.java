@@ -17,7 +17,7 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.controller.AbstractFacade;
 
 /**
  *
- * @author gochez
+ * @author gochez, zentaury
  * @param <T>
  */
 public abstract class DefaultGenerator<T> implements Serializable {
@@ -66,7 +66,9 @@ public abstract class DefaultGenerator<T> implements Serializable {
                 if (this.modelo != null) {
                     this.modelo.setRowCount(getFacade().count());
                 }
-            }
+            }else{
+                    System.err.println("Facade Vacio");
+                }
         } catch (Exception ex) {
             loggerForCatch(ex);
         } finally {
@@ -77,7 +79,7 @@ public abstract class DefaultGenerator<T> implements Serializable {
         return salida;
     }
     
-    protected void inicializarModelo() {
+    protected boolean inicializarModelo() {
         try {
             this.modelo = new LazyDataModel<T>() {
                 @Override
@@ -95,9 +97,10 @@ public abstract class DefaultGenerator<T> implements Serializable {
                     return cargarDatos(first, pageSize, sortField, sortOrder, filters);
                 }
             };
-
+            return true;
         } catch (Exception ex) {
             loggerForCatch(ex);
+            return false;
         }
 
     }

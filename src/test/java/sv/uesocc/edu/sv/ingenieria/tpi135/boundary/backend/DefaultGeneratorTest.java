@@ -5,10 +5,13 @@
  */
 package sv.uesocc.edu.sv.ingenieria.tpi135.boundary.backend;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import static javafx.scene.input.KeyCode.T;
 import javax.faces.event.ActionEvent;
+import javax.persistence.EntityManager;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -16,7 +19,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
-import  org.mockito.Mock;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.LazyDataModel;
@@ -28,31 +32,34 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.controller.AbstractFacade;
  * @author zentaury
  */
 @RunWith(MockitoJUnitRunner.class)
-public class DefaultGeneratorTest<T> {
-    
-     protected LazyDataModel<T> modelo;
-     
-    
-    
+public abstract class DefaultGeneratorTest<T> implements Serializable {
+
+    protected abstract LazyDataModel<T> getLazyDataModel();
+    protected abstract DefaultGenerator<T> getDefaultGenerator();
+
+
     public DefaultGeneratorTest() {
     }
     
-    @Mock
+    
     protected LazyDataModel lazyDataMock;
+    LazyDataModel<T> instanceLazyData = getLazyDataModel();
+    T lazyDataModel;
     
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
+        
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -63,26 +70,24 @@ public class DefaultGeneratorTest<T> {
     @Test
     public void testInicializar() {
 //        System.out.println("inicializar");
-//        DefaultGenerator instance = new DefaultGeneratorImpl();
+//        DefaultGenerator instance = getDefaultGenerator();
 //        instance.inicializar();
+//        assertTrue(true);
 //        // TODO review the generated test code and remove the default call to fail.
-//   fail("The test case is a prototype.");
-        
+//   
+
     }
 
     /**
      * Test of crearNuevo method, of class DefaultGenerator.
      */
+    
     @Test
     public void testCrearNuevo() {
-            System.out.println("crearNuevo");
-            
-//        DefaultGenerator instance = new DefaultGeneratorImpl();
-//        Object expResult = null;
-//        Object result = instance.crearNuevo();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-            fail("The test case is a prototype.");
+        System.out.println("crearNuevo");
+        DefaultGenerator<T> instance = getDefaultGenerator();
+        T result = instance.crearNuevo();
+        assertNotNull(result);
     }
 
     /**
@@ -102,18 +107,18 @@ public class DefaultGeneratorTest<T> {
      */
     @Test
     public void testCargarDatos() {
-//        System.out.println("cargarDatos");
-//        int first = 0;
-//        int pageSize = 0;
-//        String sortField = "";
-//        SortOrder sortOrder = null;
-//        Map<String, Object> filters = null;
-//        DefaultGenerator instance = new DefaultGeneratorImpl();
-//        List expResult = null;
-//        List result = instance.cargarDatos(first, pageSize, sortField, sortOrder, filters);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+        System.out.println("cargarDatos");
+        int first = 0;
+        int pageSize = 0;
+        String sortField = "";
+        SortOrder sortOrder = null;
+        Map<String, Object> filters = null;
+        DefaultGenerator instance = getDefaultGenerator();
+        List expResult = new ArrayList();
+        List result = instance.cargarDatos(first, pageSize, sortField, sortOrder, filters);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        
     }
 
     /**
@@ -121,13 +126,13 @@ public class DefaultGeneratorTest<T> {
      */
     @Test
     public void testGetFacade() {
-//        System.out.println("getFacade");
-//        DefaultGenerator instance = new DefaultGeneratorImpl();
-//        AbstractFacade expResult = null;
-//        AbstractFacade result = instance.getFacade();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+        System.out.println("getFacade");
+        DefaultGenerator instance = getDefaultGenerator();
+        AbstractFacade expResult = null;
+        AbstractFacade result = instance.getFacade();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+       
     }
 
     /**
@@ -137,12 +142,12 @@ public class DefaultGeneratorTest<T> {
     public void testObtenerRowData() {
 //        System.out.println("obtenerRowData");
 //        String rowKey = "";
-//        DefaultGenerator instance = new DefaultGeneratorImpl();
+//        DefaultGenerator instance = getDefaultGenerator();
 //        Object expResult = null;
 //        Object result = instance.obtenerRowData(rowKey);
 //        assertEquals(expResult, result);
 //        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+//        
     }
 
     /**
@@ -165,11 +170,11 @@ public class DefaultGeneratorTest<T> {
      */
     @Test
     public void testInicializarModelo() {
-//        System.out.println("inicializarModelo");
-//        DefaultGenerator instance = new DefaultGeneratorImpl();
-//        instance.inicializarModelo();
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+        System.out.println("inicializarModelo");
+        DefaultGenerator instance = getDefaultGenerator();
+        assertTrue(instance.inicializarModelo());
+        // TODO review the generated test code and remove the default call to fail.
+       
     }
 
     /**
@@ -430,6 +435,4 @@ public class DefaultGeneratorTest<T> {
 //        fail("The test case is a prototype.");
     }
 
-    
-    
 }

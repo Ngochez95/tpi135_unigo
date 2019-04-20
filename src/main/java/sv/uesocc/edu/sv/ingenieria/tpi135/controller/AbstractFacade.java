@@ -29,18 +29,20 @@ public abstract class AbstractFacade<T> {
 //        getEntityManager().persist(entity);
 //    }
 
-    
+    public void loggerSevere(Exception e){
+         Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+    }
   
     public T create(T entity) {
         T salida = null;
         try {
-            //EntityManager em = getEntityManager();
+           
             if (getEntityManager() != null && entity != null) {
                 getEntityManager().persist(entity);
                 salida = entity;
             }
         } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+            loggerSevere(e);
         }
         return salida;
     }
@@ -58,7 +60,7 @@ public abstract class AbstractFacade<T> {
                 salida = entity;
             }
         } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+            loggerSevere(e);
         }
         return salida;
     }
@@ -96,6 +98,7 @@ public abstract class AbstractFacade<T> {
                 return getEntityManager().find(entityClass, id);
             }
         } catch (Exception e) {
+            throw e;
         }
         return null;
     }
@@ -108,6 +111,7 @@ public abstract class AbstractFacade<T> {
                 return getEntityManager().createQuery(cq).getResultList();
             }
         } catch (Exception e) {
+            throw e;
         }
         return null;
     }
@@ -131,6 +135,7 @@ public abstract class AbstractFacade<T> {
                 return ((Long) q.getSingleResult()).intValue();
             }
         } catch (Exception e) {
+            throw e;
         }
         return 0;
 

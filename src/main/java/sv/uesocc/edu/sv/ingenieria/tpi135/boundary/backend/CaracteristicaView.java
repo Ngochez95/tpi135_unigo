@@ -51,6 +51,7 @@ public class CaracteristicaView extends DefaultGenerator<Caractetistica> impleme
     @Override
     protected AbstractFacade<Caractetistica> getFacade() {
         return this.caracteristicafacade;
+        
     }
 
     @Override
@@ -88,6 +89,9 @@ public class CaracteristicaView extends DefaultGenerator<Caractetistica> impleme
     public void setLstmodelo(List<Modelo> lstmodelo) {
         this.lstmodelo = lstmodelo;
     }
+
+    
+    
     
     
 

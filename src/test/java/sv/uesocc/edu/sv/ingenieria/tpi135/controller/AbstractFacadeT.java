@@ -33,6 +33,7 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Trayectoria;
 /**
  *
  * @author gochez, zepeda abrego
+ * @param <T>
  */
 @RunWith(MockitoJUnitRunner.class)
 public abstract class AbstractFacadeT<T> {
@@ -50,7 +51,6 @@ public abstract class AbstractFacadeT<T> {
 
     @Mock
     private EntityManager emMock;
-
     AbstractFacade<T> instance = getFacade();
     T entity;
 
@@ -75,6 +75,11 @@ public abstract class AbstractFacadeT<T> {
 
     @After
     public void tearDown() {
+    }
+    
+    @Test
+    public void testReturnsLoggers(){
+        
     }
 
     /**
