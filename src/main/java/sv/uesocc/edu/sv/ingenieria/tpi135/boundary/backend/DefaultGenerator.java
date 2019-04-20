@@ -10,7 +10,6 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
-import javax.inject.Inject;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
@@ -35,6 +34,12 @@ public abstract class DefaultGenerator<T> implements Serializable {
     protected boolean mostrandoDetalle;
 
     protected ACCION accion;
+     
+    protected abstract AbstractFacade<T> getFacade();
+    
+    public abstract T obtenerRowData(String rowKey);
+    
+    public abstract Object obtenerRowKey(T Object);
 
     @PostConstruct
     protected void inicializar() {
@@ -48,6 +53,10 @@ public abstract class DefaultGenerator<T> implements Serializable {
     protected void inicializarListas() {
 
     }
+    
+    public void loggerForCatch(Exception ex){
+         Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
+    }
 
     public List<T> cargarDatos(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
         List salida = null;
@@ -59,7 +68,7 @@ public abstract class DefaultGenerator<T> implements Serializable {
                 }
             }
         } catch (Exception ex) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            loggerForCatch(ex);
         } finally {
             if (salida == null) {
                 salida = new ArrayList();
@@ -67,13 +76,7 @@ public abstract class DefaultGenerator<T> implements Serializable {
         }
         return salida;
     }
-
-    protected abstract AbstractFacade<T> getFacade();
-
-    public abstract T obtenerRowData(String rowKey);
-
-    public abstract Object obtenerRowKey(T Object);
-
+    
     protected void inicializarModelo() {
         try {
             this.modelo = new LazyDataModel<T>() {
@@ -94,7 +97,7 @@ public abstract class DefaultGenerator<T> implements Serializable {
             };
 
         } catch (Exception ex) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            loggerForCatch(ex);
         }
 
     }
@@ -107,7 +110,7 @@ public abstract class DefaultGenerator<T> implements Serializable {
                 this.mostrandoDetalle = true;
                 this.accion = ACCION.EDITAR;
             } catch (Exception ex) {
-                Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
+                loggerForCatch(ex);
             }
         }
 
@@ -142,7 +145,7 @@ public abstract class DefaultGenerator<T> implements Serializable {
 
             }
         } catch (Exception ex) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            loggerForCatch(ex);
         }
     }
 
@@ -158,7 +161,7 @@ public abstract class DefaultGenerator<T> implements Serializable {
                 this.generarMensaje(ACCION.ELIMINAR, false, "El registro no es valido");
             }
         } catch (Exception ex) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            loggerForCatch(ex);
         }
     }
 
@@ -180,7 +183,7 @@ public abstract class DefaultGenerator<T> implements Serializable {
                 this.generarMensaje(ACCION.EDITAR, resultado);
             }
         } catch (Exception ex) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
+           
         }
     }
 
@@ -225,7 +228,7 @@ public abstract class DefaultGenerator<T> implements Serializable {
         try {
             FacesContext.getCurrentInstance().addMessage(null, mensaje);
         } catch (Exception ex) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            loggerForCatch(ex);
         }
     }
 

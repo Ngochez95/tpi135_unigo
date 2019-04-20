@@ -30,7 +30,7 @@ public abstract class AbstractFacade<T> {
 //    }
 
     
-    //y asi como lo tenes no los has provado con docker? bien el mismo problema me daba subi los cambios pues, voy a ver :v es un gran chingo de cambios que asaber si estan buenos ya vas a ver 
+  
     public T create(T entity) {
         T salida = null;
         try {
