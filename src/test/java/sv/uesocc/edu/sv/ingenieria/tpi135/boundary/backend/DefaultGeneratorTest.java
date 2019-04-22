@@ -35,17 +35,15 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.controller.AbstractFacade;
 public abstract class DefaultGeneratorTest<T> implements Serializable {
 
     protected abstract LazyDataModel<T> getLazyDataModel();
-    protected abstract DefaultGenerator<T> getDefaultGenerator();
 
+    protected abstract DefaultGenerator<T> getDefaultGenerator();
 
     public DefaultGeneratorTest() {
     }
-    
-    
+
     protected LazyDataModel lazyDataMock;
     LazyDataModel<T> instanceLazyData = getLazyDataModel();
     T lazyDataModel;
-    
 
     @BeforeClass
     public static void setUpClass() {
@@ -57,7 +55,7 @@ public abstract class DefaultGeneratorTest<T> implements Serializable {
 
     @Before
     public void setUp() {
-        
+
     }
 
     @After
@@ -81,7 +79,6 @@ public abstract class DefaultGeneratorTest<T> implements Serializable {
     /**
      * Test of crearNuevo method, of class DefaultGenerator.
      */
-    
     @Test
     public void testCrearNuevo() {
         System.out.println("crearNuevo");
@@ -118,7 +115,7 @@ public abstract class DefaultGeneratorTest<T> implements Serializable {
         List result = instance.cargarDatos(first, pageSize, sortField, sortOrder, filters);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        
+
     }
 
     /**
@@ -132,22 +129,22 @@ public abstract class DefaultGeneratorTest<T> implements Serializable {
         AbstractFacade result = instance.getFacade();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-       
+
     }
 
     /**
      * Test of obtenerRowData method, of class DefaultGenerator.
      */
-    @Test
+    //@Test
     public void testObtenerRowData() {
-//        System.out.println("obtenerRowData");
-//        String rowKey = "";
-//        DefaultGenerator instance = getDefaultGenerator();
-//        Object expResult = null;
-//        Object result = instance.obtenerRowData(rowKey);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        
+        System.out.println("obtenerRowData");
+        String rowKey = "";
+        DefaultGenerator instance = getDefaultGenerator();
+        Object expResult = null;
+        Object result = instance.obtenerRowData(rowKey);
+       assertEquals(expResult, result);
+       // TODO review the generated test code and remove the default call to fail.
+
     }
 
     /**
@@ -155,14 +152,13 @@ public abstract class DefaultGeneratorTest<T> implements Serializable {
      */
     @Test
     public void testObtenerRowKey() {
-//        System.out.println("obtenerRowKey");
-//        Object Object = null;
-//        DefaultGenerator instance = new DefaultGeneratorImpl();
-//        Object expResult = null;
-//        Object result = instance.obtenerRowKey(Object);
-//        assertEquals(expResult, result);
+        System.out.println("obtenerRowKey");
+        Object Object = null;
+        DefaultGenerator instance = getDefaultGenerator();
+        Object expResult = null;
+        Object result = instance.obtenerRowKey(Object);
+        assertEquals(expResult, result);
 //        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
     }
 
     /**
@@ -174,7 +170,7 @@ public abstract class DefaultGeneratorTest<T> implements Serializable {
         DefaultGenerator instance = getDefaultGenerator();
         assertTrue(instance.inicializarModelo());
         // TODO review the generated test code and remove the default call to fail.
-       
+
     }
 
     /**
@@ -385,13 +381,13 @@ public abstract class DefaultGeneratorTest<T> implements Serializable {
      */
     @Test
     public void testIsMostrandoDetalle() {
-//        System.out.println("isMostrandoDetalle");
-//        DefaultGenerator instance = new DefaultGeneratorImpl();
-//        boolean expResult = false;
-//        boolean result = instance.isMostrandoDetalle();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+        System.out.println("isMostrandoDetalle");
+        DefaultGenerator instance = getDefaultGenerator();
+        boolean expResult = false;
+        boolean result = instance.isMostrandoDetalle();
+        assertEquals(expResult, result);       
+// TODO review the generated test code and remove the default call to fail.
+        
     }
 
     /**
@@ -399,7 +395,7 @@ public abstract class DefaultGeneratorTest<T> implements Serializable {
      */
     @Test
     public void testSetMostrandoDetalle() {
-//        System.out.println("setMostrandoDetalle");
+//       System.out.println("setMostrandoDetalle");
 //        boolean mostrandoDetalle = false;
 //        DefaultGenerator instance = new DefaultGeneratorImpl();
 //        instance.setMostrandoDetalle(mostrandoDetalle);
@@ -410,15 +406,13 @@ public abstract class DefaultGeneratorTest<T> implements Serializable {
     /**
      * Test of isAgregando method, of class DefaultGenerator.
      */
-    @Test
+   @Test
     public void testIsAgregando() {
-//        System.out.println("isAgregando");
-//        DefaultGenerator instance = new DefaultGeneratorImpl();
-//        boolean expResult = false;
-//        boolean result = instance.isAgregando();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+        System.out.println("isAgregando");
+        DefaultGenerator instance = getDefaultGenerator();;
+        boolean expResult = false;
+        boolean result = instance.isAgregando();
+        assertEquals(expResult, result);
     }
 
     /**
@@ -426,13 +420,12 @@ public abstract class DefaultGeneratorTest<T> implements Serializable {
      */
     @Test
     public void testIsEditando() {
-//        System.out.println("isEditando");
-//        DefaultGenerator instance = new DefaultGeneratorImpl();
-//        boolean expResult = false;
-//        boolean result = instance.isEditando();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+        System.out.println("isEditando");
+        DefaultGenerator instance = getDefaultGenerator();;
+        boolean expResult = false;
+        boolean result = instance.isEditando();
+        assertEquals(expResult, result);
+
     }
 
 }
