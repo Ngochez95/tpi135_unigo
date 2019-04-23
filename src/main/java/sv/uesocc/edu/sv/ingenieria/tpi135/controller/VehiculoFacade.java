@@ -45,9 +45,7 @@ public class VehiculoFacade extends AbstractFacade<Vehiculo> {
 
     }
 
-//    public List<Vehiculo> findByCaracteristicas(Date anio, int capacidad) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
+
 
 
     

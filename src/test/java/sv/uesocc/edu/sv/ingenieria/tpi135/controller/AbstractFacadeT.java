@@ -90,6 +90,12 @@ public abstract class AbstractFacadeT<T> {
         instance.create(entity);
         Mockito.verify(emMock).persist(entity);
     }
+    
+    @Test
+    public void testCrear(){
+        instance.crear(entity);
+        Mockito.verify(emMock).persist(entity);
+    }
 
     /**
      * Test of edit method, of class AbstractFacade.
@@ -98,6 +104,13 @@ public abstract class AbstractFacadeT<T> {
     public void testEdit() {
         System.out.println("testEdit");
         instance.edit(entity);
+        Mockito.verify(emMock).merge(entity);
+    }
+    
+    @Test
+    public void testEditar(){
+        System.out.println("testEditar");
+        instance.editar(entity);
         Mockito.verify(emMock).merge(entity);
     }
 

@@ -25,9 +25,7 @@ public abstract class AbstractFacade<T> {
 
     protected abstract EntityManager getEntityManager();
 
-//    public void create(T entity) {
-//        getEntityManager().persist(entity);
-//    }
+
 
     public void loggerSevere(Exception e){
          Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
@@ -47,9 +45,7 @@ public abstract class AbstractFacade<T> {
         return salida;
     }
 
-//    public void edit(T entity) {
-//        getEntityManager().merge(entity);
-//    }
+
 
     public T edit(T entity) {
         T salida = null;
