@@ -32,6 +32,7 @@ public class ViajeFacade extends AbstractFacade<Viaje>  {
     public ViajeFacade() {
         super(Viaje.class);
     }
+    
 
     public List<Viaje> findByConductor(int idUsuario) {
         try {

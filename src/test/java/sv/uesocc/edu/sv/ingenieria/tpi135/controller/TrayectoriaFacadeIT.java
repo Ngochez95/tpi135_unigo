@@ -14,6 +14,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import static org.junit.Assert.*;
 import org.junit.Rule;
+import org.junit.Test;
+import org.powermock.reflect.Whitebox;
 import static sv.uesocc.edu.sv.ingenieria.tpi135.controller.EntityManagerProvider.persistenceUnit;
 import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Trayectoria;
 
@@ -52,14 +54,10 @@ public class TrayectoriaFacadeIT extends AbstractFacadeINT<Trayectoria> {
     public void testFindByReferencia() throws Exception {
         System.out.println("findByReferencia");
         int idReferencia = 0;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        TrayectoriaFacade instance = (TrayectoriaFacade) container.getContext().lookup("java:global/classes/TrayectoriaFacade");
-        List<Trayectoria> expResult = null;
+        TrayectoriaFacade instance = new TrayectoriaFacade();
+        Whitebox.setInternalState(instance, "em", getEntityManager());
         List<Trayectoria> result = instance.findByReferencia(idReferencia);
-        assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNotNull(result);
     }
 
     @Override

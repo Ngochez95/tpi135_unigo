@@ -15,6 +15,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Rule;
+import org.powermock.reflect.Whitebox;
 import static sv.uesocc.edu.sv.ingenieria.tpi135.controller.EntityManagerProvider.persistenceUnit;
 import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Viaje;
 
@@ -22,60 +23,47 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Viaje;
  *
  * @author gochez
  */
-public class ViajeFacadeIT extends AbstractFacadeINT<Viaje>{
-    
+public class ViajeFacadeIT extends AbstractFacadeINT<Viaje> {
+
     public ViajeFacadeIT() {
     }
-    
-     @Rule
+
+    @Rule
     public EntityManagerProvider emProvider = persistenceUnit("pu-test");
-    
-   
-   // @Test
+
+    @Test
     public void testFindByConductor() throws Exception {
         System.out.println("findByConductor");
         int idUsuario = 0;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        ViajeFacade instance = (ViajeFacade)container.getContext().lookup("java:global/classes/ViajeFacade");
-        List<Viaje> expResult = null;
+        ViajeFacade instance = new ViajeFacade();
+        Whitebox.setInternalState(instance, "em", getEntityManager());
         List<Viaje> result = instance.findByConductor(idUsuario);
-        assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(0, result.size());
     }
 
     /**
      * Test of findByDia method, of class ViajeFacade.
      */
-   /// @Test
+    @Test
     public void testFindByDia() throws Exception {
         System.out.println("findByDia");
         int dia = 0;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        ViajeFacade instance = (ViajeFacade)container.getContext().lookup("java:global/classes/ViajeFacade");
-        List<Viaje> expResult = null;
+        ViajeFacade instance = new ViajeFacade();
+        Whitebox.setInternalState(instance, "em", getEntityManager());
         List<Viaje> result = instance.findByDia(dia);
-        assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(0, result.size());
     }
 
     /**
      * Test of findxCiudadOrigen method, of class ViajeFacade.
      */
-   // @Test
+     @Test
     public void testFindxCiudadOrigen() throws Exception {
         System.out.println("findxCiudadOrigen");
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        ViajeFacade instance = (ViajeFacade)container.getContext().lookup("java:global/classes/ViajeFacade");
-        List<Viaje> expResult = null;
+        ViajeFacade instance = new ViajeFacade();
+        Whitebox.setInternalState(instance, "em", getEntityManager());
         List<Viaje> result = instance.findxCiudadOrigen();
-        assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNotNull(result);
     }
 
     @Override
@@ -92,5 +80,5 @@ public class ViajeFacadeIT extends AbstractFacadeINT<Viaje>{
     protected Viaje getEntity() {
         return new Viaje(1);
     }
-    
+
 }

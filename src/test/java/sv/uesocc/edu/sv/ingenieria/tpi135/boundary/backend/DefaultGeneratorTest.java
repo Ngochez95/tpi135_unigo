@@ -21,10 +21,13 @@ import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import static org.mockito.Mockito.mock;
+import org.mockito.internal.util.reflection.Whitebox;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
+import sv.uesocc.edu.sv.ingenieria.tpi135.boundary.backend.DefaultGenerator.ACCION;
 import sv.uesocc.edu.sv.ingenieria.tpi135.controller.AbstractFacade;
 
 /**
@@ -142,8 +145,8 @@ public abstract class DefaultGeneratorTest<T> implements Serializable {
         DefaultGenerator instance = getDefaultGenerator();
         Object expResult = null;
         Object result = instance.obtenerRowData(rowKey);
-       assertEquals(expResult, result);
-       // TODO review the generated test code and remove the default call to fail.
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
 
     }
 
@@ -189,14 +192,18 @@ public abstract class DefaultGeneratorTest<T> implements Serializable {
     /**
      * Test of btnNuevoHandler method, of class DefaultGenerator.
      */
-    @Test
+   // @Test
     public void testBtnNuevoHandler() {
-//        System.out.println("btnNuevoHandler");
-//        ActionEvent ae = null;
-//        DefaultGenerator instance = new DefaultGeneratorImpl();
-//        instance.btnNuevoHandler(ae);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+  /*      System.out.println("btnNuevoHandler");
+        ActionEvent ae = null;
+        DefaultGenerator instance;
+        instance = mock(DefaultGenerator.class);
+        Mockito.when(instance.mostrandoDetalle).thenReturn(true);
+        Whitebox.setInternalState(instance, "em", getDefaultGenerator());
+        ACCION intanciaAccion;
+        intanciaAccion= mock(ACCION.class);
+        Mockito.when(intanciaAccion.CREAR).thenReturn();
+     */   
     }
 
     /**
@@ -385,9 +392,9 @@ public abstract class DefaultGeneratorTest<T> implements Serializable {
         DefaultGenerator instance = getDefaultGenerator();
         boolean expResult = false;
         boolean result = instance.isMostrandoDetalle();
-        assertEquals(expResult, result);       
+        assertEquals(expResult, result);
 // TODO review the generated test code and remove the default call to fail.
-        
+
     }
 
     /**
@@ -406,7 +413,7 @@ public abstract class DefaultGeneratorTest<T> implements Serializable {
     /**
      * Test of isAgregando method, of class DefaultGenerator.
      */
-   @Test
+    @Test
     public void testIsAgregando() {
         System.out.println("isAgregando");
         DefaultGenerator instance = getDefaultGenerator();;
