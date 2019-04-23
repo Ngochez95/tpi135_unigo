@@ -37,7 +37,7 @@ public class VehiculoFacadeIT extends AbstractFacadeINT<Vehiculo> {
 
     @Override
     protected Vehiculo getEntity() {
-        return new Vehiculo();
+        return new Vehiculo(1);
         }
     
 
