@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -60,20 +61,9 @@ public class ModeloView extends DefaultGenerator<Modelo> implements Serializable
 
     @Override
     public Modelo obtenerRowData(String rowKey) {
-        try {
-            List<Modelo> registros = (List<Modelo>) this.modelo.getWrappedData();
-            if (registros != null && !registros.isEmpty()) {
-                Integer buscado = Integer.parseInt(rowKey);
-                for (Modelo r : registros) {
-                    if (r.getIdModelo().compareTo(buscado) == 0) {
-                        return r;
-                    }
-                }
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
-        }
-        return null;
+   
+      return this.modelo.getWrappedData().stream().filter(r->r.getIdModelo().toString().equalsIgnoreCase(rowKey)).collect(Collectors.toList()).get(0);
+        
 
     }
 

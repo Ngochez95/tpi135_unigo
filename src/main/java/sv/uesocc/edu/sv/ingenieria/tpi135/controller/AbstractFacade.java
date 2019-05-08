@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.EJBException;
 import javax.persistence.EntityManager;
 
 /**
@@ -112,7 +113,7 @@ public abstract class AbstractFacade<T> {
         return null;
     }
 
-    public List<T> findRange(int desde, int hasta) {
+    public List<T> findRange(int desde, int hasta) throws EJBException{
         javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityClass));
         javax.persistence.Query q = getEntityManager().createQuery(cq);

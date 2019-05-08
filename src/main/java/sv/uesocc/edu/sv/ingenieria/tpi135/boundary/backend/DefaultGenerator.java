@@ -2,6 +2,7 @@ package sv.uesocc.edu.sv.ingenieria.tpi135.boundary.backend;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -59,24 +60,19 @@ public abstract class DefaultGenerator<T> implements Serializable {
     }
 
     public List<T> cargarDatos(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
-        List salida = null;
+        
         try {
             if (getFacade() != null) {
-                salida = getFacade().findRange(first, pageSize);
                 if (this.modelo != null) {
                     this.modelo.setRowCount(getFacade().count());
                 }
-            }else{
-                    System.err.println("Facade Vacio");
-                }
+                return getFacade().findRange(first, pageSize);
+                
+            }
         } catch (Exception ex) {
             loggerForCatch(ex);
-        } finally {
-            if (salida == null) {
-                salida = new ArrayList();
-            }
         }
-        return salida;
+        return Collections.EMPTY_LIST;
     }
     
     protected boolean inicializarModelo() {
