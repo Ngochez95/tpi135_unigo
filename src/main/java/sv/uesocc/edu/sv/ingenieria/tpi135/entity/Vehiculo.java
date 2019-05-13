@@ -47,6 +47,7 @@ public class Vehiculo implements Serializable {
     @ManyToOne(optional = false)
     private Marca idMarca;
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
+
     @ManyToOne(optional = false)
     private Usuario idUsuario;
 
@@ -73,12 +74,19 @@ public class Vehiculo implements Serializable {
         this.idUsuario = idUsuario;
     }
 
+
     public boolean getEstadoVehiculo() {
         return estadoVehiculo;
     }
 
     public void setEstadoVehiculo(boolean estadoVehiculo) {
         this.estadoVehiculo = estadoVehiculo;
+      
+    @XmlTransient
+    public List<Marca> getMarcaList() {
+        return marcaList;
+      
+
     }
 
     public Marca getIdMarca() {
