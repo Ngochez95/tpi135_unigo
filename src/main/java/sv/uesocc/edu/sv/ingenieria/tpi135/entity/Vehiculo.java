@@ -81,12 +81,6 @@ public class Vehiculo implements Serializable {
 
     public void setEstadoVehiculo(boolean estadoVehiculo) {
         this.estadoVehiculo = estadoVehiculo;
-      
-    @XmlTransient
-    public List<Marca> getMarcaList() {
-        return marcaList;
-      
-
     }
 
     public Marca getIdMarca() {
