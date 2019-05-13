@@ -6,6 +6,7 @@
 package sv.uesocc.edu.sv.ingenieria.tpi135.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +19,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -81,12 +83,6 @@ public class Vehiculo implements Serializable {
 
     public void setEstadoVehiculo(boolean estadoVehiculo) {
         this.estadoVehiculo = estadoVehiculo;
-      
-    @XmlTransient
-    public List<Marca> getMarcaList() {
-        return marcaList;
-      
-
     }
 
     public Marca getIdMarca() {
