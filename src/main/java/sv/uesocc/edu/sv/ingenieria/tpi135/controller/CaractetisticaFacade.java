@@ -5,6 +5,7 @@
  */
 package sv.uesocc.edu.sv.ingenieria.tpi135.controller;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -12,10 +13,10 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Caractetistica;
 
 /**
  *
- * @author gochez
+ * @author Zepeda Abrego, Juan Carlos
  */
 @Stateless
-public class CaractetisticaFacade extends AbstractFacade<Caractetistica> implements CaractetisticaFacadeLocal {
+public class CaractetisticaFacade extends AbstractFacade<Caractetistica> {
 
     @PersistenceContext(unitName = "tpi135.proyecto_uniGo_war_1.0-SNAPSHOTPU")
     private EntityManager em;
@@ -28,5 +29,7 @@ public class CaractetisticaFacade extends AbstractFacade<Caractetistica> impleme
     public CaractetisticaFacade() {
         super(Caractetistica.class);
     }
+
+   
     
 }

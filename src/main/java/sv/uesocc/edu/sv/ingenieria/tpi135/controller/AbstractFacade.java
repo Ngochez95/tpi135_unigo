@@ -5,12 +5,16 @@
  */
 package sv.uesocc.edu.sv.ingenieria.tpi135.controller;
 
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ejb.EJBException;
 import javax.persistence.EntityManager;
 
 /**
  *
- * @author gochez
+ * @author gochez & Zepeda Abrego
  */
 public abstract class AbstractFacade<T> {
 
@@ -22,43 +26,116 @@ public abstract class AbstractFacade<T> {
 
     protected abstract EntityManager getEntityManager();
 
-    public void create(T entity) {
-        getEntityManager().persist(entity);
+
+
+    public void loggerSevere(Exception e){
+         Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+    }
+  
+    public T create(T entity) {
+        T salida = null;
+        try {
+           
+            if (getEntityManager() != null && entity != null) {
+                getEntityManager().persist(entity);
+                salida = entity;
+            }
+        } catch (Exception e) {
+            loggerSevere(e);
+        }
+        return salida;
     }
 
-    public void edit(T entity) {
-        getEntityManager().merge(entity);
+
+
+    public T edit(T entity) {
+        T salida = null;
+        try {
+            EntityManager em = getEntityManager();
+            if (em != null && entity != null) {
+                em.merge(entity);
+                salida = entity;
+            }
+        } catch (Exception e) {
+            loggerSevere(e);
+        }
+        return salida;
     }
 
-    public void remove(T entity) {
-        getEntityManager().remove(getEntityManager().merge(entity));
+    public boolean crear(T entity) {
+        try {
+            getEntityManager().persist(entity);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean editar(T entity) {
+        try {
+            getEntityManager().merge(entity);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean remove(T entity) {
+        try {
+            getEntityManager().remove(getEntityManager().merge(entity));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public T find(Object id) {
-        return getEntityManager().find(entityClass, id);
+        try {
+            if (id != null) {
+                return getEntityManager().find(entityClass, id);
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return null;
     }
 
     public List<T> findAll() {
-        javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
-        cq.select(cq.from(entityClass));
-        return getEntityManager().createQuery(cq).getResultList();
+        try {
+            if (getEntityManager() != null) {
+                javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
+                cq.select(cq.from(entityClass));
+                return getEntityManager().createQuery(cq).getResultList();
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return null;
     }
 
-    public List<T> findRange(int[] range) {
+    public List<T> findRange(int desde, int hasta) throws EJBException{
         javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityClass));
         javax.persistence.Query q = getEntityManager().createQuery(cq);
-        q.setMaxResults(range[1] - range[0] + 1);
-        q.setFirstResult(range[0]);
+        q.setMaxResults(hasta);
+        q.setFirstResult(desde);
         return q.getResultList();
     }
 
     public int count() {
-        javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
-        javax.persistence.criteria.Root<T> rt = cq.from(entityClass);
-        cq.select(getEntityManager().getCriteriaBuilder().count(rt));
-        javax.persistence.Query q = getEntityManager().createQuery(cq);
-        return ((Long) q.getSingleResult()).intValue();
+        try {
+            if (getEntityManager() != null) {
+                javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
+                javax.persistence.criteria.Root<T> rt = cq.from(entityClass);
+                cq.select(getEntityManager().getCriteriaBuilder().count(rt));
+                javax.persistence.Query q = getEntityManager().createQuery(cq);
+                return ((Long) q.getSingleResult()).intValue();
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return 0;
+
     }
-    
+
 }

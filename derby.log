@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Tue Apr 23 00:13:46 CST 2019:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.1.0 - (1808820): instance a816c00e-016a-48d4-2ddb-000008717690 
+on database directory memory:/home/gochez/tpi/tpi135_unigo/testDB with class loader sun.misc.Launcher$AppClassLoader@6bc7c054 
+Loaded from file:/home/gochez/.m2/repository/org/apache/derby/derby/10.14.1.0/derby-10.14.1.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_101-b13
+user.dir=/home/gochez/tpi/tpi135_unigo
+os.name=Linux
+os.arch=amd64
+os.version=4.10.0-38-generic
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

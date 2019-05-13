@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author gochez
  */
 @Entity
-@Table(name = "usuario", catalog = "tpi2019", schema = "public")
+@Table(name = "usuario")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
@@ -40,6 +40,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Usuario.findByApellidoDos", query = "SELECT u FROM Usuario u WHERE u.apellidoDos = :apellidoDos"),
     @NamedQuery(name = "Usuario.findByIdRol", query = "SELECT u FROM Usuario u WHERE u.idRol = :idRol"),
     @NamedQuery(name = "Usuario.findByNombreUsuario", query = "SELECT u FROM Usuario u WHERE u.nombreUsuario = :nombreUsuario"),
+    @NamedQuery(name = "Usuario.findByRol", query = "SELECT s from Usuario as s WHERE s.idRol='1'"),
     @NamedQuery(name = "Usuario.findByContrasenia", query = "SELECT u FROM Usuario u WHERE u.contrasenia = :contrasenia")})
 public class Usuario implements Serializable {
 

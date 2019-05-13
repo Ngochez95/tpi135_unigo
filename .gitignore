@@ -1,1 +1,4 @@
 /target/
+*.war
+*.jar
+/nbproject/

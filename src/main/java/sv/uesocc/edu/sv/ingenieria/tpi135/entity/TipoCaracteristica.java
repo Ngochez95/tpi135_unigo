@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author gochez
  */
 @Entity
-@Table(name = "tipo_caracteristica", catalog = "tpi2019", schema = "public")
+@Table(name = "tipo_caracteristica")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TipoCaracteristica.findAll", query = "SELECT t FROM TipoCaracteristica t"),

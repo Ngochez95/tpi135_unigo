@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:comp="http://xmlns.jcp.org/jsf/composite/componentes"
+      >
+    <ui:composition template="../resources/templates/layout.xhtml">
+        <ui:define name="titulo">Origen</ui:define>
+        <ui:define name="tituloEntidad">Mantenimiento Origen</ui:define>
+
+        <ui:define name="tablaDatos">
+
+            <p:dataTable id="tblMedioContacto" value="#{origenView.modelo}" var="reg"
+                         lazy="true" rows="4" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
+                         {NextPageLink} {LastPageLink}" selectionMode="single" >
+                <p:ajax update=":formIngreso :formTabla" event="rowSelect" listener="#{origenView.cambiarSeleccion}"/>
+                <p:column headerText="ID Origen">
+                    <p:outputLabel value="#{reg.idOrigen}"/>
+                </p:column>
+                <p:column headerText="Nombre de Origen">
+                    <p:outputLabel value="#{reg.origen}"/>
+                </p:column>
+                <p:column headerText="ID Padre Origen">
+                    <p:outputLabel value="#{reg.idPadreOrigen.idOrigen} "/>
+                </p:column>
+                <p:column headerText="Padre Origen">
+                    <p:outputLabel value="#{reg.idPadreOrigen.origen} "/>
+                </p:column>
+                <p:column headerText="ID Usuario">
+                    <p:outputLabel value="#{reg.idUsuario.idUsuario} "/>
+                </p:column>
+                <p:column headerText="Usuario">
+                    <p:outputLabel value="#{reg.idUsuario.nombreUno} #{reg.idUsuario.apellidoUno} "/>
+                </p:column>
+            </p:dataTable>
+        </ui:define>
+
+
+        <ui:define name="botonesTabla">
+            <comp:botonesTabla marcaView="#{origenView}" NombreEntidad="Origen"/>
+        </ui:define>
+
+        <ui:define name="formulario" >
+
+            <p:panelGrid id="panelIngreso" columns="2" rendered="#{origenView.mostrandoDetalle}"  >
+                <p:outputLabel value="ID Origen" />
+                <p:inputText id="txtId" readonly="true" value="#{origenView.registro.idOrigen}" />
+
+                <p:outputLabel value="Nombre Origen" />
+                <p:inputText value="#{origenView.registro.origen}" required="True" requiredMessage="Ingrese el nombre del origen" />
+
+                <p:outputLabel value="PadreOrigen" />
+                <p:selectOneMenu converter="omnifaces.SelectItemsConverter" value="#{origenView.registro.idPadreOrigen}" dynamic="true" style="width:125px">
+                    <f:selectItem itemLabel="Nuevo Pais" itemValue="" noSelectionOption="true"/>
+                    <f:selectItems value="#{origenView.lstOrigenPadre}" var="origen" itemLabel="#{origen.origen}" itemValue="#{origen}" />
+                </p:selectOneMenu>
+
+                <p:outputLabel value="Usuario" />
+                <p:selectOneMenu converter="omnifaces.SelectItemsConverter" value="#{origenView.registro.idUsuario}" dynamic="true" style="width:125px">
+                    <f:selectItems value="#{origenView.lstUsuario}" var="usuario" itemLabel="#{usuario.nombreUno} #{usuario.apellidoUno}" itemValue="#{usuario}" />
+                </p:selectOneMenu>
+
+
+
+            </p:panelGrid>
+            <comp:botonesEditar backBean="#{origenView}" NombreEntidad="Origen"/>
+
+
+        </ui:define>
+
+        <ui:define name="botonesFormulario" rendered="#{origenView.mostrandoDetalle}">
+
+
+
+
+        </ui:define>
+
+
+    </ui:composition>
+
+
+
+</html>

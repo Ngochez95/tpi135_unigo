@@ -5,17 +5,20 @@
  */
 package sv.uesocc.edu.sv.ingenieria.tpi135.controller;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Origen;
+import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Usuario;
 
 /**
  *
  * @author gochez
  */
 @Stateless
-public class OrigenFacade extends AbstractFacade<Origen> implements OrigenFacadeLocal {
+public class OrigenFacade extends AbstractFacade<Origen>  {
 
     @PersistenceContext(unitName = "tpi135.proyecto_uniGo_war_1.0-SNAPSHOTPU")
     private EntityManager em;
@@ -28,5 +31,7 @@ public class OrigenFacade extends AbstractFacade<Origen> implements OrigenFacade
     public OrigenFacade() {
         super(Origen.class);
     }
+    
+    
     
 }

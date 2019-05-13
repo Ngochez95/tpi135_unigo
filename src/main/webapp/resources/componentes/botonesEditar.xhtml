@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:cc="http://java.sun.com/jsf/composite">
+
+
+    <cc:interface >
+        <cc:attribute name="backBean" required="true" type="sv.uesocc.edu.sv.ingenieria.tpi135.boundary.backend.DefaultGenerator" />
+        <cc:attribute name="NombreEntidad" default="" required="false"  type="java.lang.String"/>
+    </cc:interface>
+
+    <cc:implementation>
+    <!--rendered="#{cc.attrs.marcaView.mostrandoDetalle}"-->
+        <!-- rendered="#{cc.attrs.marcaView.mostrandoDetalle}"--> 
+        <!--rendered="#{cc.attrs.marcaView.mostrandoDetalle}"-->
+        <p:commandButton value="Crear " actionListener="#{cc.attrs.backBean.btnGuardarHandler}" 
+                     rendered="#{cc.attrs.backBean.agregando}"  update=":formTabla :formIngreso" />
+
+        <p:commandButton value="Remover " id="btnEliminar" actionListener="#{cc.attrs.backBean.btnEliminarHandler}" 
+                         rendered="#{cc.attrs.backBean.editando}" update=":formTabla :formIngreso"/>
+        <p:tooltip id="toolTipTrack" for="btnEliminar" value="Se eliminara el registro de forma permanente" style="border-color: red "  trackMouse="true" />
+        <p:commandButton value="Editar " actionListener="#{cc.attrs.backBean.btnModificarHandler}" 
+                         rendered="#{cc.attrs.backBean.editando}" update=":formTabla :formIngreso"/>
+
+    </cc:implementation>
+</html>
