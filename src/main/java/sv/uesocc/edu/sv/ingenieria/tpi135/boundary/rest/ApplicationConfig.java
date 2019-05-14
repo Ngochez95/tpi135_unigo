@@ -19,6 +19,11 @@ public class ApplicationConfig extends Application {
     public Set<Class<?>> getClasses() {
         Set<Class<?>> resources = new java.util.HashSet<>();
         resources.add(sv.uesocc.edu.sv.ingenieria.tpi135.boundary.rest.ViajeResource.class);
+        resources.add(sv.uesocc.edu.sv.ingenieria.tpi135.boundary.rest.VehiculoResource.class);
+        resources.add(sv.uesocc.edu.sv.ingenieria.tpi135.boundary.rest.CaracteristicaResource.class);
+        resources.add(sv.uesocc.edu.sv.ingenieria.tpi135.boundary.rest.ReservaViajeResource.class);
+        resources.add(sv.uesocc.edu.sv.ingenieria.tpi135.boundary.rest.TrayectoriaResource.class);
+        resources.add(sv.uesocc.edu.sv.ingenieria.tpi135.boundary.rest.UsuarioResource.class);
         return resources;
     }
 
