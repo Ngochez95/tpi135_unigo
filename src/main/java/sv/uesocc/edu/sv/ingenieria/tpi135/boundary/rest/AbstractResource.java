@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
@@ -129,6 +130,7 @@ public abstract class AbstractResource<T> implements Serializable {
     //se le borraron validaciones porque accedia al atributo id que esdiferente en cada entidad
     @PUT
     @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
+    @Consumes({MediaType.APPLICATION_JSON})
     public T edit(T registro) {
         if (getFacade() != null) {
             if (registro != null) {
