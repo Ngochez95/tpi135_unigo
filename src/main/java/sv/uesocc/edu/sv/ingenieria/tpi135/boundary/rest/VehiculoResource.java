@@ -52,24 +52,28 @@ public class VehiculoResource extends AbstractResource<Vehiculo> implements Seri
     }
 
     @GET
-    @Path("findallid")
+    @Path("findallid/{idbuscado}")
     @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
     public Response FindAllByID(
-           @PathParam("idbuscado") int id
+            @PathParam("idbuscado") int id
     ) {
 
         if (vehiculo != null) {
             try {
                 List<Vehiculo> list = null;
-                list = vehiculo.findAllId(0);
+                list = vehiculo.findAllId(id);
                 if (list != null && !list.isEmpty()) {
                     JsonArrayBuilder ab = Json.createArrayBuilder();
                     for (Vehiculo vh : list) {
                         ab.add(Json.createObjectBuilder()
                                 .add("idVehiculo", vh.getIdVehiculo())
-                                .add("Marca", vh.getIdMarca().getIdMarca())
+                                .add("Marca", vh.getIdMarca().getMarca())
+                               // .add("Modelo", vh.getIdMarca().getModeloList().get(id).getModelo())
+//                                .add("Capacidad", vh.getIdMarca().getModeloList().get(id).getCaractetisticaList().get(id).getTipoCaracteristicaList().get(id).getCapacidad())
+//                                .add("Color", vh.getIdMarca().getModeloList().get(id).getCaractetisticaList().get(id).getTipoCaracteristicaList().get(id).getColor())
+//                                .add("Anio", vh.getIdMarca().getModeloList().get(id).getCaractetisticaList().get(id).getTipoCaracteristicaList().get(id).getAnio().getDate())
                         );
-                                //.add("marca", vh.getIdMarca().getMarca()));
+                        //.add("marca", vh.getIdMarca().getMarca()));
                     }
                     return Response.ok(ab.build()).build();
 

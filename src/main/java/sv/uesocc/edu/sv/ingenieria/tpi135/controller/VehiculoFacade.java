@@ -48,8 +48,9 @@ public class VehiculoFacade extends AbstractFacade<Vehiculo> {
         public List<Vehiculo> findAllId(int idVehiculo) {
         List<Vehiculo> lista = null;
         try {
-            Query consulta = em.createNamedQuery("Vehiculo.findAllbyId");
-//            consulta.setParameter("idVehiculo", idVehiculo);
+            //Query consulta = em.createNamedQuery("Vehiculo.findAllbyId");
+            Query consulta= em.createNamedQuery("Vehiculo.findByIdVehiculo");
+           consulta.setParameter("idVehiculo", idVehiculo);
             lista = consulta.getResultList();
         } catch (Exception ex) {
             throw ex;
