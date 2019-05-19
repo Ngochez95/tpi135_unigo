@@ -6,9 +6,19 @@
 package sv.uesocc.edu.sv.ingenieria.tpi135.boundary.rest;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import sv.uesocc.edu.sv.ingenieria.tpi135.controller.AbstractFacade;
 import sv.uesocc.edu.sv.ingenieria.tpi135.controller.UsuarioFacade;
 import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Usuario;
@@ -17,7 +27,6 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Usuario;
  *
  * @author gochez
  */
-
 @Path("usuario")
 @RequestScoped
 public class UsuarioResource extends AbstractResource<Usuario> implements Serializable {
@@ -37,6 +46,36 @@ public class UsuarioResource extends AbstractResource<Usuario> implements Serial
     @Override
     protected Usuario crearNuevo() {
         return new Usuario();
+    }
+
+    @GET
+    @Path("findbyusername/{usuariobuscado}")
+    @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
+    public Response findByNombreUsuarioLike(
+            @PathParam("usuariobuscado") String nombreUsuario
+    ) {
+        if (usuario != null) {
+            try {
+                List<Usuario> list = null;
+                list = usuario.findByNombreUsuario(nombreUsuario);
+                if (list != null && !list.isEmpty()) {
+                    JsonArrayBuilder ab = Json.createArrayBuilder();
+                    for (Usuario us : list) {
+                        ab.add(Json.createObjectBuilder()
+                                .add("idUsuario", us.getIdUsuario())
+                                .add("nombreUsuario", us.getNombreUsuario())
+                        );
+                               
+
+                    }
+                     return Response.ok(ab.build()).build();
+                }
+            }catch(Exception ex){
+                 Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            }
+            
+        }
+        return Response.status(Response.Status.NOT_FOUND).header("filter-not-found", nombreUsuario).build();
     }
 
 }

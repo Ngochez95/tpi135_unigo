@@ -41,6 +41,18 @@ public class UsuarioFacade extends AbstractFacade<Usuario>  {
         }
         return lista;
     }
+    
+    public List<Usuario> findByNombreUsuario(String nombreUsuario){
+        List<Usuario> lista = null;
+        try{
+            Query consulta = em.createNamedQuery("Usuario.findByNombreUsuario");
+            consulta.setParameter("nombreUsuario", "%"+nombreUsuario+"%");
+            lista = consulta.getResultList();
+        }catch(Exception ex){
+            throw ex;
+        }
+        return lista;
+    }
 
 
     
