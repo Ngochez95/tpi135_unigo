@@ -49,10 +49,10 @@ public class UsuarioResource extends AbstractResource<Usuario> implements Serial
     }
 
     @GET
-    @Path("findbyusername/{usuariobuscado}")
+    @Path("finduser/{username}")
     @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
     public Response findByNombreUsuarioLike(
-            @PathParam("usuariobuscado") String nombreUsuario
+            @PathParam("username") String nombreUsuario
     ) {
         if (usuario != null) {
             try {
@@ -64,16 +64,19 @@ public class UsuarioResource extends AbstractResource<Usuario> implements Serial
                         ab.add(Json.createObjectBuilder()
                                 .add("idUsuario", us.getIdUsuario())
                                 .add("nombreUsuario", us.getNombreUsuario())
+                                .add("nombreUno", us.getNombreUno())
+                                .add("nombreDos", us.getNombreDos())
+                                .add("apellidoUno", us.getApellidoUno())
+                                .add("apellidoDos", us.getApellidoDos())
                         );
-                               
 
                     }
-                     return Response.ok(ab.build()).build();
+                    return Response.ok(ab.build()).build();
                 }
-            }catch(Exception ex){
-                 Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            } catch (Exception ex) {
+                Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
             }
-            
+
         }
         return Response.status(Response.Status.NOT_FOUND).header("filter-not-found", nombreUsuario).build();
     }
