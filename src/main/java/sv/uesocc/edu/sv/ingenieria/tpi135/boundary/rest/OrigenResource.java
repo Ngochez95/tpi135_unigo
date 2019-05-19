@@ -6,7 +6,6 @@
 package sv.uesocc.edu.sv.ingenieria.tpi135.boundary.rest;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
