@@ -68,5 +68,17 @@ public class ViajeFacade extends AbstractFacade<Viaje>  {
         return lista;  
 
     }
+    
+      public List<Viaje> findBySalida(String salida) {
+        try {
+            Query consulta = em.createNamedQuery("Viaje.findBySalida");
+            consulta.setParameter("salida", salida);
+            lista = consulta.getResultList();
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return lista;
+
+    }
 
 }

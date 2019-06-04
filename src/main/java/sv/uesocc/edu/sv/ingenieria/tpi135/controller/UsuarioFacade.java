@@ -17,7 +17,7 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Usuario;
  * @author gochez
  */
 @Stateless
-public class UsuarioFacade extends AbstractFacade<Usuario>  {
+public class UsuarioFacade extends AbstractFacade<Usuario> {
 
     @PersistenceContext(unitName = "tpi135.proyecto_uniGo_war_1.0-SNAPSHOTPU")
     private EntityManager em;
@@ -30,9 +30,9 @@ public class UsuarioFacade extends AbstractFacade<Usuario>  {
     public UsuarioFacade() {
         super(Usuario.class);
     }
-    
-    public List<Usuario> findByRol(){
-          List<Usuario> lista = null;
+
+    public List<Usuario> findByRol() {
+        List<Usuario> lista = null;
         try {
             Query consulta = em.createNamedQuery("Usuario.findByRol");
             lista = consulta.getResultList();
@@ -42,6 +42,21 @@ public class UsuarioFacade extends AbstractFacade<Usuario>  {
         return lista;
     }
 
+    public List<Usuario> findByNombreUsuario(String nombreUsuario) {
+        List<Usuario> lista = null;
+        try {
+            Query consulta = em.createNamedQuery("Usuario.findByNombreUsuario");
+            consulta.setParameter("nombreUsuario", "%" + nombreUsuario + "%");
+            consulta.setParameter("nombreUno", "%" + nombreUsuario + "%");
+            consulta.setParameter("nombreDos", "%" + nombreUsuario + "%");
+            consulta.setParameter("apellidoUno", "%" + nombreUsuario + "%");
+            consulta.setParameter("apellidoDos", "%" + nombreUsuario + "%");
 
-    
+            lista = consulta.getResultList();
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return lista;
+    }
+
 }

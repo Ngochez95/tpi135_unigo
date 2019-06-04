@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Marca;
 
 /**
@@ -28,6 +29,19 @@ public class MarcaFacade extends AbstractFacade<Marca>{
 
     public MarcaFacade() {
         super(Marca.class);
+    }
+    
+    
+    public List<Marca> findByNombreUsuario(String marca) {
+        List<Marca> lista = null;
+        try {
+            Query consulta = em.createNamedQuery("Marca.findByName");
+            consulta.setParameter("nombreMarca", "%" + marca + "%");
+            lista = consulta.getResultList();
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return lista;
     }
 
   

@@ -34,6 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Origen.findAll", query = "SELECT o FROM Origen o"),
     @NamedQuery(name = "Origen.findByIdOrigen", query = "SELECT o FROM Origen o WHERE o.idOrigen = :idOrigen"),
+    @NamedQuery(name = "Origen.findbynombre", query = "SELECT DISTINCT a FROM Origen a WHERE UPPER(a.origen) LIKE UPPER(:nombre)"),
     @NamedQuery(name = "Origen.findByOrigen", query = "SELECT o FROM Origen o WHERE o.origen = :origen")})
 public class Origen implements Serializable {
 

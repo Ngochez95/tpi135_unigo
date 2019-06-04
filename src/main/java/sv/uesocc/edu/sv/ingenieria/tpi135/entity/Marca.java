@@ -35,6 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Marca.findAll", query = "SELECT m FROM Marca m"),
     @NamedQuery(name = "Marca.findByIdMarca", query = "SELECT m FROM Marca m WHERE m.idMarca = :idMarca"),
+    @NamedQuery(name = "Marca.findByName", query = "SELECT DISTINCT m FROM Marca as m WHERE UPPER(m.marca) LIKE UPPER(:nombreMarca) "),
     @NamedQuery(name = "Marca.findByMarca", query = "SELECT m FROM Marca m WHERE m.marca = :marca")})
 public class Marca implements Serializable {
 

@@ -18,7 +18,15 @@ public class ApplicationConfig extends Application {
     @Override
     public Set<Class<?>> getClasses() {
         Set<Class<?>> resources = new java.util.HashSet<>();
+        resources.add(sv.uesocc.edu.sv.ingenieria.tpi135.boundary.rest.CORSFilter.class);
         resources.add(sv.uesocc.edu.sv.ingenieria.tpi135.boundary.rest.ViajeResource.class);
+        resources.add(sv.uesocc.edu.sv.ingenieria.tpi135.boundary.rest.VehiculoResource.class);
+        resources.add(sv.uesocc.edu.sv.ingenieria.tpi135.boundary.rest.CaracteristicaResource.class);
+        resources.add(sv.uesocc.edu.sv.ingenieria.tpi135.boundary.rest.ReservaViajeResource.class);
+        resources.add(sv.uesocc.edu.sv.ingenieria.tpi135.boundary.rest.TrayectoriaResource.class);
+        resources.add(sv.uesocc.edu.sv.ingenieria.tpi135.boundary.rest.UsuarioResource.class);
+        resources.add(sv.uesocc.edu.sv.ingenieria.tpi135.boundary.rest.OrigenResource.class);
+
         return resources;
     }
 

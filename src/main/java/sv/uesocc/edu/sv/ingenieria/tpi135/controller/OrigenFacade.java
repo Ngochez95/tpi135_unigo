@@ -11,14 +11,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Origen;
-import sv.uesocc.edu.sv.ingenieria.tpi135.entity.Usuario;
 
 /**
  *
  * @author gochez
  */
 @Stateless
-public class OrigenFacade extends AbstractFacade<Origen>  {
+public class OrigenFacade extends AbstractFacade<Origen> {
 
     @PersistenceContext(unitName = "tpi135.proyecto_uniGo_war_1.0-SNAPSHOTPU")
     private EntityManager em;
@@ -31,7 +30,18 @@ public class OrigenFacade extends AbstractFacade<Origen>  {
     public OrigenFacade() {
         super(Origen.class);
     }
-    
-    
-    
+
+    public List<Origen> findbynombre(String nombre) {
+        List<Origen> lista = null;
+        try {
+            Query consulta = em.createNamedQuery("Origen.findbynombre");
+            consulta.setParameter("nombre", "%"+nombre+"%");
+            lista = consulta.getResultList();
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return lista;
+
+    }
+
 }
