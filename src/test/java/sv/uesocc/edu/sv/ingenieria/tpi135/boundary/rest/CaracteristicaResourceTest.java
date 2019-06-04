@@ -117,31 +117,34 @@ public class CaracteristicaResourceTest {
 //    /**
 //     * Test of Caractetisticacount method, of class CaracteristicaResource.
 //     */
-//    @Test
-//    public void testCaractetisticacount() {
-//        System.out.println("Caractetisticacount");
-//        CaracteristicaResource instance = new CaracteristicaResource();
-//        Integer expResult = null;
-//        Integer result = instance.Caractetisticacount();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    @Test
+    public void testCaractetisticacount() {
+        System.out.println("Caractetisticacount");
+        Integer expResult = 0;
+        Integer result = cr.Caractetisticacount();
+        Response response = server.newRequest("caracteristica/count").request().buildGet().invoke();
+        Assert.assertNotNull(response);
+        assertEquals(response.getStatus(), Response.Status.OK.getStatusCode());
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        //fail("The test case is a prototype.");
+    }
 //
 //    /**
 //     * Test of CaractetisticafindById method, of class CaracteristicaResource.
 //     */
-//    @Test
-//    public void testCaractetisticafindById() throws Exception {
-//        System.out.println("CaractetisticafindById");
-//        Integer id = null;
-//        CaracteristicaResource instance = new CaracteristicaResource();
-//        Caractetistica expResult = null;
-//        Caractetistica result = instance.CaractetisticafindById(id);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    @Test
+    public void testCaractetisticafindById() throws Exception {
+        System.out.println("CaractetisticafindById");
+        Integer id = 11;
+        Caractetistica expResult = new Caractetistica(id);
+        Caractetistica caract = new Caractetistica(id);
+        crf.create(caract);
+        Caractetistica result = cr.CaractetisticafindById(id);
+        assertEquals(caract, result);
+        
+       
+    }
 //
 //    /**
 //     * Test of Caractetisticacreate method, of class CaracteristicaResource.

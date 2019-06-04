@@ -135,7 +135,7 @@ public class CaracteristicaResource {
     }
 
     @GET
-    @Path("/caracteristica/tipocaracteristica/all")
+    @Path("/tipocaracteristica/all")
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public List<TipoCaracteristica> TipoCaracteristicafindAll() {
         if (tipocaracteristica != null) {
