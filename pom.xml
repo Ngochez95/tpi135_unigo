@@ -125,7 +125,7 @@
             <version>5.1</version>
         </dependency>
         
-      <!--  <dependency>
+       <dependency>
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
             <version>0.7.9</version>
@@ -135,7 +135,7 @@
             <artifactId>sonar-maven-plugin</artifactId>
             <version>3.6.0.1398</version>
         </dependency> 
-        -->
+       
         
     </dependencies>
 
