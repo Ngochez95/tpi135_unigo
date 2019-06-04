@@ -115,6 +115,28 @@ public class ViajeResource {
         }
         return new ArrayList<>();
     }
+    
+    
+    @GET
+    @Path("/salida/{salida}")
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public List<Viaje> findBySalida(
+            @PathParam("salida") String salida
+    ) throws InstantiationException, IllegalAccessException {
+        if (viaje != null) {
+            try {
+                List<Viaje> list = null;
+                if (!salida.isEmpty()) {
+                    list = (List<Viaje>) viaje.findBySalida(salida);
+                    return list;
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
+
+            }
+        }
+        return new ArrayList<>();
+    }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")

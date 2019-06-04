@@ -216,6 +216,29 @@ public class VehiculoResource {
 
     }
 
+//    @GET
+//    @Path("/marca")
+//    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+//    public List<Marca> MarcaByName(@DefaultValue("0") @QueryParam("first") int first,
+//            @DefaultValue("10") @QueryParam("pagesize") int pageSize) {
+//
+//        if (marca != null && first >= 0 && pageSize >= 0) {
+//            try {
+//                List<Marca> list = null;
+//                list = marca.findRange(first, pageSize);
+//                if (list != null) {
+//                    return list;
+//                }
+//
+//            } catch (Exception ex) {
+//                Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
+//
+//            }
+//        }
+//        return new ArrayList<>();
+//
+//    }
+
     @GET
     @Path("/marca/count")
     @Produces(MediaType.TEXT_PLAIN)
@@ -232,16 +255,16 @@ public class VehiculoResource {
     }
 
     @GET
-    @Path("/marca/{id}")
+    @Path("/marca/findbyname/{marcaBuscada}")
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-    public Marca MarcafindById(
-            @PathParam("id") Integer id
+    public List<Marca> MarcafindById(
+            @PathParam("marcaBuscada") String marcabuscada
     ) throws InstantiationException, IllegalAccessException {
         if (marca != null) {
             try {
-                Marca registro;
-                if (id >= 0 && id != null) {
-                    registro = marca.find(id);
+                List<Marca> registro;
+                if (!marcabuscada.isEmpty()) {
+                    registro = marca.findByNombreUsuario(marcabuscada);
                     return registro;
                 }
             } catch (Exception ex) {
@@ -249,10 +272,9 @@ public class VehiculoResource {
 
             }
         }
-        return new Marca();
+        return new ArrayList<>();
     }
-    
-    
+
     @GET
     @Path("/marca/modelo/all")
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
@@ -347,5 +369,4 @@ public class VehiculoResource {
 //        }
 //        return new Marca();
 //    }
-
 }
