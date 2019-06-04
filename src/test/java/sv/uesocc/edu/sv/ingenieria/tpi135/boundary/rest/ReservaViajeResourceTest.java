@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.List;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -19,8 +20,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.mockito.InjectMocks;
-import static sv.uesocc.edu.sv.ingenieria.tpi135.boundary.rest.CaracteristicaResourceIT.cr;
-import static sv.uesocc.edu.sv.ingenieria.tpi135.boundary.rest.CaracteristicaResourceIT.server;
+import static sv.uesocc.edu.sv.ingenieria.tpi135.boundary.rest.CaracteristicaResourceTest.cr;
+import static sv.uesocc.edu.sv.ingenieria.tpi135.boundary.rest.CaracteristicaResourceTest.server;
 import sv.uesocc.edu.sv.ingenieria.tpi135.entity.ReservaViaje;
 import sv.uesocc.edu.sv.ingenieria.tpi135.web.exceptions.ControllerExceptionMapper;
 import sv.uesocc.edu.sv.ingenieria.tpi135.web.exceptions.NotFoundMapper;
@@ -30,32 +31,32 @@ import sv.uesocc.edu.sv.ingenieria.tpi135.web.exceptions.WebExceptionMapper;
  *
  * @author gochez
  */
-public class ReservaViajeResourceIT {
-    
-    public ReservaViajeResourceIT() {
+public class ReservaViajeResourceTest {
+
+    public ReservaViajeResourceTest() {
     }
-    
+
     @InjectMocks
     public static ReservaViajeResource rv = new ReservaViajeResource();
     public static InMemoryRestServer server;
 
     public Client cliente = ClientBuilder.newClient();
     public WebTarget target = cliente.target("http://localhost:8080/tpi135_unigo/ws/reserva");
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() throws IOException {
-                server = InMemoryRestServer.create(rv, ControllerExceptionMapper.class, WebExceptionMapper.class, NotFoundMapper.class);
+        server = InMemoryRestServer.create(rv, ControllerExceptionMapper.class, WebExceptionMapper.class, NotFoundMapper.class);
 
     }
-    
+
     @After
     public void tearDown() {
         server.close();
@@ -68,14 +69,14 @@ public class ReservaViajeResourceIT {
     public void testFindAll() {
         System.out.println("findAll");
         Response response = target.path("/all").request(MediaType.APPLICATION_JSON).get();
-            assertNotNull(response);
-            assertEquals(response.getStatus(), Response.Status.OK.getStatusCode());
-            System.out.println("LA respuesta de findALL de reserva es "+response.getStatus());
+        assertNotNull(response);
+        assertEquals(response.getStatus(), Response.Status.OK.getStatusCode());
+        System.out.println("LA respuesta de findALL de reserva es " + response.getStatus());
     }
 
     /**
-     * Test of findRange method, of class ReservaViajeResource.
-//     */
+     * Test of findRange method, of class ReservaViajeResource. //
+     */
 //    @Test
 //    public void testFindRange() {
 //        System.out.println("findRange");
@@ -88,14 +89,17 @@ public class ReservaViajeResourceIT {
 //        // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
 //    }
-
     /**
      * Test of count method, of class ReservaViajeResource.
      */
     @Test
     public void testCount() {
         System.out.println("count");
-        
+        Response response = target.path("/count").request(MediaType.TEXT_PLAIN).get();
+        assertNotNull(response);
+        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+        System.out.println("La respuesta de la petición count a ReservaViaje fue: " + response.getStatus());
+
     }
 
     /**
@@ -104,13 +108,10 @@ public class ReservaViajeResourceIT {
     @Test
     public void testFindById() throws Exception {
         System.out.println("findById");
-        Integer id = null;
-        ReservaViajeResource instance = new ReservaViajeResource();
-        ReservaViaje expResult = null;
-        ReservaViaje result = instance.findById(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Response response = target.path("/1").request(MediaType.APPLICATION_JSON).get();
+        assertNotNull(response);
+        assertEquals(Response.Status.NO_CONTENT.getStatusCode(), response.getStatus());
+        System.out.println("La respuesta de la petición buscar por id de reservaViaje fue: " + response.getStatusInfo());
     }
 
     /**
@@ -119,29 +120,24 @@ public class ReservaViajeResourceIT {
     @Test
     public void testCreate() throws Exception {
         System.out.println("create");
-        ReservaViaje registro = null;
-        ReservaViajeResource instance = new ReservaViajeResource();
-        ReservaViaje expResult = null;
-        ReservaViaje result = instance.create(registro);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        ReservaViaje resv = new ReservaViaje(1);
+        Response response = server.newRequest("/").request().buildPost(Entity.entity(resv, MediaType.APPLICATION_JSON)).invoke();
+        assertNotNull(response);
+        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+        System.out.println("El valor de la peticion del create de ReservaViaje es: " + response.getStatusInfo());
     }
 
     /**
      * Test of edit method, of class ReservaViajeResource.
      */
-    @Test
-    public void testEdit() {
-        System.out.println("edit");
-        ReservaViaje registro = null;
-        ReservaViajeResource instance = new ReservaViajeResource();
-        ReservaViaje expResult = null;
-        ReservaViaje result = instance.edit(registro);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+//    @Test
+//    public void testEdit() {
+//        System.out.println("edit");
+//         Response response = server.newRequest("/1").request().build.invoke();
+//        assertNotNull(response);
+//        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+//        System.out.println(response.getStringHeaders());
+//    }
 
     /**
      * Test of delete method, of class ReservaViajeResource.
@@ -149,13 +145,11 @@ public class ReservaViajeResourceIT {
     @Test
     public void testDelete() throws Exception {
         System.out.println("delete");
-        Integer id = null;
-        ReservaViajeResource instance = new ReservaViajeResource();
-        ReservaViaje expResult = null;
-        ReservaViaje result = instance.delete(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Response response = server.newRequest("/1").request().buildDelete().invoke();
+        assertNotNull(response);
+        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+        System.out.println(response.getStringHeaders());
+
     }
-    
+
 }
