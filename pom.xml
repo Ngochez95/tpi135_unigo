@@ -337,7 +337,7 @@
         <profile>
             <id>sonar</id>
             <properties>
-                <sonar.host.url> http://localhost:9000 </sonar.host.url>
+                <sonar.host.url> http://sonarquebetpi:9000 </sonar.host.url>
             </properties>
         </profile>
        
