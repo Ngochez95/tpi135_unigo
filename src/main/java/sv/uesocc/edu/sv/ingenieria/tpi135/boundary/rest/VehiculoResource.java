@@ -46,16 +46,16 @@ public class VehiculoResource {
     @Inject
     protected ModeloFacade modelo;
 
-
     @GET
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-    public List<Vehiculo> VehiculofindRange(@DefaultValue("0") @QueryParam("first") int first,
-            @DefaultValue("10") @QueryParam("pagesize") int pageSize) {
+    public List<Vehiculo> VehiculoByMarcaModelo(
+            @PathParam("idmarca") Integer idmarca,
+            @PathParam("idmodelo") Integer idmodelo) {
 
-        if (vehiculo != null && first >= 0 && pageSize >= 0) {
+        if (vehiculo != null && idmarca >= 0 && idmodelo >= 0) {
             try {
                 List<Vehiculo> list = null;
-                list = vehiculo.findRange(first, pageSize);
+                list = vehiculo.findByMarcaModelo(idmarca, idmodelo);
                 if (list != null) {
                     return list;
                 }
@@ -69,44 +69,27 @@ public class VehiculoResource {
 
     }
 
-//    @GET
-//    @Path("count")
-//    @Produces(MediaType.TEXT_PLAIN)
-//    public Integer Vehiculocount() {
-//        if (vehiculo != null) {
-//            try {
-//                return vehiculo.count();
-//            } catch (Exception ex) {
-//                Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
-//
-//            }
-//        }
-//        return 0;
-//    }
-
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-    public Vehiculo VehiculofindById(
+    public List<Vehiculo> VehiculofindById(
             @PathParam("id") Integer id,
             @PathParam("idmarca") Integer idmarca,
             @PathParam("idmodelo") Integer idmodelo
-            
     ) throws InstantiationException, IllegalAccessException {
         if (vehiculo != null) {
             try {
-                Vehiculo registro;
                 List<Vehiculo> list = null;
                 if (id >= 0 && id != null) {
-                    registro = vehiculo.find(id);
-                    return registro;
+                    list = vehiculo.findMarcaModeloByIdVehiculo(idmarca, idmodelo, id);
+                    return list;
                 }
             } catch (Exception ex) {
                 Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
 
             }
         }
-        return new Vehiculo();
+        return new ArrayList<>();
     }
 
     @POST
@@ -127,6 +110,27 @@ public class VehiculoResource {
         return new Vehiculo();
     }
 
+    //    @GET
+//    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+//    public List<Vehiculo> VehiculofindRange(@DefaultValue("0") @QueryParam("first") int first,
+//            @DefaultValue("10") @QueryParam("pagesize") int pageSize) {
+//
+//        if (vehiculo != null && first >= 0 && pageSize >= 0) {
+//            try {
+//                List<Vehiculo> list = null;
+//                list = vehiculo.findRange(first, pageSize);
+//                if (list != null) {
+//                    return list;
+//                }
+//
+//            } catch (Exception ex) {
+//                Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
+//
+//            }
+//        }
+//        return new ArrayList<>();
+//
+//    }
 //    @GET
 //    @Path("findallid/{idbuscado}")
 //    @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
@@ -160,7 +164,6 @@ public class VehiculoResource {
 //        }
 //        return Response.status(Response.Status.NOT_FOUND).header("filter-not-found", id).build();
 //    }
-
 //    @GET
 //    @Path("/marca/all")
 //    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")

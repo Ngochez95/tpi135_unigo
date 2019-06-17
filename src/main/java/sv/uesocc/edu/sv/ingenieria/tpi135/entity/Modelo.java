@@ -34,6 +34,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Modelo.findAll", query = "SELECT m FROM Modelo m"),
+    @NamedQuery(name = "Modelo.findById", query = "SELECT m from Modelo as m join m.idMarca as idm where(idm.idMarca=:idMarca AND m.idModelo=:idModelo)"),
+    @NamedQuery(name="Modelo.findModeloByMarca", query = "SELECT m from Modelo as m join m.idMarca as idm where(idm.idMarca=:idM)"),
     @NamedQuery(name = "Modelo.findByIdModelo", query = "SELECT m FROM Modelo m WHERE m.idModelo = :idModelo"),
     @NamedQuery(name = "Modelo.findByModelo", query = "SELECT m FROM Modelo m WHERE m.modelo = :modelo")})
 public class Modelo implements Serializable {

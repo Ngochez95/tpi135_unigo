@@ -28,6 +28,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Vehiculo.findAll", query = "SELECT v FROM Vehiculo v"),
+    @NamedQuery(name = "Vehiculo.findMarcaModeloByIdVehiculo", query = "SELECT v FROM Vehiculo as v JOIN v.idMarca as idm join idm.modeloList as idmdl WHERE(idm.idMarca=:idMarca AND idmdl.idModelo=:idModelo AND v.idVehiculo=:idVehiculo)"),
+    @NamedQuery(name = "Vehiculo.findMarcaModelo", query = "SELECT v FROM Vehiculo as v JOIN v.idMarca as idm join idm.modeloList as idmdl WHERE(idm.idMarca=:idMarca AND idmdl.idModelo=:idModelo)"),
     @NamedQuery(name="Vehiculo.findAllbyId", query="SELECT v, mdl, ctl, tcl from Vehiculo as v join v.idMarca as idm join idm.modeloList as mdl join mdl.caractetisticaList as ctl join ctl.tipoCaracteristicaList as tcl WHERE v.idVehiculo= :idVehiculo"),
     @NamedQuery(name = "Vehiculo.findByIdVehiculo", query = "SELECT v FROM Vehiculo v WHERE v.idVehiculo = :idVehiculo")})
 public class Vehiculo implements Serializable {

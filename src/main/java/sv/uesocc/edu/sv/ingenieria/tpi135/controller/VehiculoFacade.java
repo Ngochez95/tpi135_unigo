@@ -44,13 +44,13 @@ public class VehiculoFacade extends AbstractFacade<Vehiculo> {
         return lista;
 
     }
-    
-        public List<Vehiculo> findAllId(int idVehiculo) {
+
+    public List<Vehiculo> findAllId(int idVehiculo) {
         List<Vehiculo> lista = null;
         try {
             //Query consulta = em.createNamedQuery("Vehiculo.findAllbyId");
-            Query consulta= em.createNamedQuery("Vehiculo.findByIdVehiculo");
-           consulta.setParameter("idVehiculo", idVehiculo);
+            Query consulta = em.createNamedQuery("Vehiculo.findByIdVehiculo");
+            consulta.setParameter("idVehiculo", idVehiculo);
             lista = consulta.getResultList();
         } catch (Exception ex) {
             throw ex;
@@ -59,8 +59,32 @@ public class VehiculoFacade extends AbstractFacade<Vehiculo> {
 
     }
 
+    public List<Vehiculo> findByMarcaModelo(int idMarca, int idModelo) {
+        List<Vehiculo> lista = null;
+        try {
+            Query consulta = em.createNamedQuery("Vehiculo.findMarcaModelo");
+            consulta.setParameter("idMarca", idMarca);
+            consulta.setParameter("idModelo", idModelo);
+            lista = consulta.getResultList();
+        } catch (Exception e) {
+            throw e;
+        }
+        return lista;
+    }
 
+    public List<Vehiculo> findMarcaModeloByIdVehiculo(int idMarca, int idModelo, int idVehiculo) {
 
+        List<Vehiculo> lista = null;
+        try {
+            Query consulta = em.createNamedQuery("Vehiculo.findMarcaModeloByIdVehiculo");
+            consulta.setParameter("idMarca", idMarca);
+            consulta.setParameter("idModelo", idModelo);
+            consulta.setParameter("idVehiculo", idVehiculo);
+            lista = consulta.getResultList();
+        } catch (Exception e) {
+            throw e;
+        }
+        return lista;
+    }
 
-    
 }

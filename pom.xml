@@ -220,7 +220,7 @@
                     </configuration>
             </plugin>
               
-            <!--PARA
+           <!--PARA-->
             
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -274,7 +274,7 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>-->
+            </plugin>
         </plugins>
     </build>
     <profiles>

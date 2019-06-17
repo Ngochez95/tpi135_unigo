@@ -25,6 +25,8 @@ public class ApplicationConfig extends Application {
         resources.add(sv.uesocc.edu.sv.ingenieria.tpi135.boundary.rest.ReservaViajeResource.class);
         resources.add(sv.uesocc.edu.sv.ingenieria.tpi135.boundary.rest.TrayectoriaResource.class);
         resources.add(sv.uesocc.edu.sv.ingenieria.tpi135.boundary.rest.UsuarioResource.class);
+        resources.add(sv.uesocc.edu.sv.ingenieria.tpi135.boundary.rest.ModeloResource.class);
+        resources.add(sv.uesocc.edu.sv.ingenieria.tpi135.boundary.rest.MarcaResource.class);
         resources.add(sv.uesocc.edu.sv.ingenieria.tpi135.boundary.rest.OrigenResource.class);
 
         return resources;
