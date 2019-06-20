@@ -221,7 +221,7 @@
             </plugin>
               
            <!--PARA-->
-            
+          
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
@@ -244,6 +244,7 @@
             </plugin>
             
             
+            <!--
             <plugin>
                 <groupId>com.dkanejs.maven.plugins</groupId>
                 <artifactId>docker-compose-maven-plugin</artifactId>
@@ -274,7 +275,7 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
         </plugins>
     </build>
     <profiles>
