@@ -2,6 +2,7 @@ version: "3"
 services:
   db:
     build: ./PostgresAlpine
+    image: 192.168.43.2:5000/postgres:9.4-alpine
     restart: always
     volumes:
       - db-data:/var/lib/postgresql/data
@@ -11,6 +12,7 @@ services:
       - PostgresAlpine/db.env
   web:
     build: ./PayaraMicro
+    image: 192.168.43.2:5000/payara/micro:4.181
     ports:
       - "8080:8081"
     #volumes:
