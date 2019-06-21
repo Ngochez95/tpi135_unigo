@@ -1,4 +1,7 @@
-FROM payara/micro:4.181
+ARG registry="192.168.43.2:5000/"
+ARG image="payara/micro"
+ARG tag=":4.181"
+FROM ${registry}${image}${tag}
 COPY postgresql-42.2.2.jar $PAYARA_PATH/
 COPY asadmin.txt $PAYARA_PATH/
 COPY uniGo-1.0-SNAPSHOT.war $PAYARA_PATH/
