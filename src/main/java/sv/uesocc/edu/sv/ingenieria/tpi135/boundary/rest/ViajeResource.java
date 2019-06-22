@@ -98,22 +98,22 @@ public class ViajeResource {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-    public List<Viaje> findById(
+    public Viaje findById(
             @PathParam("id") Integer id
     ) throws InstantiationException, IllegalAccessException {
         if (viaje != null) {
             try {
-                List<Viaje> list = null;
+                Viaje registro=null;
                 if (id >= 0 && id != null) {
-                    list = (List<Viaje>) viaje.find(id);
-                    return list;
+                    registro = viaje.find(id);
+                    return registro;
                 }
             } catch (Exception ex) {
                 Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
 
             }
         }
-        return new ArrayList<>();
+        return new Viaje();
     }
     
     
